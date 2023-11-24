@@ -9,7 +9,7 @@ Es una pagina o una aplicación de moviles para agendar partidos presenciales o 
 
 #### 🎨 UX/UI:
 
-| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
+| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|  <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
 |:---:| :---:|
 | **** | **** |
 | <a href="https://www.linkedin.com/in/karemcarranza/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| | <a href="https://www.linkedin.com/in/karemcarranza/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|

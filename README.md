@@ -25,7 +25,7 @@ Es una pagina o una aplicación de moviles para agendar partidos presenciales o 
 
  #### 🛠️ Tech Stack:
  
-![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-green?style=for-the-badge&logo=CSS&logoColor=white) ![JavaScript](https://img.shields.io/badge/JS-E34F26?style=for-the-badge&logo=javascripts&logoColor=white) ![React](https://img.shields.io/badge/react-green?style=for-the-badge&logo=react&logoColor=white) ![Tailwind](https://img.shields.io/badge/tailwind-E34F26?style=for-the-badge&logo=tailwind&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-blueviolet?style=for-the-badge&logo=Visual%20studio&logoColor=white) 
+![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-green?style=for-the-badge&logo=CSS&logoColor=white) ![JavaScript](https://img.shields.io/badge/JS-E34F26?style=for-the-badge&logo=javascripts&logoColor=white) ![React](https://img.shields.io/badge/react-green?style=for-the-badge&logo=react&logoColor=white) ![Tailwind](https://img.shields.io/badge/tailwind-E34F26?style=for-the-badge&logo=tailwind&logoColor=white) ![Material Ui](https://img.shields.io/badge/react-green?style=for-the-badge&logo=react&logoColor=white) ![Redux](https://img.shields.io/badge/tailwind-E34F26?style=for-the-badge&logo=tailwind&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-blueviolet?style=for-the-badge&logo=Visual%20studio&logoColor=white) 
 
 ### ☕ Back End:
 
@@ -35,13 +35,11 @@ Es una pagina o una aplicación de moviles para agendar partidos presenciales o 
 | <a href="https://www.linkedin.com/in/cubilla-dev/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/hectordariosol/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/miguel-guerrero-403939194/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/masielvenegas/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/yein-e-734a7a233/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href=""><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
   #### 🛠️ Tech Stack:
- ![Nodejs](https://img.shields.io/badge/Nodejs-6c5187?style=for-the-badge&logo=nodejs&logoColor=white) 
- ![Express](https://img.shields.io/badge/Express-green?style=for-the-badge&logo=express&logoColor=white)
- ![Multer](https://img.shields.io/badge/Multer-6c5187?style=for-the-badge&logo=multer&logoColor=white)
- ![Cloudinary](https://img.shields.io/badge/Cloudinary-green?style=for-the-badge&logo=cloudinary&logoColor=white)
- ![NodeMailer](https://img.shields.io/badge/NodeMailer-6c5187?style=for-the-badge&logo=nodemailer&logoColor=white)
- ![Mongoose](https://img.shields.io/badge/Mongoose-green?style=for-the-badge&logo=mongoose&logoColor=white)
- 
+ ![Axios](https://img.shields.io/badge/Nodejs-6c5187?style=for-the-badge&logo=nodejs&logoColor=white) 
+ ![Prettier](https://img.shields.io/badge/Express-green?style=for-the-badge&logo=express&logoColor=white)
+ ![JSX STANDARD](https://img.shields.io/badge/Multer-6c5187?style=for-the-badge&logo=multer&logoColor=white)
+ ![React Router DOM](https://img.shields.io/badge/Cloudinary-green?style=for-the-badge&logo=cloudinary&logoColor=white)
+  
   #### 🧑💻 QA Testers:
 
 

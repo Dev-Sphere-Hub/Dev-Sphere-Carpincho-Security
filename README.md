@@ -43,11 +43,12 @@ Es una pagina o una aplicación de moviles para agendar partidos presenciales o 
   #### 🧑💻 QA Testers:
 
 
-| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50> |
-|:---:|
-|  **Irene Vargas**|
+| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50> | <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
+|:---:|:---:|
+|  **Irene Vargas**| **Irene Vargas**|
 | <a href="https://www.linkedin.com/in/irene-vargas/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
-
+ | <a href="https://www.linkedin.com/in/irene-vargas/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+ 
 #### 🛠️ Tech Stack:
 
 ![SELENIUM](https://img.shields.io/badge/-SELENIUM-blue?style=for-the-badge&logo=selenium&logoColor=white)

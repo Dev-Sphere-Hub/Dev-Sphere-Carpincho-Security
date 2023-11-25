@@ -35,8 +35,8 @@ Es una pagina o una aplicación de moviles para agendar partidos presenciales o 
 | <a href="https://www.linkedin.com/in/aguusoleti/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/hectordariosol/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/miguel-guerrero-403939194/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/masielvenegas/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
   #### 🛠️ Tech Stack:
- ![Axios](https://img.shields.io/badge/Nodejs-6c5187?style=for-the-badge&logo=nodejs&logoColor=white) 
- ![Prettier](https://img.shields.io/badge/Express-green?style=for-the-badge&logo=express&logoColor=white)
+ ![Nodo JS](https://img.shields.io/badge/Nodejs-6c5187?style=for-the-badge&logo=nodejs&logoColor=white) 
+ ![Express](https://img.shields.io/badge/Express-green?style=for-the-badge&logo=express&logoColor=white)
  ![JSX STANDARD](https://img.shields.io/badge/Multer-6c5187?style=for-the-badge&logo=multer&logoColor=white)
  ![React Router DOM](https://img.shields.io/badge/Cloudinary-green?style=for-the-badge&logo=cloudinary&logoColor=white)
   

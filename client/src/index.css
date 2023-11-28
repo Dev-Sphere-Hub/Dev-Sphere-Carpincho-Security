@@ -1,47 +1,59 @@
-/** @type {import('tailwindcss').Config} */
-import plugin from 'tailwindcss/plugin'
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap');
 
-export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}'
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        titulo: ['Nunito', 'sans-serif'],
-        parrafo: ['Poppins', 'sans-serif']
-      },
-      colors: {
-        colorCustom1: 'var(--colorCustom1)',
-        colorCustom2: 'var(--colorCustom2)',
-        colorCustom3: 'var(--colorCustom3)',
-        colorCustom4: 'var(--colorCustom4)',
-        colorCustom5: 'var(--colorCustom5)'
-      }
-    }
-  },
-  plugins: [
-    plugin(function ({ addUtilities }) {
-      addUtilities({
-        '.botonBase': {
-          background: '#ff6347;',
-          boxShadow: '3px 3px 3px #729228, -3px -3px 3px  #ccff48',
-          color: 'var(--colorCustom5)',
-          border: '1px solid var(--colorCustom5)',
-          borderRadius: '30px',
-          transition: 'all .2s linear',
-          padding: '5px 20px',
-          '&:hover': {
-            background: '#f32703',
-            boxShadow: '3px 3px 3px #3d3d3d, -3px -3px 3px #5a5a5a',
-            color: 'var(--colorCustom5)',
-            border: '1px solid var(--colorCustom1)'
-          }
-        }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-      })
-    })
-  ]
+
+:root {
+  font-family: 'Poppins', sans-serif;
+  /* line-height: 1.5; */
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #e7a56f;
+  background-color: #4d494a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --titulo: 'Nunito', sans-serif;
+  --parrafo: 'Poppins', sans-serif;
+
+  --colorCustom1: #f1b95e;
+  --colorCustom2: #ff6347;
+  --colorCustom3: #b2e43f;
+  --colorCustom4: #333333;
+  --colorCustom5: #f8f9fa;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+} */
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: #ffffff;
+  }
 }
 

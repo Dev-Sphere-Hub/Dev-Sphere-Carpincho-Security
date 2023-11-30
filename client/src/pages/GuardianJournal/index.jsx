@@ -29,6 +29,9 @@ const GuardianJournal = () => {
     // Agregar la novedad al estado de novedades
     setNovedades([...novedades, formData]);
 
+    // Imprimir la fecha en la consola
+    console.log('Fecha almacenada:', formData.dateTime);
+
     // Limpiar el formulario después de enviar
     setFormData({
       dateTime: '',
@@ -41,8 +44,8 @@ const GuardianJournal = () => {
   };
 
   return (
-    <div className="flex justify-center">
-
+    <div className="flex flex-col items-center">
+    <p className="self-center font-bold">Novedades</p>
 
       {/* Modal para el registro de novedades */}
       {showModal && (
@@ -80,10 +83,10 @@ const GuardianJournal = () => {
                   <option value="" disabled>
                     Seleccionar Categoría
                   </option>
-                  <option value="emergencias">Emergencias</option>
-                  <option value="eventosDestacados">Eventos Destacados</option>
-                  <option value="personasNoAutorizadas">Personas No Autorizadas</option>
-                  <option value="vehiculoNoAutorizado">Vehículo No Autorizado</option>
+                  <option value="Emergencias">Emergencias</option>
+                  <option value="Eventos Destacados">Eventos Destacados</option>
+                  <option value="Personas No Autorizadas">Personas No Autorizadas</option>
+                  <option value="Vehiculo No Autorizado">Vehículo No Autorizado</option>
                 </select>
               </div>
               <div className="mb-4">
@@ -118,41 +121,66 @@ const GuardianJournal = () => {
         </div>
       )}
 
-      {/* Renderizar las tarjetas de novedades */}
-      {novedades.map((novedad, index) => (
-        <div
-          key={index}
-          className="max-w-sm mx-4 w-full my-4 h-72 px-2 py-4 bg-gray-50 drop-shadow-md rounded-2xl flex justify-around items-center text-center text-neutral-900"
-        >
-          <div className="w-56 h-20">
-            <h2 className="text-title font-title">{novedad.category}</h2>
-            <p className="text-sans font-subtitle">{novedad.detail}</p>
+      <div className="flex flex-col gap-4 md:flex-row flex-wrap md:max-w-[80%] md:m-auto justify-center">
+        {/* Renderizar las tarjetas de novedades */}
+        {novedades.map((novedad, index) => (
+          <div
+            key={index}
+            className="max-w-sm mx-4 w-full  h-32 px-2 py-4 bg-gray-50 drop-shadow-md rounded-md flex justify-around items-center text-center text-neutral-900"
+          >
+            <div className="w-56 h-20 flex-col text-left">
+              <h2 className="text-title font-title font-bold">{novedad.category}</h2>
+              <p className="text-sans font-subtitle">{novedad.detail}</p>
+              <p className="text-xs text-gray-500 mt-2">{new Date(novedad.dateTime).toLocaleString()}</p>
+            </div>
           </div>
-        </div>
-
-      ))}
-        {/* Ícono de agregar fuera de la tarjeta */}
-        <div
-        className="max-w-[22rem] h-[13.5rem] bg-violet-300 rounded-lg flex justify-center items-center self-center cursor-pointer hover:bg-gray-300"
+        ))} {/* Ícono de agregar fuera de la tarjeta */}
+      <div
+        className="max-w-[22rem] h-[13.5rem]rounded-lg flex justify-center items-center self-center cursor-pointer hover:bg-gray-300"
         onClick={() => setShowModal(true)}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="feather feather-plus m-auto"
-        >
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
+        {/* Ícono para pantallas grandes (Desktop) */}
+        <div className="hidden lg:block">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-plus"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+
+        {/* Ícono para pantallas pequeñas (Mobile) */}
+        <div className="w-16 h-16 lg:hidden bg-gray-600 rounded-full flex justify-center items-center cursor-pointer hover:bg-gray-300">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-plus"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
       </div>
     </div>
+      </div>
+
+     
   );
 };
 

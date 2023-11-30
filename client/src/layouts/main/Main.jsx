@@ -3,7 +3,7 @@ import AppRoutes from '../../routes/AppRoutes'
 
 const Main = () => {
   return (
-    <main className='main w-[100%] h-min-screen  bg-whiteCustom overflow-hidden  box-border flex flex-col justify-top gap-[2rem]'>
+    <main className='w-[100%] box-border mt-[140px] h-screen lg:mt-[80px] p-0'>
       <AppRoutes />
     </main>
   )

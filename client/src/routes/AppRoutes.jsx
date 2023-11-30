@@ -5,7 +5,6 @@ import Home from '../pages/home/Home'
 const AppRoutes = () => {
   const logged = true // luego lo traemos desde un estado
   return (
-
     <Routes>
       <Route path='/' element={<Home />} />
       {
@@ -13,6 +12,7 @@ const AppRoutes = () => {
           <Route path='/profile' element='' />
       }
     </Routes>
+
   )
 }
 

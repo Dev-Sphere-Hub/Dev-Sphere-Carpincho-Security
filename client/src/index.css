@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 
 :root {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   /* line-height: 1.5; */
   font-weight: 400;
 
@@ -19,8 +19,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --titulo: 'Nunito', sans-serif;
-  --parrafo: 'Poppins', sans-serif;
+  --titulo: 'Plus Jakarta Sans', sans-serif;
+  --parrafo: 'Plus Jakarta Sans', sans-serif;
 
   --colorCustom1: #f1b95e;
   --colorCustom2: #ff6347;

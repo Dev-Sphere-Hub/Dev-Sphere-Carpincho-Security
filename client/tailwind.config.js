@@ -41,8 +41,13 @@ export default {
             color: 'var(--colorCustom5)',
             border: '1px solid var(--colorCustom1)'
           }
+        },
+        '.ellipsisText': {
+          width: '100%',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
         }
-
       })
     })
   ]

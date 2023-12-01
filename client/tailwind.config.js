@@ -19,7 +19,7 @@ export default {
         colorCustom1: '#f1b95e',
         colorCustom2: '#ff6347',
         colorCustom3: '#b2e43f',
-        colorCustom4: '#333333',
+        colorCustom4: '#302c25',
         colorCustom5: '#f8f9fa'
       }
     }

@@ -6,7 +6,7 @@ const LatestArrivals = () => {
   return (
     <section className='w-[100%] min-w-[300px] flex flex-col items-center gap-3'>
       <h2 className='tituloGeneral w-[90%] font-titulo font-semibold text-xl text-colorCustom4 flex flex-row justify-between items-center'>Novedades
-        <Link className='font-parrafo font-light text-sm text-gray-500 hover:text-colorCustom1 transition-colors ease-out duration-700'>Ver mas</Link>
+        <Link to='/novedades' className='font-parrafo font-light text-sm text-gray-500 hover:text-colorCustom1 transition-colors ease-out duration-700'>Ver mas</Link>
       </h2>
 
       <section className='sweepList w-full h-[200px] min-w-[300px] flex justify-center items-center'>

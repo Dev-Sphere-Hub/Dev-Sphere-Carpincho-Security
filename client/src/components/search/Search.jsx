@@ -14,14 +14,23 @@ const Search = () => {
       setTimeout(() => {
         navigate('/search')
         setRedirect(false)
-      }, 2000)
+      }, 3000)
     }
   }, [redirect])
 
-  const handleSearch = (e) => {
+  const handleSearch = () => {
     const filteredData = filtersProductsByKeyword(packages, searchTerm)
     console.log('Foods Filter Keyword ->', filteredData)
     setRedirect(false)
+    setSearchTerm('...buscando')
+    setTimeout(() => {
+      setSearchTerm('')
+    }, 1000)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    handleSearch()
   }
 
   return (
@@ -29,10 +38,10 @@ const Search = () => {
       {
         redirect
           ? (
-            <p className='redirect '>redirigiendo...</p>
+            <p className='redirect '> Redirigiendo...</p>
             )
           : (
-            <div className='relative'>
+            <form onSubmit={handleSubmit} className='relative'>
               <input
                 type='text'
                 name='text'
@@ -41,10 +50,10 @@ const Search = () => {
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder='Buscador'
               />
-              <button className='icon absolute left-2 top-[14px] text-lg' onClick={handleSearch}>
+              <button type='submit' className='icon absolute left-2 top-[14px] text-lg'>
                 <IoSearch />
               </button>
-            </div>
+            </form>
             )
       }
     </div>

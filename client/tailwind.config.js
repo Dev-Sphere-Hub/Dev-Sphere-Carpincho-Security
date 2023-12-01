@@ -12,6 +12,9 @@ export default {
         titulo: ['Plus Jakarta Sans', 'sans-serif'],
         parrafo: ['Poppins', 'sans-serif']
       },
+      boxShadow: {
+        custom: '2px 3px 6px #969696, -3px -3px 4px #ffffff'
+      },
       colors: {
         colorCustom1: '#f1b95e',
         colorCustom2: '#ff6347',

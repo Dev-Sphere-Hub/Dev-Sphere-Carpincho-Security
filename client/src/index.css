@@ -38,9 +38,10 @@ a {
 }
 
 body {
+  margin: 0;
   display: flex;
-  background-color: white;
   min-width: 300px;
+  background-color: white;
 }
 
 /* h1 {

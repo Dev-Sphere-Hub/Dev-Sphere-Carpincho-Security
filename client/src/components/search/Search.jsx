@@ -45,7 +45,7 @@ const Search = () => {
               <input
                 type='text'
                 name='text'
-                className='input h-[45px] w-[208px] rounded-[50px] border-2 border-colorCustom1 bg-white outline-none font-parrafo font-medium text-sm px-7'
+                className='input h-[45px] w-[278px] rounded-[50px] border-2 border-colorCustom1 bg-white outline-none font-parrafo font-medium text-sm px-7'
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder='Buscador'

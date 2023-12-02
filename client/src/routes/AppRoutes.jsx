@@ -13,6 +13,8 @@ const AppRoutes = () => {
           <Route path='/profile' element='' />
       }
       <Route path='/novedades' element={<GuardianJournal />} />
+      <Route path='/novedades' element={<GuardianJournal />} />
+
     </Routes>
 
   )

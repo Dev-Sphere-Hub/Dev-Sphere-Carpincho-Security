@@ -1,8 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import React from 'react'
-import Home from '../pages/home/Home'
+import Home from '../pages/Home'
 import GuardianJournal from '../pages/GuardianJournal'
 import LoginForm from '../components/Login'
+import Register from '../components/Register'
 
 const AppRoutes = () => {
   const logged = true // luego lo traemos desde un estado
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       }
       <Route path='/novedades' element={<GuardianJournal />} />
       <Route path='/login' element={<LoginForm />} />
+      <Route path='/register' element={<Register />} />
     </Routes>
 
   )

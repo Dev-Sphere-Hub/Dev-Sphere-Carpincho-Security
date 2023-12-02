@@ -6,6 +6,7 @@ import LatestArrivals from '../../components/LatestArrivals'
 const Home = () => {
   return (
     <section className='relative w-[100%] h-auto bg-white m-0 p-0 flex flex-col gap-8 min-w-[300px]'>
+      Hola Victor prueba
       <Search />
       <Categories />
       <LatestArrivals />

@@ -10,8 +10,7 @@
   /* line-height: 1.5; */
   font-weight: 400;
 
-  color-scheme: light dark;
-  background-color: #4d494a;
+ 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -50,9 +49,9 @@ body {
 } */
 
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     background-color: #ffffff;
   }
-}
+} */
 

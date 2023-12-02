@@ -2,44 +2,29 @@ import React from 'react'
 
 const LoginForm = () => {
   return (
-    <div className="w-70% min-h-screen flex items-center justify-center ">
-    <div className="max-w-md w-full p-10 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold text-center mb-6">Iniciar Sesión</h2>
-      <form>
-        <div className="mb-4">
-          <label htmlFor="username" className=" pt-9 block text-gray-700 text-sm font-bold mb-2">
-            Nombre de usuario
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            className="w-full p-2 border rounded-md"
-            placeholder="Ingrese su nombre de usuario"
-          />
+    <div className='text-lg md:text-xl pt-9 block text-center h-max'>
+        <div className='pt-9'>
+          <h1>Logo</h1>
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="w-full p-2 border rounded-md"
-            placeholder="Ingrese su contraseña"
-          />
+        <div className='pt-6'>
+          <p>Nombre de la app</p>
         </div>
-        <p>Recuperar contraseña</p>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-        >
-          Iniciar Sesión
-        </button>
-      </form>
+        <div className='pt-9'>
+          <form action="">
+            <div className='p-2'>
+
+              <input  type="email" name="" id="" placeholder='Email'/> <br/>
+            </div>
+            <input  type="password" name="" id="" placeholder='Contraseña' />
+          </form>
+          <div className='text-sm'> 
+            <p>Recuperar contraseña</p>
+          </div>
+
+          <button className='pt-9 border'>Ingresar</button>
+        </div>
+        
     </div>
-  </div>
   )
 }
 

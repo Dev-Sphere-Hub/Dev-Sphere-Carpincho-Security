@@ -9,15 +9,18 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        titulo: ['Nunito', 'sans-serif'],
+        titulo: ['Plus Jakarta Sans', 'sans-serif'],
         parrafo: ['Poppins', 'sans-serif']
       },
+      boxShadow: {
+        custom: '2px 3px 6px #969696, -3px -3px 4px #ffffff'
+      },
       colors: {
-        colorCustom1: 'var(--colorCustom1)',
-        colorCustom2: 'var(--colorCustom2)',
-        colorCustom3: 'var(--colorCustom3)',
-        colorCustom4: 'var(--colorCustom4)',
-        colorCustom5: 'var(--colorCustom5)'
+        colorCustom1: '#f1b95e',
+        colorCustom2: '#ff6347',
+        colorCustom3: '#b2e43f',
+        colorCustom4: '#302c25',
+        colorCustom5: '#f8f9fa'
       }
     }
   },
@@ -38,10 +41,14 @@ export default {
             color: 'var(--colorCustom5)',
             border: '1px solid var(--colorCustom1)'
           }
+        },
+        '.ellipsisText': {
+          width: '100%',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
         }
-
       })
     })
   ]
 }
-

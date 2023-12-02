@@ -1,14 +1,13 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '../../../../../../../../vite.svg'
-import GuardianJournal from './pages/GuardianJournal'
+import './App.css'
+import Contain from './layouts/contain/Contain'
+import Main from './layouts/main/Main'
 
 function App () {
-
   return (
     <>
-          <GuardianJournal />
- 
+      <Contain>
+        <Main />
+      </Contain>
     </>
   )
 }

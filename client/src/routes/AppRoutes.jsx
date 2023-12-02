@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 import Home from '../pages/home/Home'
 import GuardianJournal from '../pages/GuardianJournal'
+import LoginForm from '../components/Login'
 
 const AppRoutes = () => {
   const logged = true // luego lo traemos desde un estado
@@ -13,6 +14,7 @@ const AppRoutes = () => {
           <Route path='/profile' element='' />
       }
       <Route path='/novedades' element={<GuardianJournal />} />
+      <Route path='/login' element={<LoginForm />} />
     </Routes>
 
   )

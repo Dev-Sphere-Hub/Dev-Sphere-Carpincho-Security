@@ -13,9 +13,9 @@ const VerticalMenu = () => {
 
   const imageUser = 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
   return (
-    <div className='absolute h-[calc(100vh-240px)] lg:relative lg:z-10 lg:h-[calc(100vh-138px)] lg:w-[305px] bg-slate-400 flex justify-center items-center content-center'>
+    <div className='absolute h-[calc(100vh-240px)] lg:relative lg:z-10 lg:h-[calc(100vh-138px)] lg:w-[270px] xl:w-[235px]  flex justify-center items-center content-center'>
 
-      <nav className={`navVerical fixed z-10 navVertical w-auto h-auto ${activeNavVerticas ? 'left-0' : '-left-[52px]'} transition-all ease-linear duration-200 lg:left-0 px-1 py-4 bg-[#f4f3f3] rounded-r-lg xl:relative xl:h-auto lg:w-[300px] lg:h-[calc(100%-150px)] lg:p-2`}>
+      <nav className={`navVerical fixed z-10 navVertical w-auto h-auto ${activeNavVerticas ? 'left-0' : '-left-[52px]'} transition-all ease-linear duration-200 lg:left-0 px-1 py-4 bg-[#f4f3f3] rounded-r-lg  xl:h-auto lg:w-[300px] lg:h-[calc(100%-150px)] lg:p-2`}>
         <ul className='navMenuVert pl-1 flex flex-col flex-nowrap gap-1'>
           <li>
             <button

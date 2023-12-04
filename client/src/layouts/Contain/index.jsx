@@ -11,5 +11,4 @@ const Contain = ({ children }) => {
     </>
   )
 }
-
 export default Contain

@@ -2,9 +2,9 @@ import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 import Home from '../pages/Home/index'
 import GuardianJournal from '../pages/GuardianJournal'
-import History from '../pages/History'
 import Register from '../pages/Register'
 import LoginForm from '../pages/LoginForm'
+import History from '../pages/History'
 
 const AppRoutes = () => {
   const logged = true // luego lo traemos desde un estado

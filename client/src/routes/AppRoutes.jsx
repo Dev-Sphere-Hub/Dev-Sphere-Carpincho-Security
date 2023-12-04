@@ -14,7 +14,10 @@ const AppRoutes = () => {
           <Route path='/profile' element='' />
       }
       <Route path='/novedades' element={<GuardianJournal />} />
-      <Route path='/historial' element={<History />} />
+      <Route
+        path='/historial/*'
+        element={<History />}
+      />
 
     </Routes>
 

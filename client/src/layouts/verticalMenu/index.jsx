@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import { BiRedo, BiSolidTruck, BiSolidTimeFive, BiSolidReport, BiCaretRight } from 'react-icons/bi'
 
 const VerticalMenu = () => {
   const [activeNavVerticas, setActiveNavVerticas] = useState(false)
+  const navigate = useNavigate()
 
   const handleClickNavVerticas = (e) => {
     e.preventDefault()
@@ -16,7 +18,10 @@ const VerticalMenu = () => {
       <nav className={`navVerical fixed z-10 navVertical w-auto h-auto ${activeNavVerticas ? 'left-0' : '-left-[52px]'} transition-all ease-linear duration-200 lg:left-0 px-1 py-4 bg-[#f4f3f3] rounded-r-lg xl:relative xl:h-auto lg:w-[300px] lg:h-[calc(100%-150px)] lg:p-2`}>
         <ul className='navMenuVert pl-1 flex flex-col flex-nowrap gap-1'>
           <li>
-            <button className='customButton w-[40px] h-[40px] rounded-full flex justify-center items-center text-xl lg:w-[98%] lg:h-[250px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 lg:pl-5'>
+            <button
+              className='customButton w-[40px] h-[40px] rounded-full flex justify-center items-center text-xl lg:w-[98%] lg:h-[250px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 lg:pl-5'
+              onClick={() => navigate('/historial/')}
+            >
               <img
                 className='w-full h-full lg:w-[150px] lg:h-[150px] object-cover rounded-full'
                 title='imagen perfil del usuario'
@@ -27,25 +32,37 @@ const VerticalMenu = () => {
             </button>
           </li>
           <li>
-            <button className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'>
+            <button
+              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'
+              onClick={() => navigate('/historial/ingresoEgreso')}
+            >
               <BiRedo />
               <span className='hidden lg:block font-semibold text-lg text-center'>Ingreso / Egreso</span>
             </button>
           </li>
           <li>
-            <button className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'>
+            <button
+              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'
+              onClick={() => navigate('/historial/ingresoRapido')}
+            >
               <BiSolidTruck />
               <span className='hidden lg:block font-semibold text-lg text-center'>Ingreso rápido</span>
             </button>
           </li>
           <li>
-            <button className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'>
+            <button
+              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'
+              onClick={() => navigate('/historial/historia')}
+            >
               <BiSolidTimeFive />
               <span className='hidden lg:block font-semibold text-lg text-center'>Historial</span>
             </button>
           </li>
           <li>
-            <button className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'>
+            <button
+              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5'
+              onClick={() => navigate('/historial/reportes')}
+            >
               <BiSolidReport />
               <span className='hidden lg:block font-semibold text-lg text-center'>Reportes</span>
             </button>

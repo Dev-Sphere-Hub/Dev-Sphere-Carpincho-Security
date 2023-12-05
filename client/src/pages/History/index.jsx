@@ -12,7 +12,7 @@ const History = () => {
   return (
     <div className='variabeleContain w-[100%] min-h-screen border-2 border-pink-400 lg:flex lg:flex-row lg:flex-wrap lg:justify-start lg:items-start lg:gap-1'>
       <VerticalMenu />
-      <section className='relative w-[100%] h-[100%] min-h-screen border-2 border-teal-400 m-0 flex flex-col gap-8 min-w-[300px] lg:w-[calc(100%-292px)] xl:w-[calc(100%-260px)] 2xl:w-[100%] lg:ml-auto py-2 px-1 overflow-auto'>
+      <section className='relative w-[100%] h-[100%] min-h-screen border-2 border-teal-400 m-0 flex flex-col gap-8 min-w-[300px] lg:w-[calc(100%-300px)] xl:w-[calc(100%-260px)] 2xl:w-[100%] lg:ml-auto py-2 px-1 overflow-auto'>
         <Routes>
           <Route
             path='/historial/'

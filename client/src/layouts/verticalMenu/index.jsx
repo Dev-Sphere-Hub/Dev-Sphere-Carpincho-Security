@@ -15,7 +15,7 @@ const VerticalMenu = () => {
   return (
     <div className='absolute top-0 h-[calc(100vh)] lg:absolute lg:top-0 lg:h-[calc(100vh)] lg:w-auto] xl:w-auto flex justify-center items-center content-center lg:justify-start lg:items-start bg-blue-300'>
 
-      <nav className={`navVerical fixed z-10 navVertical w-auto h-auto ${activeNavVerticas ? 'left-0' : '-left-[52px]'} transition-all ease-linear duration-200 lg:left-0 px-1 py-4 bg-[#f4f3f3] rounded-r-lg lg:top-[60px] lg:w-[300px] lg:h-[calc(100%-65px)] lg:p-2 xl:h-[calc(100%-65px)]  shadow-custom`}>
+      <nav className={`navVerical fixed z-30 navVertical w-auto h-auto ${activeNavVerticas ? 'left-0' : '-left-[52px]'} transition-all ease-linear duration-200 lg:left-0 px-1 py-4 bg-[#f4f3f3] rounded-r-lg lg:top-[60px] lg:w-[300px] lg:h-[calc(100%-65px)] lg:p-2 xl:h-[calc(100%-65px)]  shadow-custom`}>
         <ul className='navMenuVert pl-1 flex flex-col flex-nowrap gap-1'>
           <li>
             <button

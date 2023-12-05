@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Scheme({
     type: {
         type: String,
-        enum: ['admin', 'safety_guard', 'home_owner'],
+        enum: ['admin', 'safety_guard', 'home_owner', 'visitor'],
         required: true
     },
     fullName: {
@@ -12,18 +12,17 @@ const userSchema = new mongoose.Scheme({
     },
     email: {
         type: String,
-        required: true,
         unique: true
     },
     password: {
         type: String,
-        required: true
     },
     phone: {
         type: String
     },
     documentId: {
-        type: String
+        type: String,
+        required: true
     },
     photoUrl: {
         type: String
@@ -31,7 +30,7 @@ const userSchema = new mongoose.Scheme({
     address: {
         type: String
     },
-    status: {
+    is_authorized: {
         type: Boolean,
         default: true
     }

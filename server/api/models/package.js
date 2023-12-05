@@ -21,6 +21,14 @@ const packageSchema = new mongoose.Scheme({
     description: {
         type: String,
         required: true
+    },
+    recordedBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
+    status: {
+        type: String,
+        enum: ['received', 'delivered']
     }
 });
 

@@ -1,11 +1,7 @@
 import mongoose from 'mongoose';
 
 const visitSchema = new mongoose.Scheme({
-    apartment: {
-        type: String,
-        required: true
-    },
-    interior: {
+    address: {
         type: String,
         required: true
     },
@@ -25,16 +21,29 @@ const visitSchema = new mongoose.Scheme({
         required: true
     },
     homeOwnerId: {
-        type: String,
-        ref: 'User'
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     vehicle: {
         type: mongoose.Types.ObjectId,
-        ref: 'User',
+        ref: 'Vehicle',
     },
-    status: {
-        type: Boolean,
-        default: true
+    checkInBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
+    checkOutBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
+    state: {
+        type: String,
+        enum: ['authorized', 'unauthorized'],
+        required: true
+    },
+    photo: {
+        type: String
     }
 });
 

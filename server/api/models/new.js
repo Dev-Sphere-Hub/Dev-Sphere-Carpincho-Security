@@ -11,8 +11,12 @@ const newSchema = new mongoose.Scheme({
         required: true
     },
     date: {
-        type: Date,
-        default: Date.now
+        type: Date
+    },
+    author: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 

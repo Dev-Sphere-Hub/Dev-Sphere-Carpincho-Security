@@ -44,7 +44,7 @@ const GuardianJournal = () => {
   }
 
   return (
-    <div className='flex flex-col items-center'>
+    <div id='novedades' className='w-[100%] min-h-[500px] flex flex-col items-center'>
       <p className='self-center font-bold'>Novedades</p>
 
       {/* Modal para el registro de novedades */}

@@ -1,7 +1,6 @@
 import React from 'react'
-import Header from '../header'
-import Footer from '../footer'
-
+import Header from '../Header'
+import Footer from '../Footer'
 
 const Contain = ({ children }) => {
   return (
@@ -12,5 +11,4 @@ const Contain = ({ children }) => {
     </>
   )
 }
-
 export default Contain

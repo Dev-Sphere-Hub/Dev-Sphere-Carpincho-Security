@@ -1,7 +1,7 @@
 import React from 'react'
-import Search from '../../components/Search'
+import Search from '../../components/search'
 import Categories from '../../components/Categories'
-import LatestArrivals from '../../components/LatestArrivals'
+import LatestArrivals from '../../components/latestArrivals'
 
 const Home = () => {
   return (

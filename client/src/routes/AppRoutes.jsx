@@ -4,6 +4,9 @@ import Home from '../pages/Home'
 import GuardianJournal from '../pages/GuardianJournal'
 import Register from '../pages/Register'
 import LoginForm from '../pages/LoginForm'
+import QuickRegistration from '../pages/QuickRegistration/index'
+import PhotoCapture from '../components/PhotoCapture'
+import SuccessfulRegistration from '../components/SuccessfulRegistration'
 
 const AppRoutes = () => {
   const logged = true // luego lo traemos desde un estado
@@ -17,6 +20,9 @@ const AppRoutes = () => {
       <Route path='/novedades' element={<GuardianJournal />} />
       <Route path='/login' element={<LoginForm />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/photoCapture' element={<PhotoCapture />} />
+      <Route path='/photoCapture/quickRegistration' element={<QuickRegistration />} />
+      <Route path='/photoCapture/registerExito' element={<SuccessfulRegistration />} />
     </Routes>
 
   )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { BiHistory, BiUpArrowAlt, BiSolidReport, BiPencil } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 const Categories = () => {
   return (
@@ -14,12 +15,12 @@ const Categories = () => {
           </div>
         </section>
 
-        <section className='catdRedirect w-[125px] h-[125px] bg-colorCustom1 mr-auto rounded-lg flex flex-col justify-between p-2 shadow-custom'>
+        <Link to='photoCapture' className='catdRedirect w-[125px] h-[125px] bg-colorCustom1 mr-auto rounded-lg flex flex-col justify-between p-2 shadow-custom'>
           <h2 className='subtituloCategories font-titulo font-bold text-xl text-colorCustom5 text-center'>Registro rápido</h2>
           <div className='icon w-8 h-8 grid place-content-center text-2xl ml-auto text-colorCustom5'>
             <BiPencil />
           </div>
-        </section>
+        </Link>
 
         <section className='catdRedirect relative w-[125px] h-[125px] bg-colorCustom1 ml-auto rounded-lg flex flex-col justify-between p-2 shadow-custom overflow-hidden whitespace-break-spaces'>
           <h2 className='subtituloCategories font-titulo font-bold text-xl text-colorCustom5'>Ingreso / Egreso</h2>

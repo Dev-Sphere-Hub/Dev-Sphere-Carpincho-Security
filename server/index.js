@@ -4,6 +4,7 @@ dotenv.config({ path: ".env" });
 import express from "express";
 import cors from "cors";
 import conectarDB from "./db/db.js";
+import mainRouter from "./api/routes/index.js"
 
 const PORT = process.env.PORT || 5000;
 
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 5000;
   const app = express();
   app.use(cors());
   app.use(express.json());
+  app.use(mainRouter);
   app.get("/", (req, res) => {
     res.send("¡Hola, mundo!");
   });

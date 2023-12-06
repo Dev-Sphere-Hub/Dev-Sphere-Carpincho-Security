@@ -7,7 +7,7 @@ import { sendResponse } from '../utils/responses.js';
 const TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || '24h';
 
 export const createUser = tryCatch(async(req, res) => {
-    const { name, lastname, documentId, email, password } = req.body;
+    const { name, lastname, documentId, phone, email, password } = req.body;
     const existingUser = await User.findOne({ email });
     const existingUserDocumentId = await User.findOne({ documentId });
     if (existingUser) {
@@ -23,6 +23,7 @@ export const createUser = tryCatch(async(req, res) => {
     const newUser = new User({
         fullName,
         documentId,
+        phone,
         email: email.toLowerCase(),
         password: hashedPassword,
     });
@@ -33,7 +34,7 @@ export const createUser = tryCatch(async(req, res) => {
 
     const token = jwt.sign({ userId: newUser._id }, secretKey, { expiresIn: TOKEN_EXPIRATION });
 
-    sendResponse(res, 201, 'Usuario creado con éxito.', { token });
+    sendResponse(res, 201, 'Se ha registrado correctamente.', { token });
 });
 
 export const login = tryCatch(async(req, res) => {

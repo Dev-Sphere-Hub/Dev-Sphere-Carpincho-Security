@@ -1,9 +1,9 @@
 import React from 'react'
-import VerticalMenu from '../../layouts/verticalMenu'
+import VerticalMenu from '../../layouts/VerticalMenu'
 import { Route, Routes, Outlet } from 'react-router-dom'
 import IngresoEgreso from './components/IngresoEgreso/IngresoEgreso'
-import UserProfile from './components/UserProfile/UserProfile'
-import Reportes from './components/Reportes/Reportes'
+import UserProfile from '../../components/UserProfile'
+import Reportes from '../../components/Reports'
 import IngresoRapido from './components/IngresoEgreso/IngresoRapido'
 import Historial from './components/Historial/Historial'
 

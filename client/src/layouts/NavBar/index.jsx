@@ -11,7 +11,7 @@ const NavBar = () => {
   const imagePerfil = 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
   const user = null
   return (
-    <div className='w-[90%] flex flex-row justify-between items-center bg-white text-colorCustom4 '>
+    <div className='w-[90%] flex flex-row justify-between items-center bg-white text-colorCustom4'>
       <h1 className='text-left pl-1 capitalize font-titulo text-xl font-bold'>Hola {user || 'user!'}</h1>
       <div
         onClick={handleNavigation}

@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import personas from '../../../../db/db_registros'
 import './styles.css'
+import useNavStore from '../../../../store/NavStore/navStore'
 
 const Historial = () => {
+  const { setActiveIndex } = useNavStore()
+
+  useEffect(() => {
+    setActiveIndex('historial')
+    return () => setActiveIndex(null)
+  }, [])
+
   const calcStatus = (status) => status === 'aprobado'
 
   return (

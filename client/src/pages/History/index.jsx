@@ -4,7 +4,7 @@ import { Route, Routes, Outlet } from 'react-router-dom'
 import IngresoEgreso from './components/IngresoEgreso/IngresoEgreso'
 import UserProfile from '../../components/UserProfile'
 import Reportes from '../../components/Reports'
-import IngresoRapido from './components/IngresoEgreso/IngresoRapido'
+import IngresoRapido from './components/IngresoRapido/IngresoRapido'
 import Historial from './components/Historial/Historial'
 
 const History = () => {

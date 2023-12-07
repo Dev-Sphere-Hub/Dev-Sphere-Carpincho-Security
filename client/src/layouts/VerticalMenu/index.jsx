@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
 import { BiRedo, BiSolidTruck, BiSolidTimeFive, BiSolidReport, BiCaretRight } from 'react-icons/bi'
+import useNavStore from '../../store/NavStore/navStore'
 
 const VerticalMenu = () => {
+  const { activeIndex } = useNavStore()
   const [activeNavVerticas, setActiveNavVerticas] = useState(false)
   const navigate = useNavigate()
   const menuRef = useRef(null)
@@ -34,7 +36,7 @@ const VerticalMenu = () => {
         <ul className='navMenuVert pl-1 flex flex-col flex-nowrap gap-1'>
           <li>
             <button
-              className='customButton w-[40px] h-[40px] rounded-full flex justify-center items-center text-xl lg:w-[98%] lg:h-[250px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 lg:pl-5'
+              className='customButton w-[40px] h-[40px] rounded-full flex justify-center items-center text-xl lg:w-[98%] lg:h-[250px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 lg:pl-5 '
               onClick={() => navigate('/historial/')}
             >
               <img
@@ -48,7 +50,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300'
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoEgreso' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'} `}
               onClick={() => navigate('/historial/ingresoEgreso')}
             >
               <BiRedo />
@@ -57,7 +59,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300'
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
               onClick={() => navigate('/historial/ingresoRapido')}
             >
               <BiSolidTruck />
@@ -66,7 +68,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300'
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
               onClick={() => navigate('/historial/historia')}
             >
               <BiSolidTimeFive />
@@ -75,7 +77,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className='customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300'
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
               onClick={() => navigate('/historial/reportes')}
             >
               <BiSolidReport />
@@ -87,7 +89,7 @@ const VerticalMenu = () => {
           className='activeNavVerical absolute top-[42%] -right-2 lg:-right-4 esconde w-2 lg:w-4 h-[50px] bg-[#f4f3f3] rounded-r-[3px] grid place-content-center text-md '
           onClick={e => handleClickNavVerticas(e)}
         >
-          <BiCaretRight />
+          <BiCaretRight className={`${activeNavVerticas ? 'rotate-180 transition-all ease-in-out duration-300' : 'rotate-0 transition-all ease-in-out duration-300'}`} />
         </button>
       </nav>
     </div>

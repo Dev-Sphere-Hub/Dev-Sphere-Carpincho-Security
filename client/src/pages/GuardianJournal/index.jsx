@@ -47,7 +47,7 @@ const GuardianJournal = () => {
   return (
     <div id='novedades' className='w-[100%] min-h-[500px] flex flex-col items-center'>
       <p className='self-center lg:self-start text-3xl font-bold'>Novedades</p>
-<div className='hided lg:block'>
+<div className='hidden lg:block'>
 <Carousel />
 </div>
       {/* Modal para el registro de novedades */}

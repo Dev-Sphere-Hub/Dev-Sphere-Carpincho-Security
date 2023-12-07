@@ -18,12 +18,21 @@ export const registerVisit = tryCatch(async (req, res) => {
 
 // Controlador para actualizar una visita por ID
 export const updateVisit = tryCatch(async (req, res) => {
-    const updatedVisit = await Visit.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updatedVisit) {
+  const { checkOut, ...otherFields } = req.body;
+
+  // Verificar si hay otros campos presentes en el cuerpo de la solicitud
+  if (Object.keys(otherFields).length > 0) {
+      return sendResponse(res, 400, 'Solo se permite la actualización de checkOut');
+  }
+
+  const updatedVisit = await Visit.findByIdAndUpdate(req.params.id, { checkOut }, { new: true });
+  if (!updatedVisit) {
       return sendResponse(res, 404, 'Visita no encontrada');
-    }
-    sendResponse(res, 200, 'Visita actualizada con éxito', updatedVisit);
+  }
+
+  sendResponse(res, 200, 'Visita actualizada con éxito', updatedVisit);
 });
+
 
 
 // Controlador para obtener todas las visitas

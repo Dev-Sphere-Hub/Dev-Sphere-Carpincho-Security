@@ -1,9 +1,13 @@
 import express from 'express';
-import { registerVisit } from '../controllers/visit.controller.js';
+import { registerVisit, getAllVisits, getVisitById, updateVisit, deleteVisit  } from '../controllers/visit.controller.js';
 
 const router = express.Router();
 
 router
-    .post('/', registerVisit);
+    .get('/', getAllVisits)
+    .get('/:id', getAllVisits)
+    .post('/', registerVisit)
+    .patch('/:id', updateVisit)
+    .delete('/:id', deleteVisit)
 
 export default router;

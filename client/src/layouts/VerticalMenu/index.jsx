@@ -50,7 +50,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoEgreso' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'} `}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoEgreso' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'} `}
               onClick={() => navigate('/historial/ingresoEgreso')}
             >
               <BiRedo />
@@ -59,7 +59,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/ingresoRapido')}
             >
               <BiSolidTruck />
@@ -68,7 +68,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/historia')}
             >
               <BiSolidTimeFive />
@@ -77,7 +77,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/reportes')}
             >
               <BiSolidReport />

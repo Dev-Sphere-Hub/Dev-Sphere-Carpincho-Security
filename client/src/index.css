@@ -3,3 +3,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ANIMATIONS */
+/* Hover img */
+/* 
+.lift-up {
+  transition: transform 0.3s ease-out;
+}
+
+.lift-up.is-zoomed {
+  transform: translateY(-8px);
+}
+
+.scale-up {
+  transition: transform 0.3s ease-out;
+}
+
+.scale-up.is-zoomed {
+  transform: scale(1.05);
+} */
+
+/* Hover img END   */

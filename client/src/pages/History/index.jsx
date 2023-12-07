@@ -1,11 +1,11 @@
 import React from 'react'
 import VerticalMenu from '../../layouts/VerticalMenu'
 import { Route, Routes, Outlet } from 'react-router-dom'
-import IngresoEgreso from './components/IngresoEgreso/IngresoEgreso'
+import IngresoEgreso from './components/IngresoEgreso'
 import UserProfile from '../../components/UserProfile'
 import Reportes from '../../components/Reports'
-import IngresoRapido from './components/IngresoRapido/IngresoRapido'
-import Historial from './components/Historial/Historial'
+import IngresoRapido from './components/IngresoRapido'
+import Historial from './components/Historial'
 
 const History = () => {
   // la ruta de esto es /historial

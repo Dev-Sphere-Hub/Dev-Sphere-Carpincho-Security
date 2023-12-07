@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Scheme({
+const userSchema = new mongoose.Schema({
     type: {
         type: String,
         enum: ['admin', 'safety_guard', 'home_owner', 'visitor'],
-        required: true
+        default: 'safety_guard',
     },
     fullName: {
         type: String,

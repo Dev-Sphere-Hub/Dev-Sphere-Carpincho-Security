@@ -6,15 +6,18 @@ import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-ico
 const Carousel = () => {
   const [currentCategory, setCurrentCategory] = useState(0);
   const [intervalTime, setIntervalTime] = useState(5000);
+  const [isBackArrowVisible, setIsBackArrowVisible] = useState(false);
 
   const nextCategory = () => {
     setCurrentCategory((currentCategory + 1) % newDetails.length);
     setIntervalTime(60000);
+    setIsBackArrowVisible(true);
   };
 
   const prevCategory = () => {
     setCurrentCategory((currentCategory + newDetails.length - 1) % newDetails.length);
     setIntervalTime(60000);
+    setIsBackArrowVisible(false);
   };
 
   const newDetails = [
@@ -37,7 +40,7 @@ const Carousel = () => {
       new: "Evento Destacado",
       newDescripcion: "Mañana 18:00hs, habrá reunión de vecinos en el salón comunitario.",
     },
-
+  
     {
       img: "https://images.unsplash.com/photo-1601914697928-0b536e76d048?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       new: "Emergencia",
@@ -49,11 +52,13 @@ const Carousel = () => {
       newDescripcion: "Habrá un mantenimiento programado en el sistema de seguridad del country",
     },
   ];
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCategory((currentCategory + 1) % newDetails.length);
       setIntervalTime(3000);
+      setIsBackArrowVisible(false);
     }, intervalTime);
     return () => clearInterval(interval);
   }, [currentCategory, newDetails.length, intervalTime]);
@@ -66,7 +71,7 @@ const Carousel = () => {
         <div className="self-center">
           <button
             onClick={prevCategory}
-            className="text-2xl opacity-50 hover:opacity-100 transition-opacity mr-10"
+            className={`text-2xl ${isBackArrowVisible ? 'opacity-50 hover:opacity-100' : 'opacity-0'} transition-opacity mr-10`}
           >
             <MdKeyboardDoubleArrowLeft size={iconSize} />
           </button>
@@ -80,7 +85,7 @@ const Carousel = () => {
               detail: newsItem.newDescripcion,
               image: newsItem.img,
             }}
-            isZoomed={index === 0 || index === 1} // Aplicar el efecto a ambas tarjetas
+            isZoomed={index === 1} 
           />
         ))}
         <div className="self-center">

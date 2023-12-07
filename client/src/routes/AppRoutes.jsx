@@ -10,6 +10,8 @@ import PhotoCapture from '../components/PhotoCapture'
 import SuccessfulRegistration from '../components/SuccessfulRegistration'
 
 import History from '../pages/History'
+import CamCapture from '../components/CamCapture'
+import VehicleRegister from '../pages/VehicleRegister'
 
 const AppRoutes = () => {
   const logged = true // luego lo traemos desde un estado
@@ -24,10 +26,11 @@ const AppRoutes = () => {
 
       <Route path='/login' element={<LoginForm />} />
       <Route path='/register' element={<Register />} />
-
       <Route path='/photoCapture' element={<PhotoCapture />} />
       <Route path='/photoCapture/quickRegistration' element={<QuickRegistration />} />
       <Route path='/photoCapture/registerExito' element={<SuccessfulRegistration />} />
+      <Route path='/camCapture' element={<CamCapture />} />
+      <Route path='registro' element={<VehicleRegister />} />
 
       <Route
         path='/historial/*'

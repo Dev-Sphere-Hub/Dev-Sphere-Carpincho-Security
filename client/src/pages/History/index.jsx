@@ -5,7 +5,7 @@ import IngresoEgreso from './components/IngresoEgreso/IngresoEgreso'
 import UserProfile from '../../components/UserProfile'
 import Reportes from '../../components/Reports'
 import IngresoRapido from './components/IngresoEgreso/IngresoRapido'
-import Historial from './components/Historial/Historial'
+import Historial from './components/Historial'
 
 const History = () => {
   // la ruta de esto es /historial

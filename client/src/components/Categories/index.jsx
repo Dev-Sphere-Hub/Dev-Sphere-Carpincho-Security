@@ -22,12 +22,14 @@ const Categories = () => {
           </div>
         </Link>
 
-        <section className='catdRedirect relative w-[125px] h-[125px] bg-colorCustom1 ml-auto rounded-lg flex flex-col justify-between p-2 shadow-custom overflow-hidden whitespace-break-spaces'>
-          <h2 className='subtituloCategories font-titulo font-bold text-xl text-colorCustom5'>Ingreso / Egreso</h2>
-          <div className='icon w-8 h-8 grid place-content-center text-2xl ml-auto text-colorCustom5'>
-            <BiUpArrowAlt />
-          </div>
-        </section>
+        <Link to='registroVehicle'>
+          <section className='catdRedirect relative w-[125px] h-[125px] bg-colorCustom1 ml-auto rounded-lg flex flex-col justify-between p-2 shadow-custom overflow-hidden whitespace-break-spaces'>
+            <h2 className='subtituloCategories font-titulo font-bold text-xl text-colorCustom5'>Ingreso / Egreso</h2>
+            <div className='icon w-8 h-8 grid place-content-center text-2xl ml-auto text-colorCustom5'>
+              <BiUpArrowAlt />
+            </div>
+          </section>
+        </Link>
 
         <section className='catdRedirect w-[125px] h-[125px] bg-colorCustom1 mr-auto rounded-lg flex flex-col justify-between p-2 shadow-custom'>
           <h2 className='subtituloCategories font-titulo font-bold text-xl text-colorCustom5 text-center'>Reportes</h2>

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const vehicleSchema = new mongoose.Scheme({
+const vehicleSchema = new mongoose.Schema({
     plateCode: {
         type: String,
         required: true

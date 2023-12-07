@@ -36,7 +36,6 @@ const VehicleRegister = () => {
 
   return (
     <>
-
       <div className='flex flex-col items-center justify-center h-screen'>
         {
       imgSrc && <img src={imgSrc} alt='preview' className='h-64 w-64 object-cover mb-4' />

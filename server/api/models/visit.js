@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const visitSchema = new mongoose.Scheme({
+const visitSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true

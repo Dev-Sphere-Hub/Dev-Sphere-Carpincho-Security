@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Carousel from '../../components/Carousel'
 
 const GuardianJournal = () => {
   const [formData, setFormData] = useState({
@@ -45,8 +46,10 @@ const GuardianJournal = () => {
 
   return (
     <div id='novedades' className='w-[100%] min-h-[500px] flex flex-col items-center'>
-      <p className='self-center font-bold'>Novedades</p>
-
+      <p className='self-center lg:self-start text-3xl font-bold'>Novedades</p>
+<div className='hided lg:block'>
+<Carousel />
+</div>
       {/* Modal para el registro de novedades */}
       {showModal && (
         <div className='fixed inset-0 flex items-center justify-center z-50'>

@@ -22,29 +22,30 @@ const Carousel = () => {
     setIsBackArrowVisible(false);
   };
 
+  
   const newDetails = [
     {
-      img: "https://i.postimg.cc/Gm5q470B/Image-generated-168170914-2.webp",
+      img: "https://source.unsplash.com/featured/?report",
       new: "Reporte",
       newDescripcion: "Se rompió un vidrio de la entrada de un hogar (Hogar 515)",
     },
     {
-      img: "https://i.postimg.cc/N0N9sVZV/Image-generated-168170922-3.webp",
+      img: "https://source.unsplash.com/featured/?people",
       new: "Personas No Autorizadas",
       newDescripcion: "Se detectaron personas no autorizadas en el área común a las 14:30:45 del 6/12/2023.",
     },
     {
-      img: "https://i.postimg.cc/2j0vjqNy/Image-generated-1681709552.webp",
+      img: "https://source.unsplash.com/featured/?event",
       new: "Evento Destacado",
       newDescripcion: "Mañana a las 18:00 horas, habrá una reunión de vecinos en el salón comunitario.",
     },
     {
-      img: "https://i.postimg.cc/dV0DKkT9/Image-generated-168196449-3.webp",
+      img: "https://source.unsplash.com/featured/?emergency",
       new: "Emergencia",
       newDescripcion: "Se produjo un incendio en el contenedor de basura. Alejarse del área afectada.",
     },
     {
-      img: "https://i.postimg.cc/g07QPccT/Image-generated-168170731-3.webp",
+      img: "https://source.unsplash.com/featured/?warning",
       new: "Aviso",
       newDescripcion: "Habrá un mantenimiento programado en el sistema de seguridad del country",
     },

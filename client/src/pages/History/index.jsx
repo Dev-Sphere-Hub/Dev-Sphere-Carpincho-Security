@@ -8,6 +8,7 @@ import UserProfile from '../../components/UserProfile'
 import Historial from './components/Historial'
 import PhotoCapture from '../../components/PhotoCapture'
 import GuardianJournal from '../GuardianJournal'
+import Paquetes from './components/Paquetes/Paquetes'
 
 const History = () => {
   // la ruta de esto es /historial
@@ -47,6 +48,10 @@ const History = () => {
           <Route
             path='/reportes'
             element={<GuardianJournal />}
+          />
+          <Route
+            path='/paquetes'
+            element={<Paquetes />}
           />
         </Routes>
       </section>

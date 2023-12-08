@@ -10,7 +10,7 @@ const Paquetes = () => {
   }, [])
 
   return (
-    <div>Paquetes</div>
+    <div> paqueteria de oprueba </div>
   )
 }
 

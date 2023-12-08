@@ -6,7 +6,7 @@ import Register from '../pages/Register'
 import LoginForm from '../pages/LoginForm'
 
 import QuickRegistration from '../pages/QuickRegistration/index'
-import PhotoCapture from '../components/PhotoCapture'
+// import PhotoCapture from '../components/PhotoCapture'
 import SuccessfulRegistration from '../components/SuccessfulRegistration'
 
 import History from '../pages/History'
@@ -27,7 +27,6 @@ const AppRoutes = () => {
       <Route path='/login' element={<LoginForm />} />
       <Route path='/register' element={<Register />} />
 
-      <Route path='/photoCapture' element={<PhotoCapture />} />
       <Route path='/photoCapture/quickRegistration' element={<QuickRegistration />} />
       <Route path='/photoCapture/registerExito' element={<SuccessfulRegistration />} />
 

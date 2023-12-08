@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useRef, useState } from 'react'
-import { BiRedo, BiSolidTruck, BiSolidTimeFive, BiSolidReport, BiCaretRight } from 'react-icons/bi'
+import { BiSolidTruck, BiSolidTimeFive, BiSolidReport, BiCaretRight, BiPackage } from 'react-icons/bi'
 import useNavStore from '../../store/NavStore/navStore'
 
 const VerticalMenu = () => {
@@ -48,27 +48,19 @@ const VerticalMenu = () => {
               <span className='hidden lg:block font-semibold text-lg text-center'>Usuario</span>
             </button>
           </li>
+
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoEgreso' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'} `}
-              onClick={() => navigate('/historial/ingresoEgreso')}
-            >
-              <BiRedo />
-              <span className='hidden lg:block font-semibold text-lg text-center'>Ingreso / Egreso</span>
-            </button>
-          </li>
-          <li>
-            <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/ingresoRapido')}
             >
               <BiSolidTruck />
-              <span className='hidden lg:block font-semibold text-lg text-center'>Ingreso rápido</span>
+              <span className='hidden lg:block font-semibold text-lg text-center'>Ingreso Egreso</span>
             </button>
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/historia')}
             >
               <BiSolidTimeFive />
@@ -77,11 +69,20 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-colorCustom2' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/reportes')}
             >
               <BiSolidReport />
               <span className='hidden lg:block font-semibold text-lg text-center'>Reportes</span>
+            </button>
+          </li>
+          <li>
+            <button
+              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'paquetes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
+              onClick={() => navigate('/historial/paquetes')}
+            >
+              <BiPackage />
+              <span className='hidden lg:block font-semibold text-lg text-center'>Paquetes</span>
             </button>
           </li>
         </ul>

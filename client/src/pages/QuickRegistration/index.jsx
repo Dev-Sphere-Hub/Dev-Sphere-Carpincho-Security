@@ -22,7 +22,7 @@ const QuickRegistration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/photoCapture/registerExito', { state: { form } })
+    navigate('/historial', { state: { form } })
     console.log(form)
   }
 

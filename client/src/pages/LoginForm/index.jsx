@@ -9,7 +9,7 @@ const LoginForm = () => {
   const handleLogin = () => {
     // if (!user === '') toast.error('Usuario invalido')
     // if (user){
-    Navigate('/')
+    Navigate('/historial')
   }
 
   const handleRegister = () => {

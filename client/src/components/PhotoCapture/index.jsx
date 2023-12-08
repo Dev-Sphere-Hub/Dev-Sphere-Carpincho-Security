@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Webcam from 'react-webcam'
+import useNavStore from '../../store/NavStore/navStore'
 
 const PhotoCapture = () => {
   const webcamRef = useRef(null)
@@ -11,6 +12,13 @@ const PhotoCapture = () => {
     const imagenSrc = webcamRef.current.getScreenshot()
     navigate('/photoCapture/quickRegistration', { state: { imagen: imagenSrc } })
   }
+
+  const { setActiveIndex } = useNavStore()
+
+  useEffect(() => {
+    setActiveIndex('ingresoRapido')
+    return () => setActiveIndex(null)
+  }, [])
 
   return (
     <div className='flex flex-col items-center justify-center h-screen'>

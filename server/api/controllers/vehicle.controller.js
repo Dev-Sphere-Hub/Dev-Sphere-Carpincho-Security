@@ -38,8 +38,8 @@ export const createVehicle = tryCatch(async(req, res) => {
 
 export const getAllVehicles = tryCatch(async(req, res) => {
     const vehicles = await Vehicle.find();
-    if (vehicles.length() == 0) {
-        sendResponse(res, 404, 'No se encontraron vehículos.')
+    if (vehicles.length == 0) {
+        return sendResponse(res, 404, 'No se encontraron vehículos.')
     }
     sendResponse(res, 200, 'Vehículos encontrados.', vehicles)
 })
@@ -47,7 +47,7 @@ export const getAllVehicles = tryCatch(async(req, res) => {
 export const getVehicleById = tryCatch(async(req, res) => {
     const vehicle = await Vehicle.findById(req.params.id);
     if (!vehicle) {
-        sendResponse(res, 404, 'Vehículo no encontrada.');
+        return sendResponse(res, 404, 'Vehículo no encontrada.');
     }
     sendResponse(res, 200, 'Vehículo encontrada con éxito.', vehicle);
 })

@@ -5,7 +5,7 @@ const vehicleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    car_insurance: {
+    carInsurance: {
         type: String,
         required: true
     },

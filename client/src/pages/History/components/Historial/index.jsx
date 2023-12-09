@@ -1,21 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import personas from '../../../../db/db_registros'
 import './styles.css'
 import useNavStore from '../../../../store/NavStore/navStore'
+import { BiSolidRightArrowAlt, BiSolidLeftArrowAlt } from 'react-icons/bi'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     setActiveIndex('historial')
     return () => setActiveIndex(null)
   }, [])
 
+  // funcion que retorna un bolean de acuerdo a s el calor es aprovado o no
   const calcStatus = (status) => status === 'aprobado'
+
+  const itemsPerPage = 5
+
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = personas.slice(indexOfFirstItem, indexOfLastItem)
+
+  const paginate = (action) => {
+    if (action === 'next') {
+      setCurrentPage((prev) => prev + 1)
+    } else if (action === 'prev' && currentPage > 1) {
+      setCurrentPage((prev) => prev - 1)
+    }
+  }
 
   return (
     <div
-      className='h-full w-[95%] sm:w-[90%] md:w-[90%] lg:w-[98%] xl:w-[98%] 2xl:w-[100%] lg:flex lg:justify-center lg:items-center  overflow-x-scroll 2xl:overflow-auto scrollbar pb-2'
+      className='h-full w-[95%] sm:w-[90%] md:w-[90%] lg:w-[98%] xl:w-[98%] 2xl:w-[100%] lg:flex flex-col lg:justify-center lg:items-center overflow-x-scroll 2xl:overflow-auto scrollbar pb-2'
 
     >
       <div className='w-[1000px] 2xl:w-[100%] grid grid-cols-5  rounded-lg border-2 overflow-hidden border-colorCustom1 text-colorCustom4 font-titulo font-medium text-base'>
@@ -36,7 +53,7 @@ const Historial = () => {
         </div>
         <div className='col-span-5 p-0 bg-white'>
 
-          {personas.map(persona => (
+          {currentItems.map(persona => (
             <div key={persona.id} className='col-span-5 py-2 bg-white'>
               <div className='grid grid-cols-5'>
                 <div className='col-span-1 py-2 grid place-content-center'>
@@ -60,6 +77,19 @@ const Historial = () => {
 
         </div>
       </div>
+      <div className='w-[99%] max-w-[1000px] mx-auto py-3  paginationButtons flex justify-between items-center'>
+        <button
+          className='text-xl text-colorCustom1 hover:text-colorCustom2 transition-all ease-linear duration-300'
+          onClick={() => paginate('prev')}
+        ><BiSolidLeftArrowAlt />
+        </button>
+        <button
+          className='text-xl text-colorCustom1 hover:text-colorCustom2 transition-all ease-linear duration-300'
+          onClick={() => paginate('next')}
+        ><BiSolidRightArrowAlt />
+        </button>
+      </div>
+
     </div>
   )
 }

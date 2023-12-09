@@ -3,6 +3,7 @@ import personas from '../../../../db/db_registros'
 import './styles.css'
 import useNavStore from '../../../../store/NavStore/navStore'
 import { BiSolidRightArrowAlt, BiSolidLeftArrowAlt } from 'react-icons/bi'
+import ListOfPeople from './components/ListOfPeople'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
@@ -12,9 +13,6 @@ const Historial = () => {
     setActiveIndex('historial')
     return () => setActiveIndex(null)
   }, [])
-
-  // funcion que retorna un bolean de acuerdo a s el calor es aprovado o no
-  const calcStatus = (status) => status === 'aprobado'
 
   const itemsPerPage = 5
 
@@ -51,31 +49,8 @@ const Historial = () => {
         <div className='bg-colorCustom1 py-2 rounded-tr-md'>
           <span>Tipo</span>
         </div>
-        <div className='col-span-5 p-0 bg-white'>
 
-          {currentItems.map(persona => (
-            <div key={persona.id} className='col-span-5 py-2 bg-white'>
-              <div className='grid grid-cols-5'>
-                <div className='col-span-1 py-2 grid place-content-center'>
-                  <img src={persona.imagen} alt={`Imagen de ${persona.id}`} className='w-16 h-16 object-cover rounded-full' />
-                </div>
-                <div className='col-span-1 py-2 grid place-content-center'>
-                  <span className={`py-2 px-4 rounded-[30px] text-colorCustom4 font-medium capitalize ${calcStatus(persona.estado) ? 'bg-green-300' : 'bg-red-400'}`}>{persona.estado}</span>
-                </div>
-                <div className='col-span-1 py-2 grid place-content-center'>
-                  <span>{persona.fechaPublicacion}</span>
-                </div>
-                <div className='col-span-1 py-2 grid place-content-center capitalize'>
-                  <span>{persona.categoria}</span>
-                </div>
-                <div className='col-span-1 py-2 grid place-content-center capitalize'>
-                  <span>{persona.tipo}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-
-        </div>
+        <ListOfPeople personas={currentItems} />
       </div>
       <div className='w-[99%] max-w-[1000px] mx-auto py-3  paginationButtons flex justify-between items-center'>
         <button

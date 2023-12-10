@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Carousel from '../../components/Carousel'
+import useNavStore from '../../store/NavStore/navStore'
 
 const GuardianJournal = () => {
   const [formData, setFormData] = useState({
@@ -43,10 +45,19 @@ const GuardianJournal = () => {
     setShowModal(false)
   }
 
-  return (
-    <div id='novedades' className='w-[100%] min-h-[500px] flex flex-col items-center'>
-      <p className='self-center font-bold'>Novedades</p>
+  const { setActiveIndex } = useNavStore()
 
+  useEffect(() => {
+    setActiveIndex('reportes')
+    return () => setActiveIndex(null)
+  }, [])
+
+  return (
+    <div id='novedades' className='w-[100%] min-h-[500px] h-auto xl:min-w-[1280px] flex flex-col items-center gap-[5rem] border-2 p-2 rounded-md '>
+      <h2 className='self-center lg:self-start text-3xl w-[100%] lg:w-[860px]  font-bold mx-auto lg:text-left'>Novedades</h2>
+      <div className='hidden lg:block'>
+        <Carousel />
+      </div>
       {/* Modal para el registro de novedades */}
       {showModal && (
         <div className='fixed inset-0 flex items-center justify-center z-50'>

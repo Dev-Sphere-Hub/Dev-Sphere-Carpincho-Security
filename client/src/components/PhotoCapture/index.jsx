@@ -1,16 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
+import { IoCameraOutline } from 'react-icons/io5'
+import { PiCameraSlashBold } from 'react-icons/pi'
 import Webcam from 'react-webcam'
 import useNavStore from '../../store/NavStore/navStore'
 
 const PhotoCapture = () => {
   const webcamRef = useRef(null)
   const [isActive, setIsActive] = useState(true)
-  const navigate = useNavigate()
+  const [capturedImage, setCapturedImage] = useState(null)
+  // const navigate = useNavigate()
 
   const capturar = async () => {
     const imagenSrc = webcamRef.current.getScreenshot()
-    navigate('/photoCapture/quickRegistration', { state: { imagen: imagenSrc } })
+    setCapturedImage(imagenSrc)
+    // navigate('/photoCapture/quickRegistration', { state: { imagen: imagenSrc } })
   }
 
   const { setActiveIndex } = useNavStore()
@@ -21,36 +25,43 @@ const PhotoCapture = () => {
   }, [])
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
-      <h1 className='text-2xl font-bold mb-4'>Registro rápido</h1>
-      <div className='mb-4 border border-gray-300 h-64 w-64'>
-        {isActive
+    <div className='flex flex-col items-center justify-center'>
+
+      <div className='mb-4 border border-gray-300 h-64 w-64 relative'>
+        {capturedImage
           ? (
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat='image/jpeg'
-              className='h-64 w-64 object-cover'
-            />
+            <img src={capturedImage} alt='Captured' className='h-64 w-64 object-cover' />
             )
-          : (
-            <div className='h-64 w-64 flex items-center justify-center'>
-              <span>La cámara está desactivada</span>
-            </div>
-            )}
+          : isActive
+            ? (
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat='image/jpeg'
+                className='h-64 w-64 object-cover'
+              />
+              )
+            : (
+              <div className='h-64 w-64 flex items-center justify-center'>
+                <span className='h-64 w-64 flex items-center justify-center'>La cámara está desactivada</span>
+              </div>
+              )}
+
+        <button
+          onClick={() => setIsActive(!isActive)}
+          className='bg-slate-800 text-white rounded absolute px-2 py-2 -top-3 -right-3'
+        >
+          {isActive ? <PiCameraSlashBold /> : <IoCameraOutline />}
+        </button>
       </div>
+
       <button
         onClick={capturar}
-        className='bg-blue-500 text-white px-4 py-2 rounded mb-4'
+        className='bg-blue-500 text-white px-4 py-2 rounded mt-5'
       >
         Tomar foto y registrar
       </button>
-      <button
-        onClick={() => setIsActive(!isActive)}
-        className='bg-red-500 text-white px-4 py-2 rounded'
-      >
-        {isActive ? 'Desactivar' : 'Activar'} cámara
-      </button>
+
     </div>
   )
 }

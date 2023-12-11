@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const FormVehicle = () => {
+const FormVehicle = ({ imagen }) => {
   const navigate = useNavigate()
 
   const [form, setForm] = useState({
     nombre: '',
-    seguro: '',
-    patente: '',
-    modelo: ''
+    documento: '',
     propietario: '',
+    estado: '',
+    direccion: '',
+    patente: '',
+    seguro: '',
+    imagen
 
-  })  
+  })
 
   const handleChange = (e) => {
     setForm({
@@ -22,16 +25,16 @@ const FormVehicle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/CamCapture/registerExito', { state: { form } })
+    navigate('/historial/historia', { state: { form } })
     console.log(form)
   }
   return (
     <div>
-      <form onSubmit={handleSubmit} className=''>
+      {/* <form onSubmit={handleSubmit} className=''>
         <h2 className='text-2xl font-bold mb-4'>Registro</h2>
         <div className=' text-white p-2 rounded-md   flex justify-around mb-5'>
           <button className='rounded-md w-full bg-slate-400'>Ingreso</button>
-          <button className='rounded-md w-full  bg-slate-500'>Egreso</button>
+          <button className='rounded-md w-full  bg-slate-500'>Paqueteria</button>
         </div>
         <div className=' text-white p-2 rounded-md   flex justify-around mb-5'>
           <button className='rounded-md w-full bg-slate-400'>Caminar</button>
@@ -75,6 +78,16 @@ const FormVehicle = () => {
         <button type='submit' className='w-full p-2 bg-blue-500 text-white rounded'>
           Guardar
         </button>
+      </form> */}
+      <form onSubmit={handleSubmit} className=''>
+        <input type='text' name='nombre' placeholder='Nombre y Apellido' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <input type='text' name='documento' placeholder='Número de documento' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <input type='text' name='propietario' placeholder='Nombre de propietario' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <input type='text' name='estado' placeholder='Estado' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <input type='text' name='direccion' placeholder='Torre/Apartamento que se dirige' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <input type='text' name='patente' placeholder='Patente' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <input type='text' name='seguro' placeholder='Seguro' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
+        <button type='submit' className='w-full p-2 bg-green-700 text-white rounded'>Guardar</button>
       </form>
     </div>
   )

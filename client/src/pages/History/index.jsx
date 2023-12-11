@@ -1,14 +1,11 @@
 import React from 'react'
 import VerticalMenu from '../../layouts/VerticalMenu'
 import { Route, Routes, Outlet } from 'react-router-dom'
-import IngresoEgreso from './components/IngresoEgreso'
 import UserProfile from '../../components/UserProfile'
-// import Reportes from '../../components/Reports'
-// import IngresoRapido from './components/IngresoRapido'
 import Historial from './components/Historial'
-import PhotoCapture from '../../components/PhotoCapture'
 import GuardianJournal from '../GuardianJournal'
 import Paquetes from './components/Paquetes/Paquetes'
+import RegisterAll from '../RegisterAll'
 
 const History = () => {
   // la ruta de esto es /historial
@@ -29,16 +26,9 @@ const History = () => {
             path='/'
             element={<UserProfile />}
           />
-
-          <Route
-            path='/ingresoEgreso'
-            element={<IngresoEgreso />}
-          />
-
           <Route
             path='/ingresoRapido'
-            // element={<IngresoRapido />}
-            element={<PhotoCapture />}
+            element={<RegisterAll />}
 
           />
           <Route

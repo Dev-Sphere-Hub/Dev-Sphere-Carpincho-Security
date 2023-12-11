@@ -59,10 +59,10 @@ const Historial = () => {
           <span>Publicado</span>
         </div>
         <div className='bg-colorCustom1 py-2'>
-          <span>Categoria</span>
+          <span>Direccion</span>
         </div>
         <div className='bg-colorCustom1 py-2 rounded-tr-md'>
-          <span>Tipo</span>
+          <span>Nombre</span>
         </div>
 
         <ListOfPeople personas={currentItems} />

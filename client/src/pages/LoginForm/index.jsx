@@ -12,7 +12,7 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/v1/auth/login', {
+      const res = await fetch('https://carpincho-security.onrender.com/api/v1/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

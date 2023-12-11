@@ -56,7 +56,7 @@ const Register = () => {
     event.preventDefault()
     const formData = { name, lastname, email, password, confirmPassword, phone, documentId }
     try {
-      const response = await fetch('http://localhost:3001/api/v1/auth/register', {
+      const response = await fetch('https://carpincho-security.onrender.com/api/v1/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ const Register = () => {
   }
 
   return (
-    <div className='relative bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen  p-0 flex flex-col lg:flex-row lg:justify-around gap-8 min-w-[300px]'>
+    <div className='relative bg-colorCustom1 mt-9 w-[100%] px-6 lg:bg-slate-400 h-screen  p-0 flex flex-col lg:flex-row lg:justify-around gap-8 min-w-[300px]'>
       <div className='lg:flex-col lg:self-center'>
         <div className='pt-9 text-black text-5xl'>
           <h1>Logo</h1>
@@ -90,7 +90,7 @@ const Register = () => {
       </div>
       <div className='pt-9 lg:self-center'>
         <form onSubmit={handleRegisterForm}>
-          <div className='flex flex-col gap-8'>
+          <div className='flex flex-col gap-8 '>
             <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Nombre' value={name} onChange={(e) => setName(e.target.value)} />
             <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Apellido' value={lastname} onChange={(e) => setLastname(e.target.value)} />
             <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Dni' value={documentId} onChange={(e) => setDocumentId(e.target.value)} />

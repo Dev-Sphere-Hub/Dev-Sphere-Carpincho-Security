@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import personas from '../../../../db/db_registros'
+// import personas from '../../../../db/db_registros'
 import './styles.css'
 import useNavStore from '../../../../store/NavStore/navStore'
-import { BiSolidRightArrowAlt, BiSolidLeftArrowAlt } from 'react-icons/bi'
 import ListOfPeople from './components/ListOfPeople'
+import Paginacion from './components/Paginacion'
+import axios from 'axios'
+import useVicitStore from '../../../../store/VisitStore/VisitStore'
+import { endpoints } from '../../../../constants/api'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
   const [currentPage, setCurrentPage] = useState(1)
+
+  const { visitas, setVisitas } = useVicitStore()
+
+  useEffect(() => {
+    axios.get(endpoints.visitas)
+      .then(res => {
+        setVisitas(res.data.data)
+      })
+      .catch(err => console.log(err))
+  }, [setVisitas])
 
   useEffect(() => {
     setActiveIndex('historial')
@@ -18,7 +31,7 @@ const Historial = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = personas.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = visitas?.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (action) => {
     if (action === 'next') {
@@ -27,6 +40,8 @@ const Historial = () => {
       setCurrentPage((prev) => prev - 1)
     }
   }
+
+  console.log('Vicitas --> ', visitas)
 
   return (
     <div
@@ -52,18 +67,8 @@ const Historial = () => {
 
         <ListOfPeople personas={currentItems} />
       </div>
-      <div className='w-[99%] max-w-[1000px] mx-auto py-3  paginationButtons flex justify-between items-center'>
-        <button
-          className='text-xl text-colorCustom1 hover:text-colorCustom2 transition-all ease-linear duration-300'
-          onClick={() => paginate('prev')}
-        ><BiSolidLeftArrowAlt />
-        </button>
-        <button
-          className='text-xl text-colorCustom1 hover:text-colorCustom2 transition-all ease-linear duration-300'
-          onClick={() => paginate('next')}
-        ><BiSolidRightArrowAlt />
-        </button>
-      </div>
+
+      <Paginacion paginate={paginate} />
 
     </div>
   )

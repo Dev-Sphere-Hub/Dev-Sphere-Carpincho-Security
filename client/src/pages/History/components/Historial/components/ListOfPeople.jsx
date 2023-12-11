@@ -6,7 +6,7 @@ const ListOfPeople = ({ personas }) => {
     <div className='col-span-5 p-0 bg-white'>
 
       {personas.map(persona => (
-        <ItemPeople key={persona.id} persona={persona} />
+        <ItemPeople key={persona._id} persona={persona} />
       ))}
 
     </div>

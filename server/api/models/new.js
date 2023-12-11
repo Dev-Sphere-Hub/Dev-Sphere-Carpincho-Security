@@ -11,7 +11,8 @@ const newSchema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: Date
+        type: Date,
+        required: true
     },
     author: {
         type: mongoose.Types.ObjectId,

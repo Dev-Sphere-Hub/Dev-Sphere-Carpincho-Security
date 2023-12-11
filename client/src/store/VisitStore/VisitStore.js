@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 
-const useVicitStore = create((set) => ({
+const useVisitStore = create((set) => ({
   visitas: [],
 
-  // actualizamosla vicitas
+  // actualizamosla visitas
   setVisitas: (nuevaVisita) => set({ visitas: nuevaVisita })
 }))
 
-export default useVicitStore
+export default useVisitStore

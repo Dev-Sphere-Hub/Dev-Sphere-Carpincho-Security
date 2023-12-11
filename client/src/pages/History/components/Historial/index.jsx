@@ -5,14 +5,14 @@ import useNavStore from '../../../../store/NavStore/navStore'
 import ListOfPeople from './components/ListOfPeople'
 import Paginacion from './components/Paginacion'
 import axios from 'axios'
-import useVicitStore from '../../../../store/VisitStore/VisitStore'
+import useVisitStore from '../../../../store/VisitStore/VisitStore'
 import { endpoints } from '../../../../constants/api'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { visitas, setVisitas } = useVicitStore()
+  const { visitas, setVisitas } = useVisitStore()
 
   useEffect(() => {
     axios.get(endpoints.visitas)
@@ -41,7 +41,7 @@ const Historial = () => {
     }
   }
 
-  console.log('Vicitas --> ', visitas)
+  console.log('Visitas --> ', visitas)
 
   return (
     <div

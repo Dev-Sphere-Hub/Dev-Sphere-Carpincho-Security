@@ -1,7 +1,7 @@
 import React from 'react'
 import VerticalMenu from '../../layouts/VerticalMenu'
 import { Route, Routes, Outlet } from 'react-router-dom'
-import UserProfile from '../../components/UserProfile'
+import UserProfile from '../UserProfile/index'
 import Historial from './components/Historial'
 import GuardianJournal from '../GuardianJournal'
 import Paquetes from './components/Paquetes/Paquetes'

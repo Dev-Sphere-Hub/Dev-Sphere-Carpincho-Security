@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import { endpoints } from '../../constants/api'
+import { jwtDecode } from 'jwt-decode'
 
 const LoginForm = () => {
   const localStorage = window.localStorage
@@ -27,10 +28,12 @@ const LoginForm = () => {
       const data = await res.json()
       console.log(data)
       if (res.status === 200) {
-        const token = data.data.token
-        console.log(token)
-        localStorage.setItem('token', token)
-        setToken(token)
+        const decodedToken = jwtDecode(data.data.token)
+        console.log('DECODETOKEN => ', decodedToken)
+        // const token = data.data.token
+        // console.log(token)
+        localStorage.setItem('token', decodedToken)
+        setToken(decodedToken)
         Navigate('/historial')
       }
       if (data.status !== 'success') {

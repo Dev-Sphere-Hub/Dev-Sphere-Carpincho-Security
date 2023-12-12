@@ -1,6 +1,7 @@
-const filtersProductsByKeyword = (products, searchTerm) => {
+const filtersProductsByKeyword = ({ products, nameColumn, searchTerm }) => {
+  console.log(nameColumn)
   return products.filter((item) =>
-    item.destinatario.toLowerCase().includes(searchTerm.toLowerCase())
+    item[nameColumn].toLowerCase().includes(searchTerm.toLowerCase())
   )
 }
 

@@ -40,6 +40,7 @@
 
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { endpoints } from '../../constants/api'
 //  phone,
 const Register = () => {
   const Navigate = useNavigate()
@@ -56,7 +57,7 @@ const Register = () => {
     event.preventDefault()
     const formData = { name, lastname, email, password, confirmPassword, phone, documentId }
     try {
-      const response = await fetch('https://carpincho-security.onrender.com/api/v1/auth/register', {
+      const response = await fetch(endpoints.register, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

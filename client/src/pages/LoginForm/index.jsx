@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
+import { endpoints } from '../../constants/api'
 
 const LoginForm = () => {
+  const localStorage = window.localStorage
   const setToken = useAuthStore((state) => state.setToken)
   const [email, setUserEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -12,7 +14,7 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('https://carpincho-security.onrender.com/api/v1/auth/login', {
+      const res = await fetch(endpoints.login, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -24,15 +26,16 @@ const LoginForm = () => {
       })
       const data = await res.json()
       console.log(data)
+      if (res.status === 200) {
+        const token = data.data.token
+        console.log(token)
+        localStorage.setItem('token', token)
+        setToken(token)
+        Navigate('/historial')
+      }
       if (data.status !== 'success') {
         throw new Error(data.message)
       }
-      const token = data.data.token
-      console.log(token)
-      setToken(token)
-      setMessage(data.message) // Establecer el mensaje de éxito
-      setIsError(false) // No es un mensaje de error
-      Navigate('/historial')
     } catch (error) {
       setMessage(error.message) // Establecer el mensaje de error
       setIsError(true) // Es un mensaje de error

@@ -25,9 +25,11 @@ const PhotoCapture = () => {
   }, [])
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center '>
 
-      <div className='mb-4 border border-gray-300 h-64 w-64 relative'>
+      <div className='mb-4 border border-gray-300 h-64 w-64 relative rounded-md
+    border-2 bg-white'
+      >
         {capturedImage
           ? (
             <img src={capturedImage} alt='Captured' className='h-64 w-64 object-cover' />
@@ -38,7 +40,8 @@ const PhotoCapture = () => {
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat='image/jpeg'
-                className='h-64 w-64 object-cover'
+                className='h-64 w-64 object-cover rounded-md
+                border-2 bg-white'
               />
               )
             : (
@@ -49,7 +52,7 @@ const PhotoCapture = () => {
 
         <button
           onClick={() => setIsActive(!isActive)}
-          className='bg-slate-800 text-white rounded absolute px-2 py-2 -top-3 -right-3'
+          className='bg-slate-500 opacity-[0.3] text-white rounded-full absolute px-2 py-2 -top-3 -right-3'
         >
           {isActive ? <PiCameraSlashBold /> : <IoCameraOutline />}
         </button>

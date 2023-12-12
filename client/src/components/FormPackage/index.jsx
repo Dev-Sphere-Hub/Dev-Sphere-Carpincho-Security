@@ -28,12 +28,12 @@ const FormPackage = ({ imagen }) => {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit} className=''>
+      <form onSubmit={handleSubmit} className='flex flex-col '>
         <input type='text' name='empresa' placeholder='Tipo' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='procedencia' placeholder='Procedencia' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='propietario' placeholder='Propietario receptor' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <textarea type='text' name='descripcion' placeholder='Descripcion' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <button type='submit' className='w-full p-2 bg-green-700 text-white rounded'>Guardar</button>
+        <button type='submit' className='self-end w-full p-2 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white rounded shadow-custom'>Guardar</button>
       </form>
     </div>
   )

@@ -79,7 +79,7 @@ const FormVehicle = ({ imagen }) => {
           Guardar
         </button>
       </form> */}
-      <form onSubmit={handleSubmit} className=''>
+      <form onSubmit={handleSubmit} className='flex flex-col'>
         <input type='text' name='nombre' placeholder='Nombre y Apellido' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='documento' placeholder='Número de documento' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='propietario' placeholder='Nombre de propietario' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
@@ -87,7 +87,7 @@ const FormVehicle = ({ imagen }) => {
         <input type='text' name='direccion' placeholder='Torre/Apartamento que se dirige' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='patente' placeholder='Patente' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='seguro' placeholder='Seguro' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <button type='submit' className='w-full p-2 bg-green-700 text-white rounded'>Guardar</button>
+        <button type='submit' className='w-full p-2 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white rounded'>Guardar</button>
       </form>
     </div>
   )

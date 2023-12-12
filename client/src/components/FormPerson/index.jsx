@@ -33,7 +33,7 @@ const FormPerson = ({ imagen }) => {
         <input type='text' name='propietario' placeholder='Nombre de propietario' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='estado' placeholder='Estado' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
         <input type='text' name='direccion' placeholder='Torre/Apartamento que se dirige' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <button type='submit' className='w-full p-2 bg-green-700 text-white rounded'>Guardar</button>
+        <button type='submit' className='w-full p-2 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white rounded'>Guardar</button>
       </form>
     </div>
   )

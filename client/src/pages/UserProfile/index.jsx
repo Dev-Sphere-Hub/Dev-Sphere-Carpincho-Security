@@ -2,11 +2,27 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
+import { FaRegEdit } from 'react-icons/fa'
 
 const UserProfile = () => {
   const { token, fetchUserData, user } = useAuthStore()
 
   console.log('token --> ', token)
+
+  // permite editar los campos del perfil
+  const [editFullName, setEditFullName] = useState(false)
+  const [editEmail, setEditEmail] = useState(false)
+  const [editPhone, setEditPhone] = useState(false)
+  const [editDni, setEditDni] = useState(false)
+
+  // para las validaciones
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [documentId, setDocumentId] = useState('')
+  // para manejar los errores
+  const [errors, setErrors] = useState({})
+  const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
     token && fetchUserData(token)
@@ -19,50 +35,80 @@ const UserProfile = () => {
     console.log('data --> ', data)
   }
 
-  const [editFullName, setEditFullName] = useState(false)
-
   return (
-    <div className='w-[100%] h-[100%] z-10 bg-purple-400 grid place-content-center'>
+    <div className='w-[100%] h-[100%] z-10  grid place-content-center'>
       <section className='w-[100%] h-auto flex flex-col justify-start items-center gap-5'>
-        <Link className='w-[287px] h-[63px] bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo' to='/historial'>
+        <Link className='w-[287px] h-[63px] bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom' to='/historial'>
           <span className='text-2xl'><IoIosArrowBack /></span>
           Editar Perfil
         </Link>
 
         <form
           onSubmit={handleSubmit}
-          className='w-[300px] h-auto bg-teal-50 p-3 flex flex-col justify-start items-center gap-3' action=''
+          className='w-[300px] h-auto  p-3 flex flex-col justify-start items-center gap-3' action=''
         >
           <div>
-            <img className='w-[90px] h-[90px] rounded-full border-2 border-green-300 object-cover shadow-custom' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg' alt='carpincho image ' />
+            <img className='w-[90px] h-[90px] rounded-full object-cover shadow-custom' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg' alt='carpincho image ' />
           </div>
 
-          <label htmlFor='fullName' className='w-[100%] bg-green-100 flex flex-col justify-start items-start'>
+          <label htmlFor='fullName' className='w-[100%]  flex flex-col justify-start items-start relative'>
             Nombre y Apellido
             {editFullName
               ? (
                 <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='fullName' id='fullName' placeholder='Ingresa Nombre y Apellido' />
-
                 )
               : (
-                <p className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize'>{user?.fullName}</p>
-
+                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.fullName}
+                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditFullName(true)}>
+                    <FaRegEdit />
+                  </button>
+                </div>
                 )}
           </label>
 
-          <label htmlFor='email' className='w-[100%] bg-green-100 flex flex-col justify-start items-start'>
+          <label htmlFor='email' className='w-[100%] flex flex-col justify-start items-start'>
             Email
-            <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='email' name='email' id='email' placeholder='Ingresa Email' />
+            {editEmail
+              ? (
+                <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='email' name='email' id='email' placeholder='Ingresa Email' />)
+              : (
+                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.email}
+                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditEmail(true)}>
+                    <FaRegEdit />
+                  </button>
+                </div>
+                )}
           </label>
 
-          <label htmlFor='phone' className='w-[100%] bg-green-100 flex flex-col justify-start items-start'>
+          <label htmlFor='phone' className='w-[100%] flex flex-col justify-start items-start'>
             Telefono
-            <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='phone' id='phone' placeholder='Ingresa Telefono' />
+            {editPhone
+              ? (
+                <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='phone' id='phone' placeholder='Ingresa Telefono' />
+                )
+              : (
+                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.phone}
+                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditPhone(true)}>
+                    <FaRegEdit />
+                  </button>
+                </div>
+                )}
           </label>
 
-          <label htmlFor='documentId' className='w-[100%] bg-green-100 flex flex-col justify-start items-start'>
+          <label htmlFor='documentId' className='w-[100%] flex flex-col justify-start items-start'>
             DNI
-            <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='documentId' id='documentId' placeholder='Ingresa DNI' />
+            {
+              editDni
+                ? (<input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='documentId' id='documentId' placeholder='Ingresa DNI' />)
+                : (
+                  <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.documentId}
+                    <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditDni(true)}>
+                      <FaRegEdit />
+                    </button>
+                  </div>
+                  )
+            }
+
           </label>
 
           <button

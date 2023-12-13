@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useImageStore from '../../store/imagenStore/Imagen'
 
-const FormPerson = ({ imagen }) => {
+const FormPerson = () => {
   const navigate = useNavigate()
-
+  const { capturedImage } = useImageStore()
   const [form, setForm] = useState({
     nombre: '',
     documento: '',
     propietario: '',
     estado: '',
     direccion: '',
-    imagen
+    photo: capturedImage
   })
+
+  useEffect(() => {
+    setForm((prevForm) => ({ ...prevForm, photo: capturedImage }))
+  }, [capturedImage])
 
   const handleChange = (e) => {
     setForm({

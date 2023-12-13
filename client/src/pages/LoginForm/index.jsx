@@ -6,13 +6,14 @@ import { jwtDecode } from 'jwt-decode'
 
 const LoginForm = () => {
   const localStorage = window.localStorage
-  const setToken = useAuthStore((state) => state.setToken)
+  // const setToken = useAuthStore((state) => state.setToken)
   const [email, setUserEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
   const [isError, setIsError] = useState(false)
   const Navigate = useNavigate()
 
+  const { setTokenDesifred, setToken } = useAuthStore()
   const handleLogin = async () => {
     try {
       const res = await fetch(endpoints.login, {
@@ -32,8 +33,10 @@ const LoginForm = () => {
         console.log('DECODETOKEN => ', decodedToken)
         // const token = data.data.token
         // console.log(token)
-        localStorage.setItem('token', decodedToken)
-        setToken(decodedToken)
+
+        localStorage.setItem('token', JSON.stringify(decodedToken))
+        setToken(data.data.token)
+        setTokenDesifred(decodedToken)
         Navigate('/historial')
       }
       if (data.status !== 'success') {

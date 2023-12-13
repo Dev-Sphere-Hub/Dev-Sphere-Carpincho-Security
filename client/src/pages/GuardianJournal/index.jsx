@@ -1,64 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import Carousel from '../../components/Carousel'
-import useNavStore from '../../store/NavStore/navStore'
+import React, { useEffect, useState } from 'react';
+import Carousel from '../../components/Carousel';
+import useNavStore from '../../store/NavStore/navStore';
+import axios from 'axios';
+import { endpoints } from '../../constants/api';
 
 const GuardianJournal = () => {
+  const { setActiveIndex } = useNavStore();
   const [formData, setFormData] = useState({
     dateTime: '',
     category: '',
     detail: ''
-  })
+  });
 
-  const [novedades, setNovedades] = useState([])
-  const [showModal, setShowModal] = useState(false)
+  const [novedades, setNovedades] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    //  novedades
+    axios.get(endpoints.nuevos)
+      .then(res => {
+        setNovedades(res.data.data);
+      })
+      .catch(err => console.log(err));
+  }, []);            console.log(novedades);
+
+
+  useEffect(() => {
+    setActiveIndex('reportes');
+    return () => setActiveIndex(null);
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    // Validar que todos los campos estén llenos
-    if (!formData.dateTime || !formData.category || !formData.detail) {
-      console.log('Por favor, complete todos los campos.')
-      return
-    }
+    // Enviar datos de formData para registrar novedad
+    axios.post(endpoints.nuevos, formData)
+      .then(res => {
+        console.log('Novedad registrada con éxito.');
+        setNovedades([...novedades, formData]);
+      })
+      .catch(err => console.log(err));
+console.log(formData);
 
-    // Agregar la novedad al estado de novedades
-    setNovedades([...novedades, formData])
-
-    // Imprimir la fecha en la consola
-    console.log('Fecha almacenada:', formData.dateTime)
-
-    // Limpiar el formulario después de enviar
+    // Limpiar el formulario 
     setFormData({
       dateTime: '',
       category: '',
       detail: ''
-    })
+    });
 
-    // Ocultar el modal después de enviar
-    setShowModal(false)
-  }
-
-  const { setActiveIndex } = useNavStore()
-
-  useEffect(() => {
-    setActiveIndex('reportes')
-    return () => setActiveIndex(null)
-  }, [])
+    // Ocultar el modal
+    setShowModal(false);
+  };
 
   return (
     <div id='novedades' className='w-[100%] min-h-[500px] h-auto xl:min-w-[1280px] flex flex-col items-center gap-[5rem] border-2 p-2 rounded-md '>
-      <h2 className='self-center lg:self-start text-3xl w-[100%] lg:w-[860px]  font-bold mx-auto lg:text-left'>Novedades</h2>
+      <h2 className='self-center lg:self-start text-3xl w-[100%] lg:w-[860px] font-bold mx-auto lg:text-left'>Novedades</h2>
       <div className='hidden lg:block'>
         <Carousel />
       </div>
-      {/* Modal para el registro de novedades */}
+
       {showModal && (
         <div className='fixed inset-0 flex items-center justify-center z-50'>
           <div className='absolute inset-0 bg-gray-900 opacity-75' />
@@ -133,24 +141,25 @@ const GuardianJournal = () => {
       )}
 
       <div className='flex flex-col gap-4 md:flex-row flex-wrap md:max-w-[80%] md:m-auto justify-center'>
-        {/* Renderizar las tarjetas de novedades */}
         {novedades.map((novedad, index) => (
           <div
             key={index}
-            className='max-w-sm mx-4 w-full  h-32 px-2 py-4 bg-gray-50 drop-shadow-md rounded-md flex justify-around items-center text-center text-neutral-900'
+            className='max-w-sm mx-4 w-full h-[19rem] px-2 py-4 bg-gray-50 drop-shadow-md rounded-md flex justify-around items-center text-center text-neutral-900'
           >
             <div className='w-56 h-20 flex-col text-left'>
+              <img src="" alt="" />
               <h2 className='text-title font-title font-bold'>{novedad.category}</h2>
               <p className='text-sans font-subtitle'>{novedad.detail}</p>
-              <p className='text-xs text-gray-500 mt-2'>{new Date(novedad.dateTime).toLocaleString()}</p>
+              <p className='text-sans font-subtitle mt-2'>{`Reportado por: ${novedad.author.fullName}`}</p>
+              <p className='text-xs text-gray-500 mt-2'>{`Fecha: ${(novedad.date)}`}</p>
             </div>
           </div>
-        ))} {/* Ícono de agregar fuera de la tarjeta */}
+        ))}
+
         <div
           className='max-w-[22rem] h-[13.5rem]rounded-lg flex justify-center items-center self-center cursor-pointer hover:bg-gray-300'
           onClick={() => setShowModal(true)}
         >
-          {/* Ícono para pantallas grandes (Desktop) */}
           <div className='hidden lg:block'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -169,7 +178,6 @@ const GuardianJournal = () => {
             </svg>
           </div>
 
-          {/* Ícono para pantallas pequeñas (Mobile) */}
           <div className='w-16 h-16 lg:hidden bg-gray-600 rounded-full flex justify-center items-center cursor-pointer hover:bg-gray-300'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -190,8 +198,7 @@ const GuardianJournal = () => {
         </div>
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default GuardianJournal
+export default GuardianJournal;

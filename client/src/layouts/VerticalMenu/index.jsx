@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { BiSolidTruck, BiSolidTimeFive, BiSolidReport, BiCaretRight, BiPackage, BiCar } from 'react-icons/bi'
 import useNavStore from '../../store/NavStore/navStore'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
+import ToggleNav from '../../components/ToggleNav/ToggleNav'
 
 const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
   const { activeIndex } = useNavStore()
@@ -36,12 +37,13 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
   return (
     <div ref={menuRef} className={`alfa z-30 w-[100%] min-h-[80px] ${activeNavVerticas ? 'lg:transform lg:w-0' : 'lg:transform lg:w-1/5'}  lg:relative lg:h-screen flex justify-center items-center content-center lg:justify-center lg:items-center shadow-custom bg-gray-500`}>
       <section className='navSuperior activeNavVerical absolute top-auto  w-[100%] h-[70px] lg:top-0 lg:left-0 lg:w-[100vw] bg-[#f4f3f3] rounded-r-[3px] text-md z-30 flex flex-row justify-between items-center px-2 lg:px-5 overflow-hidden'>
-        <button
+        {/* <button
           className='activeNavVerical w-[50px] h-[50px] bg-[#f4f3f3] rounded-r-[3px] grid place-content-center text-md z-30'
           onClick={e => handleClickNavVerticas(e)}
         >
           <BiCaretRight className={`${activeNavVerticas ? 'rotate-180 transition-all ease-in-out duration-300' : 'rotate-0 transition-all ease-in-out duration-300'}`} />
-        </button>
+        </button> */}
+        <ToggleNav activeNavVerticas={activeNavVerticas} handleClickNavVerticas={handleClickNavVerticas} />
         <img className='w-[60px] h-[60px] rounded-full object-cover overflow-hidden' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381197/carpincho/2cf02024-3b12-478d-9fdf-998858aeaaee_zdvbm9.webp' alt='logotipo' />
       </section>
       <nav className={`navVerical absolute lg:relative w-full h-full ${activeNavVerticas ? 'top-0 lg:top-0 lg:-left-[500px]  ' : '-top-[1000px] lg:-top-0 lg:-left-0'} transition-all ease-linear duration-200 p-2 lg:pt-[80px] rounded-r-lg  lg:w-[100%] lg:h-screen bg-green-500`}>

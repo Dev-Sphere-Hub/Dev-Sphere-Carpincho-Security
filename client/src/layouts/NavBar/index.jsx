@@ -21,6 +21,7 @@ const NavBar = () => {
           className='w-full h-full object-cover'
           src={imagePerfil || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381197/carpincho/2cf02024-3b12-478d-9fdf-998858aeaaee_zdvbm9.webp'}
           alt='carpincho con lentes de sol, chaleco y cadena de oro, realista generado con lexicaart'
+
         />
       </div>
     </div>

@@ -8,6 +8,7 @@ import axios from 'axios'
 import useVisitStore from '../../../../store/VisitStore/VisitStore'
 import { endpoints } from '../../../../constants/api'
 import Search from '../../../../components/search'
+import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
@@ -15,9 +16,14 @@ const Historial = () => {
 
   const { visitas, setVisitas } = useVisitStore()
   const [filterVisitas, setFilterVisitas] = useState([])
+  const { token } = useAuthStore()
 
   useEffect(() => {
-    axios.get(endpoints.visitas)
+    axios.get(endpoints.visitas, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(res => {
         setVisitas(res.data.data)
         setFilterVisitas(res.data.data)

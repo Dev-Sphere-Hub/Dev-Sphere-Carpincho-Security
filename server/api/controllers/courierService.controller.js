@@ -1,6 +1,7 @@
-import CourierService from '../models/courierService';
-import { tryCatch } from '../utils/tryCatch';
-import { sendResponse } from '../utils/responses';
+import CourierService from '../models/courierService.js';
+import { tryCatch } from '../utils/tryCatch.js';
+import { sendResponse } from '../utils/responses.js';
+import User from '../models/user.js';
 
 // Controlador para crear un nuevo paquete
 export const createCourierService = tryCatch(async (req, res) => {
@@ -24,6 +25,12 @@ export const createCourierService = tryCatch(async (req, res) => {
     }
   }
 
+  // Verificar si el paquete existe, si es asi manda un error si no prosigue
+  const existingCourierService = await CourierService.findOne({ recipient, deliverer, description });
+  if (existingCourierService) {
+    return sendResponse(res, 400, 'El paquete ya existe');
+  }
+
   const newCourierService = new CourierService({
     type,
     recipient,
@@ -35,7 +42,7 @@ export const createCourierService = tryCatch(async (req, res) => {
   });
 
   await newCourierService.save();
-  sendResponse(res, 201, 'Paquete registrado con éxito', newPackage);
+  sendResponse(res, 201, 'Paquete registrado con éxito', newCourierService);
 });
 
 // Controlador para obtener todos los paquetes
@@ -46,16 +53,24 @@ export const getAllCourierServices = tryCatch(async (req, res) => {
 
 // Controlador para obtener un paquete por ID
 export const getCourierServiceById = tryCatch(async (req, res) => {
-  const CourierService = await CourierService.findById(req.params.id);
-  if (!CourierService) {
+  const CourierServiceByID = await CourierService.findById(req.params.id);
+  if (!CourierServiceByID) {
     return sendResponse(res, 404, 'Paquete no encontrado');
   }
-  sendResponse(res, 200, 'Detalle del paquete', CourierService);
+  sendResponse(res, 200, 'Detalle del paquete', CourierServiceByID);
 });
 
 // Controlador para actualizar un paquete por ID
 export const updateCourierServiceById = tryCatch(async (req, res) => {
-  const { status } = req.body;
+  const { status, ...restBody } = req.body;
+
+  if (Object.keys(restBody).length > 0) {
+    return sendResponse(res, 400, 'Solo se permite la actualización del estado');
+  }
+
+  if (!status) {
+    return sendResponse(res, 400, 'El estado es obligatorio');
+  }
 
   // Verificar si el estado es válido
   if (status && !['received', 'delivered'].includes(status)) {

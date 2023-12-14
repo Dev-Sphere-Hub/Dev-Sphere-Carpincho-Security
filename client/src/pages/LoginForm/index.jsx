@@ -58,8 +58,8 @@ const LoginForm = () => {
         <div className='pt-9 text-black text-5xl'>
           <h1>Logo</h1>
         </div>
-        <div className='pt-6 lg:flex'>
-          <p>Nombre de la app</p>
+        <div className='pt-6 text-lg lg:flex'>
+          <p>Carpincho Segurity</p>
         </div>
       </div>
       <div className='pt-9 lg:self-center'>

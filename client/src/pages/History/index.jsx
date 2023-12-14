@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import VerticalMenu from '../../layouts/VerticalMenu'
 import { Route, Routes, Outlet } from 'react-router-dom'
 import UserProfile from '../UserProfile/index'
@@ -9,13 +9,13 @@ import RegisterAll from '../RegisterAll'
 import HistorialVehiculos from './components/HistorialVehiculos/HistorialVehiculos'
 
 const History = () => {
+  const [activeNavVerticas, setActiveNavVerticas] = useState(false)
+
   // la ruta de esto es /historial
   return (
-    <div className='variabeleContain w-[100%] mt-[140px] mx-auto max-w-[1280px]
-    lg:mt-[80px] min-h-screen flex flex-col lg:flex-wrap lg:justify-start lg:items-end '
-    >
-      <VerticalMenu />
-      <section className='relative w-[100%] h-[100%] min-h-screen flex flex-col justify-start items-center p-2 lg:p-5 min-w-[300px] lg:w-[100%] xl:w-[100%] 2xl:w-[100%] '>
+    <div className='variabeleContain w-[100%] lg:w-[100%] xl:w-full xl:max-w-[1880px] min-h-screen h-full flex flex-col justify-start items-start gap-1 lg:flex-row lg:flex:nowrap lg:justify-start bg-red-100 mx-auto overflow-hidden'>
+      <VerticalMenu activeNavVerticas={activeNavVerticas} setActiveNavVerticas={setActiveNavVerticas} />
+      <section className={`relative w-screen ${activeNavVerticas ? 'lg:transform lg:w-full' : 'lg:transform lg:w-4/5'} transition-transform ease-linear duration-300 h-full min-h-screen flex flex-col justify-start items-center min-w-[300px] pt-5 lg:pt-[80px]  overflow-hidden`}>
         <Routes>
           <Route
             path='/historial/'

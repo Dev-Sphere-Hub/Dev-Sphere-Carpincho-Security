@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { BiSolidTruck, BiSolidTimeFive, BiSolidReport, BiCaretRight, BiPackage, BiCar } from 'react-icons/bi'
 import useNavStore from '../../store/NavStore/navStore'
+import { useAuthStore } from '../../store/AuthStore/AuthStore'
 
-const VerticalMenu = () => {
+const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
   const { activeIndex } = useNavStore()
-  const [activeNavVerticas, setActiveNavVerticas] = useState(false)
   const navigate = useNavigate()
   const menuRef = useRef(null)
+
+  const { user } = useAuthStore()
+  console.log('user menuVertical -->', user)
 
   const handleClickNavVerticas = (e) => {
     e.preventDefault()
@@ -28,15 +31,27 @@ const VerticalMenu = () => {
     }
   }, [])
 
-  const imageUser = 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
-  return (
-    <div ref={menuRef} className='absolute top-0 h-[calc(100vh)] lg:absolute lg:top-0 lg:h-[calc(100vh)] lg:w-auto] xl:w-auto flex justify-center items-center content-center lg:justify-start lg:items-start bg-blue-300'>
+  const imageUser = user?.photo || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
 
-      <nav className={`navVerical fixed z-30 navVertical w-auto h-auto ${activeNavVerticas ? 'left-0 lg:left-0 ' : '-left-[52px] lg:-left-[300px] '} transition-all ease-linear duration-200 px-1 py-4 bg-[#f4f3f3] rounded-r-lg lg:top-[60px] lg:w-[300px] lg:h-[calc(100%-65px)] lg:p-2 xl:h-[calc(100%-65px)]  shadow-custom`}>
-        <ul className='navMenuVert pl-1 flex flex-col flex-nowrap gap-1'>
+  return (
+    <div ref={menuRef} className={`alfa z-30 w-[100%] min-h-[80px] ${activeNavVerticas ? 'lg:transform lg:w-0' : 'lg:transform lg:w-1/5'}  lg:relative lg:h-screen flex justify-center items-center content-center lg:justify-center lg:items-center shadow-custom bg-gray-500`}>
+      <section className='navSuperior activeNavVerical absolute top-auto  w-[100%] h-[70px] lg:top-0 lg:left-0 lg:w-[100vw] bg-[#f4f3f3] rounded-r-[3px] text-md z-30 flex flex-row justify-between items-center px-2 lg:px-5 overflow-hidden'>
+        <button
+          className='activeNavVerical w-[50px] h-[50px] bg-[#f4f3f3] rounded-r-[3px] grid place-content-center text-md z-30'
+          onClick={e => handleClickNavVerticas(e)}
+        >
+          <BiCaretRight className={`${activeNavVerticas ? 'rotate-180 transition-all ease-in-out duration-300' : 'rotate-0 transition-all ease-in-out duration-300'}`} />
+        </button>
+        <img className='w-[60px] h-[60px] rounded-full object-cover overflow-hidden' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381197/carpincho/2cf02024-3b12-478d-9fdf-998858aeaaee_zdvbm9.webp' alt='logotipo' />
+      </section>
+      <nav className={`navVerical absolute lg:relative w-full h-full ${activeNavVerticas ? 'top-0 lg:top-0 lg:-left-[500px]  ' : '-top-[1000px] lg:-top-0 lg:-left-0'} transition-all ease-linear duration-200 p-2 lg:pt-[80px] rounded-r-lg  lg:w-[100%] lg:h-screen bg-green-500`}>
+        {/* hamburguer */}
+
+        {/* submenu */}
+        <ul className='navMenuVert pl-1 flex flex-row w-[100%] lg:flex-col lg:flex-nowrap gap-1'>
           <li>
             <button
-              className='customButton w-[40px] h-[40px] rounded-full flex justify-center items-center text-xl lg:w-[98%] lg:h-[250px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 lg:pl-5 '
+              className='customButton w-[60px] h-[60px] rounded-full flex justify-center items-center text-xl lg:w-[98%] lg:h-[250px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 lg:pl-5 '
               onClick={() => navigate('/historial/')}
             >
               <img
@@ -51,7 +66,7 @@ const VerticalMenu = () => {
 
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[60px] h-[60px] rounded-md flex justify-center items-center text-4xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'ingresoRapido' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/ingresoRapido')}
             >
               <BiSolidTruck />
@@ -60,7 +75,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[60px] h-[60px] rounded-md flex justify-center items-center text-4xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'historial' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/historia')}
             >
               <BiSolidTimeFive />
@@ -69,7 +84,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[60px] h-[60px] rounded-md flex justify-center items-center text-4xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'reportes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/reportes')}
             >
               <BiSolidReport />
@@ -78,7 +93,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'paquetes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[60px] h-[60px] rounded-md flex justify-center items-center text-4xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'paquetes' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/paquetes')}
             >
               <BiPackage />
@@ -87,7 +102,7 @@ const VerticalMenu = () => {
           </li>
           <li>
             <button
-              className={`customButton bg-colorCustom5 w-[40px] h-[40px] rounded-md flex justify-center items-center text-xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'vehiculos' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
+              className={`customButton bg-colorCustom5 w-[60px] h-[60px] rounded-md flex justify-center items-center text-4xl lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5  hover:bg-colorCustom1 transition-all ease-linear duration-300 ${activeIndex === 'vehiculos' && activeIndex !== null ? 'bg-orange-400' : 'bg-white'}`}
               onClick={() => navigate('/historial/vehiculos')}
             >
               <BiCar />
@@ -95,12 +110,7 @@ const VerticalMenu = () => {
             </button>
           </li>
         </ul>
-        <button
-          className='activeNavVerical absolute top-[42%] -right-2 lg:-right-4 esconde w-2 lg:w-4 h-[50px] bg-[#f4f3f3] rounded-r-[3px] grid place-content-center text-md '
-          onClick={e => handleClickNavVerticas(e)}
-        >
-          <BiCaretRight className={`${activeNavVerticas ? 'rotate-180 transition-all ease-in-out duration-300' : 'rotate-0 transition-all ease-in-out duration-300'}`} />
-        </button>
+
       </nav>
     </div>
   )

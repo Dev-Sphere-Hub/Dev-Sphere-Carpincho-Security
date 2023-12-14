@@ -5,9 +5,9 @@ import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import { FaRegEdit } from 'react-icons/fa'
 
 const UserProfile = () => {
-  const { token, fetchUserData, user } = useAuthStore()
+  const { token, fetchUserData, user, updateUser } = useAuthStore()
 
-  console.log('token --> ', token)
+  // console.log('token --> ', token)
 
   // permite editar los campos del perfil
   const [editFullName, setEditFullName] = useState(false)
@@ -28,12 +28,79 @@ const UserProfile = () => {
     token && fetchUserData(token)
   }, [token])
 
-  const handleSubmit = (event) => {
+  const validateForm = () => {
+    const validateErrors = {}
+
+    if (editFullName && !fullName.trim()) {
+      validateErrors.fullName = 'El nombre es obligatorio'
+    } else if (editFullName && !/^[a-zA-Z\s]+$/.test(fullName)) {
+      validateErrors.fullName = 'El nombre solo puede contener letras'
+    }
+
+    if (editEmail && !email.trim()) {
+      validateErrors.email = 'El email es obligatorio'
+    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+      validateErrors.email = 'El email no es valido'
+    }
+
+    if (editPhone && !phone.trim()) {
+      validateErrors.phone = 'El teléfono es obligatorio'
+    } else if (!/^\d+$/.test(phone)) {
+      validateErrors.phone = 'El teléfono solo puede contener números'
+    } else if (phone.length < 10) {
+      validateErrors.phone = 'El teléfono no puede tener más de 10 dígitos'
+    }
+
+    if (editDni && !documentId.trim()) {
+      validateErrors.documentId = 'El DNI es obligatorio'
+    } else if (!/^\d+$/.test(documentId)) {
+      validateErrors.documentId = 'El DNI solo puede contener números'
+    } else if (documentId.length <= 8) {
+      validateErrors.documentId = 'El DNI no puede tener menos de 8 dígitos'
+    }
+
+    return validateErrors
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
+    const validationErrors = validateForm()
+
+    // console.log('validate Form -> ', validateForm)
+
+    // console.log('validationErrors --> ', validationErrors)
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      setSuccessMessage('')
+      return
+    }
+
     const formData = new FormData(event.target)
     const data = Object.fromEntries(formData)
-    console.log('data --> ', data)
+    // console.log('data Nuevos Cambios --> ', data)
+
+    setErrors({})
+    setSuccessMessage('Perfil actualizado correctamente')
+    setTimeout(() => {
+      setSuccessMessage('')
+    }, 3000)
+
+    try {
+      const response = await updateUser(data, token, user)
+      console.log('response --> ', response)
+    } catch (error) {
+      console.error('Error al actualizar el usuario:', error)
+    }
   }
+
+  useEffect(() => {
+    setFullName(user?.fullName)
+    setEmail(user?.email)
+    setPhone(user?.phone)
+    setDocumentId(user?.documentId)
+  }, [user])
 
   return (
     <div className='w-[100%] h-[100%] z-10  grid place-content-center'>
@@ -55,7 +122,14 @@ const UserProfile = () => {
             Nombre y Apellido
             {editFullName
               ? (
-                <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='fullName' id='fullName' placeholder='Ingresa Nombre y Apellido' />
+                <input
+                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  type='text'
+                  name='fullName' id='fullName'
+                  placeholder='Ingresa Nombre y Apellido'
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
                 )
               : (
                 <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.fullName}
@@ -64,13 +138,22 @@ const UserProfile = () => {
                   </button>
                 </div>
                 )}
+            {errors.fullName && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.fullName}</p>}
           </label>
 
           <label htmlFor='email' className='w-[100%] flex flex-col justify-start items-start'>
             Email
             {editEmail
               ? (
-                <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='email' name='email' id='email' placeholder='Ingresa Email' />)
+                <input
+                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='Ingresa Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />)
               : (
                 <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.email}
                   <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditEmail(true)}>
@@ -78,13 +161,22 @@ const UserProfile = () => {
                   </button>
                 </div>
                 )}
+            {errors.email && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.email}</p>}
           </label>
 
           <label htmlFor='phone' className='w-[100%] flex flex-col justify-start items-start'>
             Telefono
             {editPhone
               ? (
-                <input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='phone' id='phone' placeholder='Ingresa Telefono' />
+                <input
+                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  type='text'
+                  name='phone'
+                  id='phone'
+                  placeholder='Ingresa Telefono'
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
                 )
               : (
                 <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.phone}
@@ -93,24 +185,32 @@ const UserProfile = () => {
                   </button>
                 </div>
                 )}
+            {errors.phone && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.phone}</p>}
           </label>
 
           <label htmlFor='documentId' className='w-[100%] flex flex-col justify-start items-start'>
             DNI
+            {editDni
+              ? (<input
+                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  type='text'
+                  name='documentId'
+                  id='documentId'
+                  placeholder='Ingresa DNI'
+                  value={documentId}
+                  onChange={(e) => setDocumentId(e.target.value)}
+                 />)
+              : (
+                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.documentId}
+                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditDni(true)}>
+                    <FaRegEdit />
+                  </button>
+                </div>
+                )}
             {
-              editDni
-                ? (<input className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom' type='text' name='documentId' id='documentId' placeholder='Ingresa DNI' />)
-                : (
-                  <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.documentId}
-                    <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditDni(true)}>
-                      <FaRegEdit />
-                    </button>
-                  </div>
-                  )
+              errors.documentId && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.documentId}</p>
             }
-
           </label>
-
           <button
             type='submit'
             className='w-[290px] h-[50px] rounded-3xl bg-gradient-to-r from-green-500 via-green-700 to-blue-400  font-titulo font-medium text-white shadow-custom'
@@ -118,6 +218,12 @@ const UserProfile = () => {
             Guardar cambios
           </button>
         </form>
+        {successMessage === 'Perfil actualizado correctamente' && (
+          <div className=' w-[90%] h-[90%] rounded-md absolute top-auto left-auto bg-green-300  grid place-content-center '>
+
+            <p className='text-white text-lg font-bold '>VALIDACION EXITOSA</p>
+          </div>
+        )}
       </section>
     </div>
   )

@@ -4,7 +4,7 @@ export const endpoints = {
   login: `${api}/auth/login`,
   register: `${api}/auth/register`,
   getUser: `${api}/users/profile`,
-  patchUser: `${api}/users/`,
+  patchUser: `${api}/users`,
   paquetes: `${api}/packages`,
   vehiculos: `${api}/vehicles`,
   visitas: `${api}/visits`,

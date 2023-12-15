@@ -21,7 +21,7 @@ const InputForm = ({
       >
         <label
           htmlFor={register.name}
-          className='pb-[1%] font-medium text-gray-700'
+          className='pb-[1%] font-medium flex text-gray-700'
         >
           {label}
         </label>

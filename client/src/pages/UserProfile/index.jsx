@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import { FaRegEdit } from 'react-icons/fa'
 
 const UserProfile = () => {
   const { token, fetchUserData, user, updateUser } = useAuthStore()
-
+  const navigate = useNavigate()
   // console.log('token --> ', token)
 
   // permite editar los campos del perfil
@@ -67,10 +67,6 @@ const UserProfile = () => {
 
     const validationErrors = validateForm()
 
-    // console.log('validate Form -> ', validateForm)
-
-    // console.log('validationErrors --> ', validationErrors)
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       setSuccessMessage('')
@@ -79,7 +75,6 @@ const UserProfile = () => {
 
     const formData = new FormData(event.target)
     const data = Object.fromEntries(formData)
-    // console.log('data Nuevos Cambios --> ', data)
 
     setErrors({})
     setSuccessMessage('Perfil actualizado correctamente')
@@ -102,13 +97,18 @@ const UserProfile = () => {
     setDocumentId(user?.documentId)
   }, [user])
 
+  const handelNavigateNovedades = (e) => {
+    e.preventDefault()
+    navigate('/historial/reportes')
+  }
+
   return (
     <div className='w-[100%] h-[100%] z-10  grid place-content-center'>
       <section className='w-[100%] h-auto flex flex-col justify-start items-center gap-5'>
-        <Link className='w-[287px] h-[63px] bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom' to='/historial'>
+        <button onClick={handelNavigateNovedades} className='w-[287px] h-[63px] bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom' to='/historial'>
           <span className='text-2xl'><IoIosArrowBack /></span>
           Editar Perfil
-        </Link>
+        </button>
 
         <form
           onSubmit={handleSubmit}

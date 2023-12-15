@@ -60,7 +60,7 @@ const LoginForm = () => {
               type='email' 
               name='email' 
               placeholder='Email' 
-              {...register('email', { required: 'Este campo es requerido' })}
+              {...register('email', { required: 'El email es requerido' })}
             /> <br />
             {errors.email && <span style={{ color: 'red' }}>{errors.email.message}</span>}
           </div>
@@ -69,7 +69,7 @@ const LoginForm = () => {
             type='password' 
             name='password' 
             placeholder='Contraseña' 
-            {...register('password', { required: 'Este campo es requerido' })}
+            {...register('password', { required: 'Ingresa la contraseña' })}
           />
           {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
           <p className='m-[15px] pl-[155px]'>Recuperar contraseña</p>

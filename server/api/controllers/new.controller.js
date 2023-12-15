@@ -14,7 +14,7 @@ export const registerNew = tryCatch(async(req, res) => {
         category: category,
         detail: detail,
         date: date,
-        author: existingUser._id
+        author: new mongoose.Types.ObjectId(existingUser._id)
     });
     await newNotice.save();
     sendResponse(res, 200, 'Novedad registrada con éxito.');
@@ -40,12 +40,12 @@ export const updateNew = tryCatch(async(req, res) => {
 
 
 export const getAllNews = tryCatch(async(req, res) => {
-    const news = await New.find().populate({ path: 'author', select: '-password' });
+    const news = await New.find().select('-updatedAt').populate({ path: 'author', select: '-password' });
     sendResponse(res, 200, 'Novedades encontradas con éxito.', news);
 });
 
 export const getNewById = tryCatch(async(req, res) => {
-    const news = await New.findById(req.params.id);
+    const news = await New.findById(req.params.id).populate({ path: 'author', select: '-password' });
     if (!news) {
         return sendResponse(res, 404, 'Novedad no encontrada.');
     }

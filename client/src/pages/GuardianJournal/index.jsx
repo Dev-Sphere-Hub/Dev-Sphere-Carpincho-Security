@@ -59,9 +59,9 @@ const GuardianJournal = () => {
   };
 
   return (
-    <div className='flex justify-evenly text-center w-[100%] min-h-[500px]h-auto xl:min-w-[1280px]'>
+    <div className='flex justify-evenly text-center w-full'>
       <div className='flex-col max-w-[500px] justify-center'>
-        <h2 className='mx-auto'>Novedades</h2>
+        <h2 className='mx-auto font-bold'>Novedades</h2>
         {novedades.map((novedad, index) => (
           <NewsCard
             key={index}
@@ -74,9 +74,9 @@ const GuardianJournal = () => {
          <div className='hidden lg:block'>
          <div className='flex flex-col w-[30rem] bg-[#EDEDED] h-[36rem] mx-auto border-2 p-2 rounded-md'>
   {selectedNews ? (
-    <div className='mx-auto text-neutral-900'>
+    <div className='mx-auto'>
       <img src="https://source.unsplash.com/featured/?warning" alt={selectedNews.new} className='w-full max-w-[20rem] h-[11rem] object-cover mb-5 rounded-xl mx-auto' />
-      <div className='flex-wrap px-2 w-full h-20 flex-col text-left mx-auto'>
+      <div className=' px-2 w-full h-20 flex-col text-left'>
         <p className='text-sans font-subtitle mt-2'>{`Reportado por: ${selectedNews.author.fullName}`}</p>
         <h2 className='text-title font-title font-bold'>{selectedNews.category}</h2>
         <p className=' text-sans font-subtitle'>{selectedNews.detail}</p>
@@ -84,7 +84,7 @@ const GuardianJournal = () => {
       </div>
     </div>
   ) : (
-    <div className='h-[12rem] rounded-lg flex flex-col justify-center items-center cursor-pointer hover:bg-gray-300' onClick={() => setShowModal(true)}>
+    <div className='flex justify-center items-center h-full '>
       <p className="text-center">Selecciona una novedad para ver más información detallada.</p>
     </div>
   )}

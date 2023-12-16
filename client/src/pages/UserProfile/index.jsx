@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import { FaRegEdit } from 'react-icons/fa'

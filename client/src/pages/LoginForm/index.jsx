@@ -1,16 +1,16 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useAuthStore } from '../../store/AuthStore/AuthStore';
-import { endpoints } from '../../constants/api';
-import { jwtDecode } from 'jwt-decode';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useAuthStore } from '../../store/AuthStore/AuthStore'
+import { endpoints } from '../../constants/api'
+import { jwtDecode } from 'jwt-decode'
 
 const LoginForm = () => {
-  const localStorage = window.localStorage;
-  const { setTokenDesifred, setToken } = useAuthStore();
-  const Navigate = useNavigate();
+  const localStorage = window.localStorage
+  const { setTokenDesifred, setToken } = useAuthStore()
+  const Navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   const handleLogin = async (data) => {
     try {
@@ -20,27 +20,27 @@ const LoginForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-      });
+      })
 
-      const responseData = await res.json();
-      
+      const responseData = await res.json()
+
       if (res.status === 200) {
-        const decodedToken = jwtDecode(responseData.data.token);
-        localStorage.setItem('token', JSON.stringify(decodedToken));
-        setToken(responseData.data.token);
-        setTokenDesifred(decodedToken);
-        Navigate('/historial');
+        const decodedToken = jwtDecode(responseData.data.token)
+        localStorage.setItem('token', JSON.stringify(decodedToken))
+        setToken(responseData.data.token)
+        setTokenDesifred(decodedToken)
+        Navigate('/historial')
       } else {
-        throw new Error(responseData.message);
+        throw new Error(responseData.message)
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message)
     }
-  };
+  }
 
   const handleRegister = () => {
-    Navigate('/register');
-  };
+    Navigate('/register')
+  }
 
   return (
     <div className='relative bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen  p-0 flex flex-col lg:flex-row lg:justify-around gap-8 min-w-[300px]'>
@@ -55,20 +55,20 @@ const LoginForm = () => {
       <div className='pt-9 lg:self-center'>
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className='py-5'>
-            <input 
-              className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' 
-              type='email' 
-              name='email' 
-              placeholder='Email' 
+            <input
+              className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]'
+              type='email'
+              name='email'
+              placeholder='Email'
               {...register('email', { required: 'El email es requerido' })}
             /> <br />
             {errors.email && <span style={{ color: 'red' }}>{errors.email.message}</span>}
           </div>
-          <input 
-            className='rounded lg:w-80 w-full h-[35px]' 
-            type='password' 
-            name='password' 
-            placeholder='Contraseña' 
+          <input
+            className='rounded lg:w-80 w-full h-[35px]'
+            type='password'
+            name='password'
+            placeholder='Contraseña'
             {...register('password', { required: 'Ingresa la contraseña' })}
           />
           {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
@@ -79,7 +79,7 @@ const LoginForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

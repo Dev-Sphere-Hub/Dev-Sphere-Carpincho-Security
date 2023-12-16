@@ -15,6 +15,7 @@ export const updateUser = tryCatch(async(req, res) => {
     for (let prop in vars) {
         if (updatedFields.hasOwnProperty(vars[prop])) {
             delete updatedFields[vars[prop]];
+            return sendResponse(res, 200, 'El cambio de $vars[prop] no está permitido, comunícate con el administrador.');
         }
     }
     if (req.files) {

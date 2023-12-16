@@ -45,14 +45,14 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
         <ToggleNav activeNavVerticas={activeNavVerticas} handleClickNavVerticas={handleClickNavVerticas} />
         <img className='w-[60px] h-[60px] rounded-full object-cover overflow-hidden' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381197/carpincho/2cf02024-3b12-478d-9fdf-998858aeaaee_zdvbm9.webp' onClick={handleNavigate} alt='logotipo' />
       </section>
-      <nav className={`navVerical absolute flex justify-center items-center lg:relative w-full h-full ${activeNavVerticas ? 'top-0 lg:top-0 lg:-left-[500px]  ' : '-top-full lg:-top-0 lg:-left-0'} transition-all ease-linear duration-200 p-2 lg:pt-[80px] rounded-r-lg  lg:w-[100%] lg:h-screen bg-gray-300`}>
+      <nav className={`navVerical absolute flex justify-center items-center lg:items-start lg:relative w-full h-full ${activeNavVerticas ? 'top-0 lg:top-0 lg:-left-[500px]  ' : '-top-full lg:-top-0 lg:-left-0'} transition-all ease-linear duration-200 p-2 lg:pt-[80px] rounded-r-lg  lg:w-[100%] lg:h-screen bg-gray-300`}>
         {/* hamburguer */}
 
         {/* submenu */}
         <ul className='navMenuVert w-[258px] h-[400px] grid gap-2 grid-cols-2 grid-rows-2 place-content-center lg:pl-1 z-50 lg:flex lg:w-[100%] lg:h-auto lg:flex-col lg:flex-nowrap lg:gap-3 '>
           <li>
             <button
-              className='customButton  w-[123px] h-[123px]  rounded-md lg:rounded-full flex justify-center items-center text-xl lg:w-[190px] lg:h-[190px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 '
+              className='customButton mx-auto  w-[123px] h-[123px]  rounded-md lg:rounded-full flex justify-center items-center text-xl lg:w-[190px] lg:h-[190px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 '
               onClick={() => navigate('/historial/')}
             >
               <img

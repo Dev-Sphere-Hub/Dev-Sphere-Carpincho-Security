@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const packageSchema = new mongoose.Schema({
+const courierServiceSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true
@@ -32,6 +32,6 @@ const packageSchema = new mongoose.Schema({
     }
 });
 
-const Package = mongoose.model('Package', packageSchema);
+const CourierService = mongoose.model('CourierService', courierServiceSchema);
 
-export default Package;
+export default CourierService;

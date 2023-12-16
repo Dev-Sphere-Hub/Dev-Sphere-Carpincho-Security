@@ -114,7 +114,7 @@ const UserProfile = () => {
 
         <form
           onSubmit={handleSubmit}
-          className='w-[400px] h-auto  p-5 flex flex-col justify-start items-center gap-3 cardGlass' action=''
+          className='min-w-[300px] md:w-[400px] lg:w-[500px] h-auto  p-5 flex flex-col justify-start items-center gap-3 cardGlass' action=''
         >
           <div>
             <img className='w-[90px] h-[90px] rounded-full object-cover shadow-custom' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg' alt='carpincho image ' />

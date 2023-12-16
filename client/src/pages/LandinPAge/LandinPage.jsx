@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 const LandinPage = () => {
   const navigate = useNavigate()
   return (
-    <section className='landingPage relative w-[100%] h-screen bg-purple-500 left-0 top-0'>
-      <section className='banner w-[100%] h-[70vh] md:h-[100%] overflow-hidden bg-red-300'>
+    <section className='landingPage relative w-[100%] h-screen bg-green-300 left-0 top-0'>
+      <section className='banner w-[100%] h-[70vh] md:h-[100%] overflow-hidden bg-green-300'>
         <video className='w-[100%] h-[100%] object-cover' muted loop autoPlay>
           <source src='https://res.cloudinary.com/dpiwmbsog/video/upload/v1701924112/carpincho/Gen-2_2104670588_Portrait_of_a_cartoo_M_10_tpmqc9.mp4' type='video/mp4' />
         </video>

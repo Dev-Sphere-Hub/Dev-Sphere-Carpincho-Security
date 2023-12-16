@@ -4,12 +4,16 @@ import FormVehicle from '../../components/FormVehicle'
 import FormPackage from '../../components/FormPackage'
 import FormPerson from '../../components/FormPerson'
 import useImageStore from '../../store/imagenStore/Imagen'
+import { useAuthStore } from '../../store/AuthStore/AuthStore'
+
 const RegisterAll = () => {
   const [formularioVisible, setFormularioVisible] = useState(null)
   const toggleFormulario = (formulario) => {
     setFormularioVisible(formulario)
   }
   const { capturedImage } = useImageStore()
+  const { token, user } = useAuthStore()
+
   return (
     <>
       <div className='flex flex-col items-center justify-center w-full'>
@@ -24,19 +28,19 @@ const RegisterAll = () => {
           {formularioVisible === 'ingreso' && (
             <>
               <div className='text-xl font-bold mb-4'>formulario de ingreso</div>
-              <FormPerson imagen={capturedImage} />
+              <FormPerson token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'paqueteria' && (
             <>
               <div className='text-xl font-bold mb-4'>formulario de paqueteria</div>
-              <FormPackage imagen={capturedImage} />
+              <FormPackage token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'vehiculo' && (
             <>
               <div className='text-xl font-bold mb-4'>formulario de vehiculos</div>
-              <FormVehicle imagen={capturedImage} />
+              <FormVehicle token={token} imagen={capturedImage} />
             </>
           )}
         </section>

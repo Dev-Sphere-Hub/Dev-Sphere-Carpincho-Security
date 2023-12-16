@@ -1,39 +1,38 @@
 import React, { useEffect, useState } from 'react'
-// import personas from '../../../../db/db_registros'
+
 import './styles.css'
 import useNavStore from '../../../../store/NavStore/navStore'
 import ListOfPeople from './components/ListOfPeople'
 import Paginacion from './components/Paginacion'
-import axios from 'axios'
-import useVisitStore from '../../../../store/VisitStore/VisitStore'
-import { endpoints } from '../../../../constants/api'
+
 import Search from '../../../../components/search'
+
+import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
+import useVisitStore from '../../../../store/VisitStore/VisitStore'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { visitas, setVisitas } = useVisitStore()
+  const { visitas, getAllVisits, setVisitas } = useVisitStore()
   const [filterVisitas, setFilterVisitas] = useState([])
 
+  const { token } = useAuthStore()
+
   useEffect(() => {
-    axios.get(endpoints.visitas)
-      .then(res => {
-        setVisitas(res.data.data)
-        setFilterVisitas(res.data.data)
-      })
-      .catch(err => console.log(err))
-  }, [setVisitas])
+    getAllVisits(token).then(data => {
+      setFilterVisitas(data)
+    }) // Asegúrate de tener disponible el token
+  }, [token, getAllVisits, setVisitas])
 
   useEffect(() => {
     setActiveIndex('historial')
     return () => setActiveIndex(null)
-  }, [])
+  }, [setActiveIndex])
 
   const itemsPerPage = 5
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  // const currentItems = visitas?.slice(indexOfFirstItem, indexOfLastItem)
   const currentItems = filterVisitas?.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (action) => {
@@ -48,7 +47,7 @@ const Historial = () => {
     setFilterVisitas(filterData)
   }
 
-  console.log('Vicitas --> ', visitas)
+  console.log('Vicitas en historial --> ', visitas)
 
   return (
     <div

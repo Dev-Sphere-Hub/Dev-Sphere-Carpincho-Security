@@ -37,7 +37,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
     navigate('/historial/reportes')
   }
 
-  const imageUser = user?.photo || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
+  const imageUser = user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
 
   return (
     <div ref={menuRef} className={`alfa z-30 w-[100%] min-h-[80px] ${activeNavVerticas ? 'lg:transform lg:w-0' : 'lg:transform lg:w-1/5'}  lg:relative lg:h-screen lg:min-h-[900px] flex justify-center items-center content-center lg:justify-center lg:items-start shadow-custom bg-gray-300 `}>

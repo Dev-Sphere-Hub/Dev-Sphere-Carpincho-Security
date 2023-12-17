@@ -5,10 +5,14 @@ import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import { FaRegEdit } from 'react-icons/fa'
 
 import './UserProfile.css'
+import PhotoCapture from './components/PhotoCapture'
+import usePhotoCaptureStore from '../../store/PhotoCaptureStore/photoCaptureStore'
 
 const UserProfile = () => {
   const { token, fetchUserData, user, updateUser } = useAuthStore()
   const navigate = useNavigate()
+
+  const { editPhoto, setEditPhoto, captureImage } = usePhotoCaptureStore()
   // console.log('token --> ', token)
 
   // permite editar los campos del perfil
@@ -76,6 +80,11 @@ const UserProfile = () => {
     }
 
     const formData = new FormData(event.target)
+
+    if (captureImage) {
+      formData.append('photoUrl', captureImage)
+    }
+
     const data = Object.fromEntries(formData)
 
     setErrors({})
@@ -104,10 +113,14 @@ const UserProfile = () => {
     navigate('/historial/reportes')
   }
 
+  console.log('imagen capturada en el storage', captureImage)
   return (
     <div className='w-[100%] h-[100%] z-10  grid place-content-center py-6'>
       <section className='w-[100%] h-auto flex flex-col justify-start items-center gap-5'>
-        <button onClick={handelNavigateNovedades} className='w-[287px] h-[63px] md:hidden bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom' to='/historial'>
+        <button
+          onClick={handelNavigateNovedades} className='w-[287px] h-[63px] md:hidden bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom'
+          to='/historial'
+        >
           <span className='text-2xl'><IoIosArrowBack /></span>
           Editar Perfil
         </button>
@@ -116,8 +129,22 @@ const UserProfile = () => {
           onSubmit={handleSubmit}
           className='min-w-[300px] md:w-[400px] lg:w-[500px] h-auto  p-5 flex flex-col justify-start items-center gap-3 cardGlass' action=''
         >
-          <div>
-            <img className='w-[90px] h-[90px] rounded-full object-cover shadow-custom' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg' alt='carpincho image ' />
+          <div className='w-full h-auto  flex justify-center items-center transition-all ease-linear duration-500'>
+            {
+              editPhoto === false
+                ? (
+                  <div className='relative w-[100px] h-[100px] grid place-content-center rounded-full bg-gradient-to-r from-green-500 via-green-700 to-blue-400'>
+                    <img
+                      className='w-[90px] h-[90px] rounded-full object-cover '
+                      src={user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'} alt='carpincho image '
+                    />
+                    <button className='absolute right-1 bottom-2 w-[20px] h-[20px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white  text-sm grid place-content-center ' onClick={(e) => setEditPhoto(true)}>
+                      <FaRegEdit />
+                    </button>
+                  </div>
+                  )
+                : <PhotoCapture />
+            }
           </div>
 
           <label htmlFor='fullName' className='w-[100%]  flex flex-col justify-start items-start relative text-white'>
@@ -135,7 +162,7 @@ const UserProfile = () => {
                 )
               : (
                 <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.fullName}
-                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditFullName(true)}>
+                  <button className='w-[30px] h-[30px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditFullName(true)}>
                     <FaRegEdit />
                   </button>
                 </div>

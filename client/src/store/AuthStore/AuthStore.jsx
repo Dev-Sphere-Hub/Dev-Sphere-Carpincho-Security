@@ -17,7 +17,7 @@ export const useAuthStore = create(set => ({
       }
 
       // Realiza una solicitud PATCH al backend para actualizar el usuario
-      const response = await axios.patch(`${endpoints.patchUser}/${userId}`, FormData, {
+      const response = await axios.patch(`${endpoints.patchUser}/${userId}`, updatedFields, {
         headers: {
           // Authorization: `Bearer ${token}`
           'Content-Type': 'multipart/form-data',

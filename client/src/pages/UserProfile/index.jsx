@@ -86,6 +86,7 @@ const UserProfile = () => {
     }
 
     const data = Object.fromEntries(formData)
+    console.log('Data a enviar al servidor:', data)
 
     setErrors({})
     setSuccessMessage('Perfil actualizado correctamente')

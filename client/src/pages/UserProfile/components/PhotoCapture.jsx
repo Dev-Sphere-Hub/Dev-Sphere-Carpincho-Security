@@ -13,34 +13,35 @@ const PhotoCapture = () => {
     setIsActive(!isActive)
   }
 
-  const dataURItoBlob = (dataURI) => {
-    const byteString = atob(dataURI.split(',')[1])
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  // const dataURItoBlob = (dataURI) => {
+  //   const byteString = atob(dataURI.split(',')[1])
+  //   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
 
-    const ab = new ArrayBuffer(byteString.length)
-    const ia = new Uint8Array(ab)
+  //   const ab = new ArrayBuffer(byteString.length)
+  //   const ia = new Uint8Array(ab)
 
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i)
-    }
+  //   for (let i = 0; i < byteString.length; i++) {
+  //     ia[i] = byteString.charCodeAt(i)
+  //   }
 
-    return new Blob([ab], { type: mimeString })
-  }
+  //   return new Blob([ab], { type: mimeString })
+  // }
 
   const handleCapture = async (e) => {
     e.preventDefault()
     const imagenSrc = await webcamRef.current.getScreenshot()
+    setCaptureImage(imagenSrc)
 
     // Convierte la imagen base64 en un Blob
-    const imageFile = dataURItoBlob(imagenSrc)
+    // const imageFile = dataURItoBlob(imagenSrc)
 
-    if (imageFile) {
-      // Actualiza el estado en el store con el objeto File
-      setCaptureImage(imageFile)
-    } else {
-      // Realiza alguna acción de manejo de error si es necesario
-      console.error('Error al procesar la imagen.')
-    }
+    // if (imageFile) {
+    //   // Actualiza el estado en el store con el objeto File
+    //   setCaptureImage(imageFile)
+    // } else {
+    //   // Realiza alguna acción de manejo de error si es necesario
+    //   console.error('Error al procesar la imagen.')
+    // }
   }
 
   return (

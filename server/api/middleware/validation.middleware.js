@@ -1,5 +1,27 @@
 import Joi from 'joi';
 
+export const loginSchemaValidation = Joi.object({
+    email: Joi.string()
+        .invalid('')
+        .email()
+        .required()
+        .messages({
+            "string.email": "Solo se permiten correos de tipo example@example.com",
+            "any.required": `"email" es requerido.`,
+            "any.invalid": `"email" no puede ser vacío.`
+        }),
+    password: Joi.string()
+        .invalid('')
+        .required()
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,50})/)
+        //.regex(/^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*[\d|@#$!%*?&])[\p{L}\d@#$!%*?&]{8,96}$/)
+        .messages({
+            "string.pattern.base": "password debe contener almenos una Mayúscula, una minúscula, un número y un caracter especial como #$!%*?& .",
+            "any.required": `"password" es requerido.`,
+            "any.invalid": `"password" no puede ser vacío.`
+        })
+}).options({ abortEarly: false })
+
 export const registerUserSchemaValidation = Joi.object({
     type: Joi.string().valid('admin', 'safety_guard', 'home_owner', 'visitor').default('safety_guard').optional(),
     name: Joi.string()
@@ -100,6 +122,69 @@ export const registerNewSchemaValidation = Joi.object({
             "any.required": `"detail" es requerido.`
         }),
     date: Joi.date().optional()
+}).options({ abortEarly: false })
+
+export const registerVehicleSchemaValidation = Joi.object({
+    plateCode: Joi.string()
+        .regex(/^[a-zA-Z0-9]+$/)
+        .length(6)
+        .required()
+        .messages({
+            "string.pattern.base": "Se permiten únicamente letras y números.",
+            "any.required": `"plateCode" es requerido.`,
+            "string.length": "Debe de contener 6 caracteres."
+        }),
+    carInsurance: Joi.string()
+        .regex(/^[a-zA-Z0-9]+$/)
+        .length(11)
+        .required()
+        .messages({
+            "string.pattern.base": "Solo se permiten letras y números.",
+            "any.required": `"carInsurance" es requerido.`,
+            "string.length": "Debe de contener 11 caracteres."
+        }),
+    details: Joi.string()
+        .regex(/^[ 0-9a-fA-F]+$/).required()
+        .messages({
+            "string.pattern.base": "Sólo se permiten espacios, letras y números.",
+            "any.required": `"details" es requerido.`
+        })
+}).options({ abortEarly: false })
+
+export const registerCourierServiceSchemaValidation = Joi.object({
+    type: Joi.string()
+        .regex(/^[ a-zA-Z]+$/)
+        .required()
+        .messages({
+            "string.pattern.base": "Se permiten únicamente espacios, letras y números.",
+            "any.required": `"type" es requerido.`,
+        }),
+    recipient: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .required()
+        .messages({
+            "string.pattern.base": "Formato de ID de Mongo incorrecto."
+        }),
+    deliverer: Joi.string()
+        .regex(/^[ a-zA-Z]+$/)
+        .required()
+        .messages({
+            "string.pattern.base": "Se permiten únicamente espacios, letras.",
+            "any.required": `"deliverer" es requerido.`,
+        }),
+    description: Joi.string()
+        .regex(/^[ 0-9a-fA-F]+$/).required()
+        .messages({
+            "string.pattern.base": "Sólo se permiten espacios, letras y números.",
+            "any.required": `"description" es requerido.`
+        }),
+    status: Joi.string()
+        .valid('received', 'delivered').default('received')
+        .required()
+        .messages({
+            "string.pattern.base": "Sólo se permiten espacios, letras y números.",
+            "any.required": `"status" es requerido.`
+        })
 }).options({ abortEarly: false })
 
 export const validationMiddleware = (schema) => {

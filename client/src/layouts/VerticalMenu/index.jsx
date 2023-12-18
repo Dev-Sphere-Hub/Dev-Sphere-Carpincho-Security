@@ -37,7 +37,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
     navigate('/historial/reportes')
   }
 
-  const imageUser = user?.photo || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
+  const imageUser = user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
 
   return (
     <div ref={menuRef} className={`alfa z-30 w-[100%] min-h-[80px] ${activeNavVerticas ? 'lg:transform lg:w-0' : 'lg:transform lg:w-1/5'}  lg:relative lg:h-screen lg:min-h-[900px] flex justify-center items-center content-center lg:justify-center lg:items-start shadow-custom bg-gray-300 `}>
@@ -52,7 +52,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
         <ul className='navMenuVert w-[258px] h-[400px] grid gap-2 grid-cols-2 grid-rows-2 place-content-center lg:pl-1 z-50 lg:flex lg:w-[100%] lg:h-auto lg:flex-col lg:flex-nowrap lg:gap-3 '>
           <li>
             <button
-              className='customButton mx-auto  w-[123px] h-[123px]  rounded-md lg:rounded-full flex justify-center items-center text-xl lg:w-[190px] lg:h-[190px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 '
+              className='customButton mx-auto w-[123px] h-[123px]  rounded-md lg:rounded-full flex justify-center items-center text-xl lg:w-[190px] lg:h-[190px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 '
               onClick={() => navigate('/historial/')}
             >
               <img

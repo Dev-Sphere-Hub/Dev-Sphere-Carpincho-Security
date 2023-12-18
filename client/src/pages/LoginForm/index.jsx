@@ -1,47 +1,47 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useAuthStore } from '../../store/AuthStore/AuthStore';
-import { endpoints } from '../../constants/api';
-import { jwtDecode } from 'jwt-decode';
-import InputForm from '../../components/InputForm';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useAuthStore } from '../../store/AuthStore/AuthStore'
+import { endpoints } from '../../constants/api'
+import { jwtDecode } from 'jwt-decode'
+import axios from 'axios'
+
+import InputForm from '../../components/InputForm'
 
 const LoginForm = () => {
-  const localStorage = window.localStorage;
-  const { setTokenDesifred, setToken } = useAuthStore();
-  const Navigate = useNavigate();
+  const localStorage = window.localStorage
+  const { setTokenDesifred, setToken } = useAuthStore()
+  const Navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   const handleLogin = async (data) => {
     try {
-      const res = await fetch(endpoints.login, {
-        method: 'POST',
+      const response = await axios.post(endpoints.login, data, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+        }
+      })
 
-      const responseData = await res.json();
+      const responseData = response.data
 
-      if (res.status === 200) {
-        const decodedToken = jwtDecode(responseData.data.token);
-        localStorage.setItem('token', JSON.stringify(decodedToken));
-        setToken(responseData.data.token);
-        setTokenDesifred(decodedToken);
-        Navigate('/historial');
+      if (response.status === 200) {
+        const decodedToken = jwtDecode(responseData.data.token)
+        localStorage.setItem('token', JSON.stringify(decodedToken))
+        setToken(responseData.data.token)
+        setTokenDesifred(decodedToken)
+        Navigate('/historial')
       } else {
-        throw new Error(responseData.message);
+        throw new Error(responseData.message)
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message)
     }
-  };
+  }
 
   const handleRegister = () => {
-    Navigate('/register');
-  };
+    Navigate('/register')
+  }
 
   return (
     <div className='relative bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen p-0 flex flex-col lg:flex-row lg:justify-around gap-8 min-w-[300px]'>
@@ -88,7 +88,7 @@ const LoginForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

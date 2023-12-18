@@ -92,7 +92,11 @@ const Register = () => {
             placeholder='Escribe tu DNI'
             type='text'
             register={register('documentId', {
-              required: 'Por favor, ingresa tu DNI'
+              required: 'Por favor, ingresa tu DNI',
+              minLength: {
+                value: 8,
+                message: 'El DNI debe tener 8 caracteres'
+              }
             })}
             errorType={errors.documentId}
             errorMessage={errors.documentId?.message}
@@ -114,9 +118,13 @@ const Register = () => {
           <InputForm
             label='Phone'
             placeholder='Escribe tu número de teléfono'
-            type='text'
+            type='tel'
             register={register('phone', {
-              required: 'Por favor, ingresa tu número de teléfono'
+              required: 'Por favor, ingresa tu número de teléfono',
+              minLength: {
+                value: 10,
+                message: 'El numero debe tener 10 caracteres'
+              }
             })}
             errorType={errors.phone}
             errorMessage={errors.phone?.message}

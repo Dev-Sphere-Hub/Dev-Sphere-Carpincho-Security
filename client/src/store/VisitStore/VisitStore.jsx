@@ -1,23 +1,25 @@
 import { create } from 'zustand'
 import { endpoints } from '../../constants/api'
-import { useAuthStore } from '../AuthStore/AuthStore'
+// import { useAuthStore } from '../AuthStore/AuthStore'
 
 // const user = useAuthStore().user
 const useVisitStore = create((set) => ({
   visit: [],
-  registerVisit: async (visitData, token) => {
+
+  registerVisit: async (visitData, token, userId) => {
     try {
       // Asegúrate de que el ID del usuario está disponible
-      const user = useAuthStore.getState().user
-      if (!user || !user._id) {
+      if (!userId) {
         throw new Error('El ID del usuario no está disponible')
       }
 
       // Agrega el ID del usuario a visitData
       const visitDataWithUserId = {
         ...visitData,
-        checkInBy: user._id
+        checkInBy: userId
       }
+
+      // El resto de la función...
 
       const response = await fetch(endpoints.visitas, {
         method: 'POST',
@@ -45,6 +47,47 @@ const useVisitStore = create((set) => ({
       console.error('Error al crear la visita:', error.message)
     }
   },
+  // registerVisit: async (visitData, token) => {
+  //   try {
+  //     // Asegúrate de que el ID del usuario está disponible
+  //     const user = useAuthStore.getState().user
+  //     console.log(user)
+  //     if (!user || !user._id) {
+  //       throw new Error('El ID del usuario no está disponible')
+  //     }
+
+  //     // Agrega el ID del usuario a visitData
+  //     const visitDataWithUserId = {
+  //       ...visitData,
+  //       checkInBy: user._id
+  //     }
+
+  //     const response = await fetch(endpoints.visitas, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`
+  //       },
+  //       body: JSON.stringify(visitDataWithUserId)
+  //     })
+
+  //     // Comprueba el estado de la respuesta
+  //     if (response.status === 401) {
+  //       throw new Error('Error de autenticación. Por favor, comprueba tu token.')
+  //     } else if (response.status >= 500) {
+  //       throw new Error('Error del servidor. Por favor, inténtalo de nuevo más tarde.')
+  //     } else if (!response.ok) {
+  //       throw new Error('Error al crear la visita. Por favor, comprueba los datos de la visita.')
+  //     }
+
+  //     const data = await response.json()
+  //     console.log('response createVisit --> ', data)
+  //     console.log('La visita se registró correctamente')
+  //     set(state => ({ visitas: [...state.visitas, data] }))
+  //   } catch (error) {
+  //     console.error('Error al crear la visita:', error.message)
+  //   }
+  // },
   updateVisit: async (visitId, checkOut, token) => {
     try {
       const response = await fetch(`${endpoints.visitas}/${visitId}`, {
@@ -132,7 +175,14 @@ const useVisitStore = create((set) => ({
     }
   },
   // actualizamosla visitas
-  setVisitas: (nuevaVisita) => set({ visitas: nuevaVisita })
+  setVisitas: (nuevaVisita) => set({ visitas: nuevaVisita }),
+
+  addVisit: (visit) => {
+    set((state) => ({
+      ...state,
+      visitas: [...state.visitas, visit]
+    }))
+  }
 
 }))
 

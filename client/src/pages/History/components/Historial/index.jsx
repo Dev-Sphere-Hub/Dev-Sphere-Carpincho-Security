@@ -16,6 +16,7 @@ const Historial = () => {
 
   const { visitas, getAllVisits, setVisitas } = useVisitStore()
   const [filterVisitas, setFilterVisitas] = useState([])
+  console.log(getAllVisits)
 
   const { token } = useAuthStore()
 

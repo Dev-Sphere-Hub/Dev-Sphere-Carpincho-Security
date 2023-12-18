@@ -8,7 +8,7 @@ const FormPerson = ({ imagen }) => {
   const { token, user } = useAuthStore()
   const navigate = useNavigate()
   const { capturedImage } = useImageStore()
-  const { registerVisit } = useVisitStore() // Usa la función createVisit del store de visitas
+  const { registerVisit, addVisit } = useVisitStore() // Usa la función createVisit del store de visitas
   const [form, setForm] = useState({
     address: '',
     visitType: 'walking',
@@ -16,7 +16,7 @@ const FormPerson = ({ imagen }) => {
     visitorFullName: '',
     state: '',
     photo: imagen,
-    checkInBy: user,
+    checkInBy: user._id,
     checkIn: '',
     __v: 0,
     checkOut: ''
@@ -36,14 +36,15 @@ const FormPerson = ({ imagen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!form.visitorFullName || !form.visitorIdentityNumber || !form.homeOwnerId || !form.state || !form.address) {
-      console.error('Faltan datos obligatorios')
-      return
-    }
+    // if (!form.visitorFullName || !form.visitorIdentityNumber || !form.homeOwnerId || !form.state || !form.address) {
+    //   console.error('Faltan datos obligatorios')
+    //   return
+    // }
 
     try {
       // Usa la función createVisit del store de visitas para crear la visita
-      await registerVisit(form, token)
+      await registerVisit(form, token, user._id)
+      addVisit(form)
       console.log(form)
       console.log(token)
       navigate('/historial/historia', { state: { form } })

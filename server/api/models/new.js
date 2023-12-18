@@ -18,8 +18,11 @@ const newSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    image_url: {
+        type: String
     }
-});
+}, { timestamps: true });
 
 const New = mongoose.model('New', newSchema);
 

@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import { FaRegEdit } from 'react-icons/fa'
 
+import './UserProfile.css'
+import PhotoCapture from './components/PhotoCapture'
+import usePhotoCaptureStore from '../../store/PhotoCaptureStore/photoCaptureStore'
+
 const UserProfile = () => {
   const { token, fetchUserData, user, updateUser } = useAuthStore()
+  const navigate = useNavigate()
 
+  const { editPhoto, setEditPhoto, captureImage } = usePhotoCaptureStore()
   // console.log('token --> ', token)
 
   // permite editar los campos del perfil
@@ -67,10 +73,6 @@ const UserProfile = () => {
 
     const validationErrors = validateForm()
 
-    // console.log('validate Form -> ', validateForm)
-
-    // console.log('validationErrors --> ', validationErrors)
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       setSuccessMessage('')
@@ -78,8 +80,13 @@ const UserProfile = () => {
     }
 
     const formData = new FormData(event.target)
+
+    if (captureImage) {
+      formData.append('photoUrl', captureImage)
+    }
+
     const data = Object.fromEntries(formData)
-    // console.log('data Nuevos Cambios --> ', data)
+    console.log('Data a enviar al servidor:', data)
 
     setErrors({})
     setSuccessMessage('Perfil actualizado correctamente')
@@ -102,28 +109,51 @@ const UserProfile = () => {
     setDocumentId(user?.documentId)
   }, [user])
 
+  const handelNavigateNovedades = (e) => {
+    e.preventDefault()
+    navigate('/historial/reportes')
+  }
+
+  console.log('imagen capturada en el storage', captureImage)
   return (
-    <div className='w-[100%] h-[100%] z-10  grid place-content-center'>
+    <div className='w-[100%] h-[100%] z-10  grid place-content-center py-6'>
       <section className='w-[100%] h-auto flex flex-col justify-start items-center gap-5'>
-        <Link className='w-[287px] h-[63px] bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom' to='/historial'>
+        <button
+          onClick={handelNavigateNovedades} className='w-[287px] h-[63px] md:hidden bg-[#ccdebc] rounded-[15px] flex flex-row justify-around items-center text-black font-semibold text-lg font-titulo shadow-custom'
+          to='/historial'
+        >
           <span className='text-2xl'><IoIosArrowBack /></span>
           Editar Perfil
-        </Link>
+        </button>
 
         <form
           onSubmit={handleSubmit}
-          className='w-[300px] h-auto  p-3 flex flex-col justify-start items-center gap-3' action=''
+          className='min-w-[300px] md:w-[400px] lg:w-[500px] h-auto  p-5 flex flex-col justify-start items-center gap-3 cardGlass' action=''
         >
-          <div>
-            <img className='w-[90px] h-[90px] rounded-full object-cover shadow-custom' src='https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg' alt='carpincho image ' />
+          <div className='w-full h-auto  flex justify-center items-center transition-all ease-linear duration-500'>
+            {
+              editPhoto === false
+                ? (
+                  <div className='relative w-[100px] h-[100px] grid place-content-center rounded-full bg-gradient-to-r from-green-500 via-green-700 to-blue-400'>
+                    <img
+                      className='w-[90px] h-[90px] rounded-full object-cover '
+                      src={user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'} alt='carpincho image '
+                    />
+                    <button className='absolute right-1 bottom-2 w-[20px] h-[20px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white  text-sm grid place-content-center ' onClick={(e) => setEditPhoto(true)}>
+                      <FaRegEdit />
+                    </button>
+                  </div>
+                  )
+                : <PhotoCapture />
+            }
           </div>
 
-          <label htmlFor='fullName' className='w-[100%]  flex flex-col justify-start items-start relative'>
+          <label htmlFor='fullName' className='w-[100%]  flex flex-col justify-start items-start relative text-white'>
             Nombre y Apellido
             {editFullName
               ? (
                 <input
-                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs text-slate-800'
                   type='text'
                   name='fullName' id='fullName'
                   placeholder='Ingresa Nombre y Apellido'
@@ -132,8 +162,8 @@ const UserProfile = () => {
                 />
                 )
               : (
-                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.fullName}
-                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditFullName(true)}>
+                <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.fullName}
+                  <button className='w-[30px] h-[30px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditFullName(true)}>
                     <FaRegEdit />
                   </button>
                 </div>
@@ -141,12 +171,12 @@ const UserProfile = () => {
             {errors.fullName && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.fullName}</p>}
           </label>
 
-          <label htmlFor='email' className='w-[100%] flex flex-col justify-start items-start'>
+          <label htmlFor='email' className='w-[100%] flex flex-col justify-start items-start text-white'>
             Email
             {editEmail
               ? (
                 <input
-                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs text-slate-800'
                   type='email'
                   name='email'
                   id='email'
@@ -155,7 +185,7 @@ const UserProfile = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />)
               : (
-                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.email}
+                <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.email}
                   <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditEmail(true)}>
                     <FaRegEdit />
                   </button>
@@ -164,12 +194,12 @@ const UserProfile = () => {
             {errors.email && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.email}</p>}
           </label>
 
-          <label htmlFor='phone' className='w-[100%] flex flex-col justify-start items-start'>
+          <label htmlFor='phone' className='w-[100%] flex flex-col justify-start items-start text-white'>
             Telefono
             {editPhone
               ? (
                 <input
-                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs text-slate-800 '
                   type='text'
                   name='phone'
                   id='phone'
@@ -179,7 +209,7 @@ const UserProfile = () => {
                 />
                 )
               : (
-                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.phone}
+                <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.phone}
                   <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditPhone(true)}>
                     <FaRegEdit />
                   </button>
@@ -188,11 +218,11 @@ const UserProfile = () => {
             {errors.phone && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.phone}</p>}
           </label>
 
-          <label htmlFor='documentId' className='w-[100%] flex flex-col justify-start items-start'>
+          <label htmlFor='documentId' className='w-[100%] flex flex-col justify-start items-start text-white'>
             DNI
             {editDni
               ? (<input
-                  className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom'
+                  className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs text-slate-800 '
                   type='text'
                   name='documentId'
                   id='documentId'
@@ -201,7 +231,7 @@ const UserProfile = () => {
                   onChange={(e) => setDocumentId(e.target.value)}
                  />)
               : (
-                <div className='w-[100%] h-[54px] border-2 rounded-md outline-none px-3 text-xs shadow-custom bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.documentId}
+                <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.documentId}
                   <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditDni(true)}>
                     <FaRegEdit />
                   </button>
@@ -213,7 +243,7 @@ const UserProfile = () => {
           </label>
           <button
             type='submit'
-            className='w-[290px] h-[50px] rounded-3xl bg-gradient-to-r from-green-500 via-green-700 to-blue-400  font-titulo font-medium text-white shadow-custom'
+            className='w-[290px] h-[50px] rounded-3xl bg-gradient-to-r from-green-500 via-green-700 to-blue-400  font-titulo font-medium text-white'
           >
             Guardar cambios
           </button>

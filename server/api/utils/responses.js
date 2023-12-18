@@ -1,8 +1,8 @@
 export const sendResponse = (res, status, message, data) => {
-    if (`${status}`.startsWith('4') ? 'fail' : 'error');
-    if (`${status}`.startsWith('2') ? 'success' : 'ok');
+    let statusRes = '';
+    if (status.toString().startsWith('2') ? statusRes = 'success' : statusRes = 'fail');
     const response = {
-        status: status,
+        status: statusRes,
         message,
     };
 

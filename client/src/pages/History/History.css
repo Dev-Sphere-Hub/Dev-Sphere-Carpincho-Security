@@ -1,0 +1,12 @@
+.fondo {
+  background-image: url('https://res.cloudinary.com/dpiwmbsog/image/upload/v1702700714/carpincho/A_cute_police_baby_capybara_1_dosr0b.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+}

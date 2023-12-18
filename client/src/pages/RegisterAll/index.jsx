@@ -20,7 +20,7 @@ const RegisterAll = () => {
             className={`flex-1 rounded-[20px] h-full grid place-content-center ${formularioVisible === 'ingreso' ? 'bg-lime-600' : 'bg-transparent text-black'} transition ease-in delay-200`}
             onClick={() => toggleFormulario('ingreso')}
           >
-            Ingreso de persona
+            Ingreso de persona  
           </button>
           <button
             className={`flex-1 rounded-[20px] h-full grid place-content-center ${formularioVisible === 'paqueteria' ? 'bg-lime-600' : 'bg-transparent text-black'} transition ease-in delay-200`}

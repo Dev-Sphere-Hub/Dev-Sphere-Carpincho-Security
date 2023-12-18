@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 // import Home from '../pages/Home/index'
 import GuardianJournal from '../pages/GuardianJournal'
@@ -10,36 +10,28 @@ import SuccessfulRegistration from '../components/SuccessfulRegistration'
 
 import History from '../pages/History'
 import LandinPage from '../pages/LandinPAge/LandinPage'
-import ProtectedRoute from './ProtectedRoutes'
 // import RegisterAll from '../pages/RegisterAll'
 
 const AppRoutes = () => {
   const logged = false // luego lo traemos desde un estado
   return (
     <Routes>
+      {/* <Route path='/' element={<Home />} /> */}
       <Route path='/' element={<LandinPage />} />
       {
-        logged
-          ? (
-            <Route path='/profile' />
-            )
-          : (
-            <Navigate to='/login' />
-            )
+        logged === true &&
+          <Route path='/profile' element='' />
       }
-      <Route element={<ProtectedRoute />}>
+      <Route path='/novedades' element={<GuardianJournal />} />
 
-        <Route path='/novedades' element={<GuardianJournal />} />
-
-        <Route path='/login' element={<LoginForm />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/photoCapture/registerExito' element={<SuccessfulRegistration />} />
-        {/* <Route path='/registro' element={<RegisterAll />} /> */}
-        <Route
-          path='/historial/*'
-          element={<History />}
-        />
-      </Route>
+      <Route path='/login' element={<LoginForm />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/photoCapture/registerExito' element={<SuccessfulRegistration />} />
+      {/* <Route path='/registro' element={<RegisterAll />} /> */}
+      <Route
+        path='/historial/*'
+        element={<History />}
+      />
 
     </Routes>
 

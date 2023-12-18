@@ -1,44 +1,62 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import { endpoints } from '../../constants/api'
-const Register = () => {
-  const Navigate = useNavigate()
-  const [name, setName] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [phone, setphone] = useState('')
-  const [documentId, setDocumentId] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+import InputForm from '../../components/InputForm'
+import Button from '../../components/Button'
 
-  const handleRegisterForm = async (event) => {
-    event.preventDefault()
-    const formData = { name, lastname, email, password, confirmPassword, phone, documentId }
+const Register = () => {
+  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues
+  } = useForm()
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  const onSubmit = async (data) => {
     try {
+      setIsLoading(true)
+
+      const payload = {
+        name: data.name,
+        lastname: data.lastname,
+        email: data.email,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        phone: data.phone,
+        documentId: data.documentId
+      }
+
       const response = await fetch(endpoints.register, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       })
 
       if (!response.ok) {
         throw new Error(`Error al registrar: ${response.status}`)
       }
 
-      const data = await response.json()
-      console.log(data)
-      const token = data.data.token
+      const responseData = await response.json()
+      console.log(responseData)
+
+      const token = responseData.data.token
       console.log(token)
-      Navigate('/login')
+
+      navigate('/login')
     } catch (error) {
       console.error('Error al registrarse:', error.message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <div className='relative bg-colorCustom1 mt-9 w-[100%] px-6 lg:bg-slate-400 h-screen  p-0 flex flex-col lg:flex-row lg:justify-around gap-8 min-w-[300px]'>
+    <div className='bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen flex flex-col lg:flex-row lg:justify-around min-w-[300px]'>
       <div className='lg:flex-col lg:self-center'>
         <div className='pt-9 text-black text-5xl'>
           <h1>Logo</h1>
@@ -47,19 +65,107 @@ const Register = () => {
           <p>Nombre de la app</p>
         </div>
       </div>
-      <div className='pt-9 lg:self-center'>
-        <form onSubmit={handleRegisterForm}>
-          <div className='flex flex-col gap-8 '>
-            <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Nombre' value={name} onChange={(e) => setName(e.target.value)} />
-            <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Apellido' value={lastname} onChange={(e) => setLastname(e.target.value)} />
-            <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Dni' value={documentId} onChange={(e) => setDocumentId(e.target.value)} />
-            <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input className='rounded lg:w-80 w-full h-[35px] lg:h-[40px]' type='text' placeholder='Phone' value={phone} onChange={(e) => setphone(e.target.value)} />
+      <div className=''>
+        <form className='w-full px-[10%]' onSubmit={handleSubmit(onSubmit)}>
+          <InputForm
+            label='Nombre'
+            placeholder='Escribe tu nombre'
+            type='text'
+            register={register('name', {
+              required: 'Por favor, ingresa tu nombre'
+            })}
+            errorType={errors.name}
+            errorMessage={errors.name?.message}
+          />
+          <InputForm
+            label='Apellido'
+            placeholder='Escribe tu apellido'
+            type='text'
+            register={register('lastname', {
+              required: 'Por favor, ingresa tu apellido'
+            })}
+            errorType={errors.lastname}
+            errorMessage={errors.lastname?.message}
+          />
+          <InputForm
+            label='Dni'
+            placeholder='Escribe tu DNI'
+            type='text'
+            register={register('documentId', {
+              required: 'Por favor, ingresa tu DNI',
+              minLength: {
+                value: 8,
+                message: 'El DNI debe tener 8 caracteres'
+              }
+            })}
+            errorType={errors.documentId}
+            errorMessage={errors.documentId?.message}
+          />
+          <InputForm
+            label='Email'
+            placeholder='Escribe tu correo electrónico'
+            type='email'
+            register={register('email', {
+              required: 'Por favor, ingresa tu correo electrónico',
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: 'Correo electrónico inválido'
+              }
+            })}
+            errorType={errors.email}
+            errorMessage={errors.email?.message}
+          />
+          <InputForm
+            label='Phone'
+            placeholder='Escribe tu número de teléfono'
+            type='tel'
+            register={register('phone', {
+              required: 'Por favor, ingresa tu número de teléfono',
+              minLength: {
+                value: 10,
+                message: 'El numero debe tener 10 caracteres'
+              }
+            })}
+            errorType={errors.phone}
+            errorMessage={errors.phone?.message}
+          />
 
-            <input className='rounded lg:w-80 w-full h-[35px]' type='password' placeholder='Contraseña' value={password} onChange={(e) => setPassword(e.target.value)} />
-            <input className='rounded lg:w-80 w-full h-[35px]' type='password' placeholder='Confirmar Contraseña' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-          </div>
-          <button className='bg-blue border-solid rounded-3xl mt-10 w-full text-xl bg-slate-500 h-[50px]' type='submit'>Registrar</button>
+          <InputForm
+            label='Contraseña'
+            placeholder='Ingresa tu contraseña'
+            type='password'
+            register={register('password', {
+              required: 'Por favor, ingresa tu contraseña',
+              minLength: {
+                value: 6,
+                message: 'La contraseña debe tener al menos 6 caracteres'
+              }
+            })}
+            errorType={errors.password}
+            errorMessage={errors.password?.message}
+          />
+          <InputForm
+            label='Confirmar Contraseña'
+            placeholder='Confirma tu contraseña'
+            type='password'
+            register={register('confirmPassword', {
+              required: 'Confirma tu contraseña',
+              minLength: {
+                value: 6,
+                message: 'La contraseña debe tener al menos 6 caracteres'
+              },
+              validate: (value) =>
+                value === getValues('password') ||
+                  'Las contraseñas no coinciden'
+            })}
+            errorType={errors.confirmPassword}
+            errorMessage={errors.confirmPassword?.message}
+          />
+          <Button
+            type='submit'
+            text={isLoading ? 'Cargando...' : 'Registrar'}
+            onClick={handleSubmit(onSubmit)}
+          />
         </form>
       </div>
     </div>

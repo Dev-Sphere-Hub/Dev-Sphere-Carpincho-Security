@@ -17,13 +17,21 @@ export const useAuthStore = create(persist((set) => ({
 
   updateUser: async (updatedFields, token, user) => {
     try {
+      const userId = user._id
+
+      if (!userId) {
+        throw new Error('El ID del usuario no está definido')
+      }
+
       // Realiza una solicitud PATCH al backend para actualizar el usuario
-      const response = await axios.patch(endpoints.patchUser, updatedFields, {
+      const response = await axios.patch(`${endpoints.patchUser}/${userId}`, updatedFields, {
         headers: {
+          // Authorization: `Bearer ${token}`
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }
       })
-      console.log('response updateUser --> ', response)
+      // console.log('response updateUser --> ', response)
       // Actualiza el estado del usuario en el store con los nuevos datos
       set({ user: { ...user, ...response.data.data } })
     } catch (error) {

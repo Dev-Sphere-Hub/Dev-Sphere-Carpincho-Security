@@ -22,8 +22,7 @@ const visitSchema = new mongoose.Schema({
     },
     homeOwnerId: {
         type: mongoose.Types.ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     },
     vehicle: {
         type: mongoose.Types.ObjectId,
@@ -31,7 +30,8 @@ const visitSchema = new mongoose.Schema({
     },
     checkInBy: {
         type: mongoose.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     checkOutBy: {
         type: mongoose.Types.ObjectId,
@@ -44,8 +44,16 @@ const visitSchema = new mongoose.Schema({
     },
     photo: {
         type: String
+    },
+    visitType: {
+        type: String,
+        enum: ['vehicle', 'walking', 'courierService'],
+        required: true
+    },
+    note: {
+        type: String
     }
-});
+}, { timestamps: true });
 
 const Visit = mongoose.model('Visit', visitSchema);
 

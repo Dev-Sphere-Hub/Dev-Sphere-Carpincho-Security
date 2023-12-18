@@ -6,8 +6,9 @@ import ListOfPeople from './components/ListOfPeople'
 import Paginacion from './components/Paginacion'
 
 import Search from '../../../../components/search'
-
 import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
+
+// import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
 import useVisitStore from '../../../../store/VisitStore/VisitStore'
 
 const Historial = () => {
@@ -18,13 +19,27 @@ const Historial = () => {
   const [filterVisitas, setFilterVisitas] = useState([])
   console.log(getAllVisits)
 
+  // const { token } = useAuthStore()
+
+  // useEffect(() => {
+  //   getAllVisits(token).then(data => {
+  //     setFilterVisitas(data)
+  //   }) // Asegúrate de tener disponible el token
+  // }, [token, getAllVisits, setVisitas])
   const { token } = useAuthStore()
 
   useEffect(() => {
-    getAllVisits(token).then(data => {
-      setFilterVisitas(data)
-    }) // Asegúrate de tener disponible el token
-  }, [token, getAllVisits, setVisitas])
+    axios.get(endpoints.visitas, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        setVisitas(res.data.data)
+        setFilterVisitas(res.data.data)
+      })
+      .catch(err => console.log(err))
+  }, [setVisitas])
 
   useEffect(() => {
     setActiveIndex('historial')

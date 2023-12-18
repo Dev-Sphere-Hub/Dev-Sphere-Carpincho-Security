@@ -24,15 +24,11 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
     }
   }
 
-  const handlClickNavigation = (e) => {
-    navigate('/historial')
-  }
-
   useEffect(() => {
     document.addEventListener('click', handleClickOutsideMenu)
 
     return () => {
-      documentNaNpxoveEventListener('click', handleClickOutsideMenu)
+      document.removeEventListener('click', handleClickOutsideMenu)
     }
   }, [])
 

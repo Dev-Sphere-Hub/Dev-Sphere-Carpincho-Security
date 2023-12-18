@@ -26,15 +26,6 @@ const LoginForm = () => {
         },
       });
 
-
-        localStorage.setItem('token', JSON.stringify(decodedToken))
-        setToken(data.data.token)
-        setTokenDesifred(decodedToken)
-        Navigate('/historial/reportes')
-      }
-      if (data.status !== 'success') {
-        throw new Error(data.message)
-
       const responseData = response.data;
 
       if (response.status === 200) {
@@ -45,7 +36,6 @@ const LoginForm = () => {
         Navigate("/historial");
       } else {
         throw new Error(responseData.message);
-
       }
     } catch (error) {
       console.error(error.message);

@@ -1,10 +1,27 @@
 import { create } from 'zustand'
+import { endpoints } from '../../constants/api'
+import axios from 'axios'
 
 const useVisitStore = create((set) => ({
   visitas: [],
-
+  update: false,
+  newVisite: null,
   // actualizamosla visitas
-  setVisitas: (nuevaVisita) => set({ visitas: nuevaVisita })
+  setUpdate: (update) => set({ update }),
+  setVisitas: (nuevaVisita) => set({ visitas: nuevaVisita }),
+  setNewVisite: (newVisite) => set({ newVisite }),
+  subirVicita: async (token, updateVisita) => {
+    try {
+      const response = await axios.post(endpoints.visitas, updateVisita, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      set({ update: true })
+      set({ newVisite: response.data })
+    } catch (error) {
+      console.error('Error al subir la visita:', error)
+    }
+  }
+
 }))
 
 export default useVisitStore

@@ -1,20 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
 import { IoCameraOutline } from 'react-icons/io5'
 import { PiCameraSlashBold } from 'react-icons/pi'
 import Webcam from 'react-webcam'
 import useNavStore from '../../store/NavStore/navStore'
+import useImageStore from '../../store/imagenStore/Imagen'
 
 const PhotoCapture = () => {
   const webcamRef = useRef(null)
   const [isActive, setIsActive] = useState(true)
-  const [capturedImage, setCapturedImage] = useState(null)
-  // const navigate = useNavigate()
+  const { capturedImage, setCapturedImage } = useImageStore()
 
   const capturar = async () => {
     const imagenSrc = webcamRef.current.getScreenshot()
     setCapturedImage(imagenSrc)
-    // navigate('/photoCapture/quickRegistration', { state: { imagen: imagenSrc } })
   }
 
   const { setActiveIndex } = useNavStore()

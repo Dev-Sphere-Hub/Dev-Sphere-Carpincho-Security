@@ -53,8 +53,8 @@ const UserProfile = () => {
       validateErrors.phone = 'El teléfono es obligatorio'
     } else if (!/^\d+$/.test(phone)) {
       validateErrors.phone = 'El teléfono solo puede contener números'
-    } else if (phone.length < 10) {
-      validateErrors.phone = 'El teléfono no puede tener más de 10 dígitos'
+    } else if (phone.length > 8) {
+      validateErrors.phone = 'El teléfono debe tener mas de 8 dígitos'
     }
 
     if (editDni && !documentId.trim()) {

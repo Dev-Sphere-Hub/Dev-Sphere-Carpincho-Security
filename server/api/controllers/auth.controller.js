@@ -11,10 +11,10 @@ export const createUser = tryCatch(async(req, res) => {
     const existingUser = await User.findOne({ email });
     const existingUserDocumentId = await User.findOne({ documentId });
     if (existingUser) {
-        return res.status(409).json({ error: 'El correo ya está registrado' });
+        throw sendResponse(res, 409, 'El correo ya está registrado.');
     }
     if (existingUserDocumentId) {
-        return res.status(409).json({ error: 'Ya existe un usuario registrado con el número de documento ingresado' });
+        throw sendResponse(res, 409, 'Ya existe un usuario registrado con el número de documento ingresado.');
     }
     const saltRounds = 10;
 
@@ -41,12 +41,12 @@ export const login = tryCatch(async(req, res) => {
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-        return res.status(401).json({ error: 'No existe un usuario con el correo ingresado.' });
+        return sendResponse(res, 401, 'No existe un usuario con el correo ingresado.');
     }
     const isPasswordValid = await bcrypt.compare(password, existingUser.password);
 
     if (!isPasswordValid) {
-        return res.status(409).json({ error: 'Credenciales incorrectas.' });
+        return sendResponse(res, 409, 'Credenciales incorrectas.');
     }
     const secretKey = process.env.SECRET_KEY;
     const token = jwt.sign({ userId: existingUser._id }, secretKey, { expiresIn: TOKEN_EXPIRATION });
@@ -57,7 +57,7 @@ export const recoverPassword = tryCatch(async(req, res) => {
     const { email } = req.body;
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-        return res.status(401).json({ error: 'No existe un usuario con el correo ingresado.' });
+        return sendResponse(res, 401, 'No existe un usuario con el correo ingresado.');
     }
     /*TODO - Enviar correo electrónico con un enlace con tiempo de expiración para el cambio de contraseña*/
     sendResponse(res, 200, `Se ha enviado un código de verificación. Por favor, verifica tu bandeja de entrada.`);

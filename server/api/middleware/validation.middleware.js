@@ -161,7 +161,23 @@ export const registerVisitSchemaValidation = Joi.object({
             "any.required": `"visitType" es requerido.`
         }),
     note: Joi.string()
+        .optional(),
+    image: Joi.any().optional()
+}).options({ abortEarly: false })
+
+export const updateVisitSchemaValidation = Joi.object({
+    state: Joi.string()
+        .valid('authorized', 'unauthorized')
         .optional()
+        .messages({
+            "string.valid": "Valor no permitido.",
+            "any.required": `"state" es requerido.`
+        }),
+    note: Joi.string()
+        .optional(),
+    checkOut: Joi.date()
+        .optional(),
+    image: Joi.any().optional()
 }).options({ abortEarly: false })
 
 export const registerNewSchemaValidation = Joi.object({
@@ -175,7 +191,8 @@ export const registerNewSchemaValidation = Joi.object({
             "string.max": "No debe de tener más de 50 caracteres.",
             "any.required": `"detail" es requerido.`
         }),
-    date: Joi.date().optional()
+    date: Joi.date().optional(),
+    image: Joi.any().optional()
 }).options({ abortEarly: false })
 
 export const registerVehicleSchemaValidation = Joi.object({
@@ -203,7 +220,8 @@ export const registerVehicleSchemaValidation = Joi.object({
         .messages({
             "string.pattern.base": "Sólo se permiten espacios, letras y números.",
             "any.required": `"details" es requerido.`
-        })
+        }),
+    image: Joi.any().optional()
 }).options({ abortEarly: false })
 
 export const registerCourierServiceSchemaValidation = Joi.object({
@@ -241,7 +259,8 @@ export const registerCourierServiceSchemaValidation = Joi.object({
         .messages({
             "string.pattern.base": "Sólo se permiten espacios, letras y números.",
             "any.required": `"status" es requerido.`
-        })
+        }),
+    image: Joi.any().optional()
 }).options({ abortEarly: false })
 
 export const validationMiddleware = (schema) => {

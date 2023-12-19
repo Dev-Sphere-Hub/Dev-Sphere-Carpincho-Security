@@ -22,6 +22,39 @@ export const loginSchemaValidation = Joi.object({
         })
 }).options({ abortEarly: false })
 
+export const updateUserSchemaValidation = Joi.object({
+    fullName: Joi.string()
+        .max(50)
+        .optional()
+        .invalid('')
+        .regex(/^[ a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/) //"Miguel Durán"
+        .messages({
+            "string.pattern.base": "Caracteres inválidos, no se permiten dígitos ni caracteres especiales.",
+            "string.max": "Máximo 50 caracteres permitidos",
+            "any.invalid": `"name" no puede ser vacío.`
+        }),
+    email: Joi.string()
+        .email()
+        .optional()
+        .messages({
+            "string.email": "Solo se permiten correos de tipo example@example.com",
+            "any.required": `"email" es requerido.`
+        }),
+    phone: Joi.string()
+        .regex(/^(?=[0-9]*$)(?:.{9}|.{11})$/) //"958945124 or 9845125474, 9 or 11 digits"
+        .optional()
+        .messages({
+            "string.pattern.base": "El número de teléfono debe contener 9 o 11 dígitos en formato 784512541.",
+        }),
+    address: Joi.string()
+        .min(6)
+        .optional()
+        .messages({
+            "string.min": `"address" de contener más de 6 caracteres.`
+        }),
+    image: Joi.any().optional()
+}).options({ abortEarly: false })
+
 export const registerUserSchemaValidation = Joi.object({
     type: Joi.string()
         .valid('admin', 'safety_guard', 'home_owner', 'visitor')
@@ -84,6 +117,7 @@ export const registerUserSchemaValidation = Joi.object({
         .messages({
             "string.min": `"address" de contener más de 6 caracteres.`
         }),
+    image: Joi.any().optional()
 }).options({ abortEarly: false })
 
 export const registerVisitSchemaValidation = Joi.object({

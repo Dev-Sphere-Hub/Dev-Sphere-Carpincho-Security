@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import PhotoCapture from '../../components/PhotoCapture'
 import FormVehicle from '../../components/FormVehicle'
 import FormPackage from '../../components/FormPackage'
 import FormPerson from '../../components/FormPerson'
+import useImageStore from '../../store/imagenStore/Imagen'
+import { useAuthStore } from '../../store/AuthStore/AuthStore'
+
 const RegisterAll = () => {
   const [formularioVisible, setFormularioVisible] = useState(null)
   const toggleFormulario = (formulario) => {
     setFormularioVisible(formulario)
   }
-  const location = useLocation()
-  const imgSrc = location.state?.imagen
+  const { capturedImage } = useImageStore()
+  console.log(capturedImage)
+  const { token, user } = useAuthStore()
+
   return (
     <>
       <div className='flex flex-col items-center justify-center w-full'>
@@ -40,20 +44,20 @@ const RegisterAll = () => {
         <section className='mx-auto w-[90%] p-3'>
           {formularioVisible === 'ingreso' && (
             <>
-              <div className='text-xl font-bold mb-4'>formulario de ingreso</div>
-              <FormPerson imagen={imgSrc} />
+              <div className='text-xl font-bold mb-4'>Ingreso de persona</div>
+              <FormPerson token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'paqueteria' && (
             <>
-              <div className='text-xl font-bold mb-4'>formulario de paqueteria</div>
-              <FormPackage imagen={imgSrc} />
+              <div className='text-xl font-bold mb-4'>Ingreso de paqueteria</div>
+              <FormPackage token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'vehiculo' && (
             <>
-              <div className='text-xl font-bold mb-4'>formulario de vehiculos</div>
-              <FormVehicle imagen={imgSrc} />
+              <div className='text-xl font-bold mb-4'>Ingreso de vehiculos</div>
+              <FormVehicle token={token} imagen={capturedImage} />
             </>
           )}
         </section>

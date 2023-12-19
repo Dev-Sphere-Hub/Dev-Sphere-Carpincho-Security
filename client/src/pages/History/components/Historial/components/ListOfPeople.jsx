@@ -4,10 +4,13 @@ import ItemPeople from './ItemPeople'
 const ListOfPeople = ({ personas }) => {
   return (
     <div className='col-span-5 p-0 bg-white'>
-
-      {personas.map(persona => (
-        <ItemPeople key={persona._id} persona={persona} />
-      ))}
+      {
+        personas && personas.map(
+          persona => (
+            <ItemPeople key={persona._id} persona={persona} />
+          )
+        )
+      }
 
     </div>
   )

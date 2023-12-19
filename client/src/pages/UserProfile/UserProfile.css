@@ -14,9 +14,9 @@
   transition: all ease-in-out .3s;
 
 
-  &:hover{
-    background-color: #5b7dad50;
-    backdrop-filter: blur(5px) saturate(180%);
-    transition: all ease-in-out .3s;
-  }
+}
+.cardGlass:hover{
+  background-color: #5b7dad50;
+  backdrop-filter: blur(5px) saturate(180%);
+  transition: all ease-in-out .3s;
 }

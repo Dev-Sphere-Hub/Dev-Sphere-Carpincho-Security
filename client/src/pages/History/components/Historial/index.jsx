@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from 'react'
-
 import './styles.css'
 import useNavStore from '../../../../store/NavStore/navStore'
 import ListOfPeople from './components/ListOfPeople'
 import Paginacion from './components/Paginacion'
-
 import Search from '../../../../components/search'
 import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
-
-// import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
 import useVisitStore from '../../../../store/VisitStore/VisitStore'
+import axios from 'axios'
+import { endpoints } from '../../../../constants/api'
 
 const Historial = () => {
   const { setActiveIndex } = useNavStore()
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { visitas, getAllVisits, setVisitas } = useVisitStore()
+  const { visitas, setVisitas } = useVisitStore()
   const [filterVisitas, setFilterVisitas] = useState([])
-  console.log(getAllVisits)
 
-  // const { token } = useAuthStore()
-
-  // useEffect(() => {
-  //   getAllVisits(token).then(data => {
-  //     setFilterVisitas(data)
-  //   }) // Asegúrate de tener disponible el token
-  // }, [token, getAllVisits, setVisitas])
   const { token } = useAuthStore()
 
   useEffect(() => {
@@ -63,7 +53,7 @@ const Historial = () => {
     setFilterVisitas(filterData)
   }
 
-  console.log('Vicitas en historial --> ', visitas)
+  // console.log('Vicitas en historial --> ', visitas)
 
   return (
     <div

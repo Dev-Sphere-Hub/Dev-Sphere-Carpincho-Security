@@ -12,6 +12,7 @@ const RegisterAll = () => {
     setFormularioVisible(formulario)
   }
   const { capturedImage } = useImageStore()
+  console.log(capturedImage)
   const { token, user } = useAuthStore()
 
   return (
@@ -43,19 +44,19 @@ const RegisterAll = () => {
         <section className='mx-auto w-[90%] p-3'>
           {formularioVisible === 'ingreso' && (
             <>
-              <div className='text-xl font-bold mb-4'>formulario de ingreso</div>
+              <div className='text-xl font-bold mb-4'>Ingreso de persona</div>
               <FormPerson token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'paqueteria' && (
             <>
-              <div className='text-xl font-bold mb-4'>formulario de paqueteria</div>
+              <div className='text-xl font-bold mb-4'>Ingreso de paqueteria</div>
               <FormPackage token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'vehiculo' && (
             <>
-              <div className='text-xl font-bold mb-4'>formulario de vehiculos</div>
+              <div className='text-xl font-bold mb-4'>Ingreso de vehiculos</div>
               <FormVehicle token={token} imagen={capturedImage} />
             </>
           )}

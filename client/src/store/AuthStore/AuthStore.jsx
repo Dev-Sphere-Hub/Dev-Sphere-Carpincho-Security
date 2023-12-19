@@ -7,6 +7,8 @@ export const useAuthStore = create(persist((set) => ({
   token: null,
   user: null,
   tokenDesifred: null,
+  loading: false,
+
   setToken: (newToken) => {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('token', newToken)
@@ -23,22 +25,21 @@ export const useAuthStore = create(persist((set) => ({
         throw new Error('El ID del usuario no está definido')
       }
 
-      // Realiza una solicitud PATCH al backend para actualizar el usuario
       const response = await axios.patch(`${endpoints.patchUser}/${userId}`, updatedFields, {
         headers: {
-          // Authorization: `Bearer ${token}`
+
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }
       })
-      // console.log('response updateUser --> ', response)
-      // Actualiza el estado del usuario en el store con los nuevos datos
+
       set({ user: { ...user, ...response.data.data } })
     } catch (error) {
       console.error('Error al actualizar el usuario:', error)
     }
   },
   fetchUserData: async (token) => {
+    set({ loading: true })
     try {
       const response = await axios.get(endpoints.getUser, {
         headers: {
@@ -47,10 +48,11 @@ export const useAuthStore = create(persist((set) => ({
       })
       console.log('response fetchUserData --> ', response.data)
       set({ user: response.data.data })
+      set({ loading: false })
     } catch (error) {
       console.error('Error al obtener los datos del usuario:', error)
     }
   }
 }), {
-  name: 'authStore' // Nombre único para el almacenamiento en localStorage
+  name: 'authStore'
 }))

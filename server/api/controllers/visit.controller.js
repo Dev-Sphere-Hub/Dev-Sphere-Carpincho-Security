@@ -24,7 +24,8 @@ export const registerVisit = tryCatch(async(req, res) => {
         await visit.save();
         return sendResponse(res, 200, 'Visita registrada con éxito.');
     }
-    const visit = new Visit(req.body);
+    visitFields.checkInBy = req.user.userId;
+    const visit = new Visit(visitFields);
 
     await visit.save();
     sendResponse(res, 200, 'Visita registrado con éxito');

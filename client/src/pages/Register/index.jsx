@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { endpoints } from '../../constants/api'
@@ -18,7 +19,6 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true)
-
       const payload = {
         name: data.name,
         lastname: data.lastname,
@@ -28,25 +28,15 @@ const Register = () => {
         phone: data.phone,
         documentId: data.documentId
       }
-
-      const response = await fetch(endpoints.register, {
-        method: 'POST',
+      const response = await axios.post(endpoints.register, payload, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+        }
       })
-
-      if (!response.ok) {
-        throw new Error(`Error al registrar: ${response.status}`)
-      }
-
-      const responseData = await response.json()
+      const responseData = response.data
       console.log(responseData)
-
       const token = responseData.data.token
       console.log(token)
-
       navigate('/login')
     } catch (error) {
       console.error('Error al registrarse:', error.message)
@@ -54,7 +44,6 @@ const Register = () => {
       setIsLoading(false)
     }
   }
-
   return (
     <div className='bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen flex flex-col lg:flex-row lg:justify-around min-w-[300px]'>
       <div className='lg:flex-col lg:self-center'>
@@ -92,7 +81,11 @@ const Register = () => {
             placeholder='Escribe tu DNI'
             type='text'
             register={register('documentId', {
-              required: 'Por favor, ingresa tu DNI'
+              required: 'Por favor, ingresa tu DNI',
+              minLength: {
+                value: 8,
+                message: 'El DNI debe tener 8 caracteres'
+              }
             })}
             errorType={errors.documentId}
             errorMessage={errors.documentId?.message}
@@ -114,9 +107,13 @@ const Register = () => {
           <InputForm
             label='Phone'
             placeholder='Escribe tu número de teléfono'
-            type='text'
+            type='tel'
             register={register('phone', {
-              required: 'Por favor, ingresa tu número de teléfono'
+              required: 'Por favor, ingresa tu número de teléfono',
+              minLength: {
+                value: 10,
+                message: 'El numero debe tener 10 caracteres'
+              }
             })}
             errorType={errors.phone}
             errorMessage={errors.phone?.message}

@@ -13,35 +13,29 @@ const PhotoCapture = () => {
     setIsActive(!isActive)
   }
 
-  // const dataURItoBlob = (dataURI) => {
-  //   const byteString = atob(dataURI.split(',')[1])
-  //   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-  //   const ab = new ArrayBuffer(byteString.length)
-  //   const ia = new Uint8Array(ab)
-
-  //   for (let i = 0; i < byteString.length; i++) {
-  //     ia[i] = byteString.charCodeAt(i)
-  //   }
-
-  //   return new Blob([ab], { type: mimeString })
-  // }
-
   const handleCapture = async (e) => {
     e.preventDefault()
-    const imagenSrc = await webcamRef.current.getScreenshot()
-    setCaptureImage(imagenSrc)
+    const imagenBase64 = await webcamRef.current.getScreenshot()
 
-    // Convierte la imagen base64 en un Blob
-    // const imageFile = dataURItoBlob(imagenSrc)
+    // Verificar si la cadena es una cadena base64 válida
+    if (/^data:image\/\w+;base64,/.test(imagenBase64)) {
+    // Decodificar la cadena base64
+      const arrayBuffer = Uint8Array.from(atob(imagenBase64.split(',')[1]), (c) =>
+        c.charCodeAt(0)
+      ).buffer
 
-    // if (imageFile) {
-    //   // Actualiza el estado en el store con el objeto File
-    //   setCaptureImage(imageFile)
-    // } else {
-    //   // Realiza alguna acción de manejo de error si es necesario
-    //   console.error('Error al procesar la imagen.')
-    // }
+      // Crear un Blob y un objeto File
+      const blob = new Blob([arrayBuffer], { type: 'image/png' })
+      const fileName = 'perfilUser.png'
+      const file = new File([blob], fileName, { type: 'image/png' })
+
+      console.log('Imagen convertida a objeto File ->', file)
+
+      // Hacer lo que necesites con el objeto File
+      setCaptureImage(file)
+    } else {
+      console.error('La cadena no es una cadena base64 válida.')
+    }
   }
 
   return (

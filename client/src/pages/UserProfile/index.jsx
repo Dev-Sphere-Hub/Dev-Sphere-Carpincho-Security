@@ -91,9 +91,10 @@ const UserProfile = () => {
     }
 
     const formData = new FormData(event.target)
+    console.log('asasasasas -> ', captureImage)
 
     if (captureImage) {
-      formData.append('photoUrl', captureImage)
+      formData.append('image', captureImage)
     }
 
     const data = Object.fromEntries(formData)
@@ -157,7 +158,11 @@ const UserProfile = () => {
                       className='w-[90px] h-[90px] rounded-full object-cover '
                       src={user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'} alt='carpincho image '
                     />
-                    <button className={`${buttonStyles} w-[20px] h-[20px] z-30`} onClick={(e) => setEditPhoto(true)}>
+                    <button
+                      className={`${buttonStyles} 
+                    w-[20px] h-[20px] z-30`}
+                      onClick={(e) => setEditPhoto(true)}
+                    >
                       <FaRegEdit />
                     </button>
                     <input

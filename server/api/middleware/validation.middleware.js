@@ -66,7 +66,7 @@ export const updateUserSchemaValidation = Joi.object({
             "any.required": `"email" es requerido.`
         }),
     phone: Joi.string()
-        .regex(/^(?=[0-9]*$)(?=.{8,15})$/) //"958945124 or 9845125474, 9 or 11 digits"
+        .regex(/(^[0-9]{8,15}$)/) //"958945124 or 9845125474, 9 or 11 digits"
         .optional()
         .messages({
             "string.pattern.base": "El número de teléfono debe contener 9 o 11 dígitos en formato 784512541.",
@@ -124,16 +124,16 @@ export const registerUserSchemaValidation = Joi.object({
             "any.invalid": `"name" no puede ser vacío.`
         }),
     phone: Joi.string()
-        .regex(/^(?=[0-9]*$)(?=.{8,15})$/) //"958945124 or 9845125474, 9 or 11 digits"
+        .regex(/(^[0-9]{8,15}$)/) //"958945124 or 9845125474, 9 or 11 digits"
         .optional()
         .messages({
             "string.pattern.base": "El número de teléfono debe contener entre 8 y 15 dígitos.",
         }),
     documentId: Joi.string()
-        .regex(/^(?=[0-9]*$)(?=.{8,10})$/)
+        .regex(/(^[0-9]{8,15}$)/)
         .required()
         .messages({
-            "string.pattern.base": "El número de identificación debe tener entre 8 y 10 dígitos.",
+            "string.pattern.base": "El número de identificación debe tener entre 8 y 15 dígitos.",
             "any.required": `"documentId" es requerido.`
         }),
     address: Joi.string()
@@ -152,10 +152,10 @@ export const registerVisitSchemaValidation = Joi.object({
             "any.required": `"address" es requerido.`
         }),
     visitorIdentityNumber: Joi.string()
-        .regex(/^\d{8}(?:[-\s]\d{4})?$/)
+        .regex(/(^[0-9]{8,15}$)/)
         .required()
         .messages({
-            "string.pattern.base": "Formato de número de identificación incorrecto.",
+            "string.pattern.base": "El número de identificación de la visita debe tener entre 8 y 15 dígitos.",
             "any.required": `"visitorIdentityNumber" es requerido.`
         }),
     visitorFullName: Joi.string()

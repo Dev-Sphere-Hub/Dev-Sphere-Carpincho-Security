@@ -33,7 +33,7 @@ const LoginForm = () => {
         localStorage.setItem('token', JSON.stringify(decodedToken))
         setToken(responseData.data.token)
         setTokenDesifred(decodedToken)
-        Navigate('/historial')
+        Navigate('/historial/reportes')
       } else {
         throw new Error(responseData.message)
       }

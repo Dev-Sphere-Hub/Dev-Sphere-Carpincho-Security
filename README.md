@@ -12,7 +12,7 @@ Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al pr
 | <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
 |:---:|
 | **Jennifer Durrling** |
-| <a href="https://www.linkedin.com/in/gonzalezlucerocamila?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
+| <a href="https://www.linkedin.com/in/jennifer-durrling/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
 
 #### 🧑💻 Developers:
 

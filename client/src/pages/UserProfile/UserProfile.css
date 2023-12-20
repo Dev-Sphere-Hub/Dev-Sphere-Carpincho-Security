@@ -10,7 +10,7 @@
 
 }
 .cardGlass:hover{
-  background-color: #3f96a794;
+  background-color: #5b7dad91;
   backdrop-filter: blur(5px) saturate(180%);
   transition: all ease-in-out .3s;
 }

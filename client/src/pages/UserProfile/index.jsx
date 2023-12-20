@@ -9,7 +9,7 @@ import PhotoCapture from './components/PhotoCapture'
 import usePhotoCaptureStore from '../../store/PhotoCaptureStore/photoCaptureStore'
 
 const UserProfile = () => {
-  const { token, fetchUserData, user, updateUser } = useAuthStore()
+  const { token, fetchUserData, user, updateUser, update } = useAuthStore()
   const navigate = useNavigate()
 
   const { editPhoto, setEditPhoto, captureImage } = usePhotoCaptureStore()
@@ -20,19 +20,24 @@ const UserProfile = () => {
   const [editEmail, setEditEmail] = useState(false)
   const [editPhone, setEditPhone] = useState(false)
   const [editDni, setEditDni] = useState(false)
+  const [editImagen, setEditImagen] = useState(false)
 
   // para las validaciones
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [documentId, setDocumentId] = useState('')
+  const [imagen, setImage] = useState('')
   // para manejar los errores
   const [errors, setErrors] = useState({})
   const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
     token && fetchUserData(token)
-  }, [token])
+  }, [token, update])
+
+  console.log('capturando imagen ->', imagen)
+  console.log('va la imagen --> ', editImagen)
 
   const validateForm = () => {
     const validateErrors = {}
@@ -53,7 +58,7 @@ const UserProfile = () => {
       validateErrors.phone = 'El teléfono es obligatorio'
     } else if (!/^\d+$/.test(phone)) {
       validateErrors.phone = 'El teléfono solo puede contener números'
-    } else if (phone.length > 8) {
+    } else if (phone.length > 9) {
       validateErrors.phone = 'El teléfono debe tener mas de 8 dígitos'
     }
 
@@ -61,8 +66,14 @@ const UserProfile = () => {
       validateErrors.documentId = 'El DNI es obligatorio'
     } else if (!/^\d+$/.test(documentId)) {
       validateErrors.documentId = 'El DNI solo puede contener números'
-    } else if (documentId.length <= 8) {
+    } else if (documentId.length < 8) {
       validateErrors.documentId = 'El DNI no puede tener menos de 8 dígitos'
+    }
+
+    if (editImagen && !imagen) {
+      validateErrors.captureImage = 'La foto es obligatoria'
+    } else if (imagen.size > 3000000) {
+      validateErrors.captureImage = 'La foto debe tener menos de 3MB'
     }
 
     return validateErrors
@@ -72,6 +83,7 @@ const UserProfile = () => {
     event.preventDefault()
 
     const validationErrors = validateForm()
+    console.log('validationErrors --> ', validationErrors)
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
@@ -80,13 +92,16 @@ const UserProfile = () => {
     }
 
     const formData = new FormData(event.target)
+    console.log('asasasasas -> ', captureImage)
 
     if (captureImage) {
-      formData.append('photoUrl', captureImage)
+      formData.append('image', captureImage)
     }
 
     const data = Object.fromEntries(formData)
     console.log('Data a enviar al servidor:', data)
+    console.log('id del usuario: ', user._id)
+    console.log('token: ', token)
 
     setErrors({})
     setSuccessMessage('Perfil actualizado correctamente')
@@ -136,14 +151,31 @@ const UserProfile = () => {
             {
               editPhoto === false
                 ? (
-                  <div className='relative w-[100px] h-[100px] grid place-content-center rounded-full bg-gradient-to-r from-green-500 via-green-700 to-blue-400'>
+                  <div
+                    className='imagenPerfil relative w-[100px] h-[100px] grid place-content-center rounded-full bg-gradient-to-r from-green-500 via-green-700 to-blue-400'
+                  >
+
                     <img
                       className='w-[90px] h-[90px] rounded-full object-cover '
                       src={user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'} alt='carpincho image '
                     />
-                    <button className={`${buttonStyles} w-[20px] h-[20px]`} onClick={(e) => setEditPhoto(true)}>
+                    <button
+                      className={`${buttonStyles} 
+                    w-[20px] h-[20px] z-30`}
+                      onClick={(e) => setEditPhoto(true)}
+                    >
                       <FaRegEdit />
                     </button>
+                    <input
+                      type='file'
+                      name='image'
+                      id='image'
+                      accept='image/png, image/jpeg'
+                      onClick={(e) => setEditImagen(true)}
+                      onChange={(e) => setImage(e.target.files[0])}
+                      value={captureImage}
+                      className='absolute w-full h-full top-0 left-0 rounded-full z-20 opacity-0'
+                    />
                   </div>
                   )
                 : <PhotoCapture />

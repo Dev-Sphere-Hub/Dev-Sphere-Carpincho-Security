@@ -15,6 +15,7 @@ const Register = () => {
 
   const [errors, setErrors] = useState({})
   const [successMessage, setSuccessMessage] = useState('')
+  const [successMessageCorrect, setSuccessMessageCorrect] = useState({})
 
   const validateForm = () => {
     const validateErrors = {}
@@ -42,7 +43,7 @@ const Register = () => {
     } else if (!/^\d+$/.test(phone)) {
       validateErrors.phone = 'El teléfono solo puede contener números'
     } else if (phone.length > 9) {
-      validateErrors.phone = 'El teléfono debe tener mas de 8 dígitos'
+      validateErrors.phone = 'El teléfono debe tener mas de 9 dígitos'
     }
 
     if (!documentId.trim()) {
@@ -89,19 +90,39 @@ const Register = () => {
     try {
       const response = await axios.post(endpoints.register, data)
       console.log('response --> ', response)
-      navigate('/login')
+      if (response.status === 201) {
+        console.log('Usuario registrado correctamente')
+        setSuccessMessageCorrect({ succes: response.data.message })
+        setTimeout(() => {
+          setSuccessMessageCorrect('')
+          navigate('/login')
+        }, 3000)
+      }
     } catch (error) {
-      console.error('Error al registrar el usuario:', error)
-      setSuccessMessage('')
-      setErrors({ general: 'Error al registrar el usuario' })
+      if (error.response) {
+        setSuccessMessageCorrect({ error: error.response.data.message })
+        setTimeout(() => {
+          setErrors({})
+        }, 3000)
+      }
+      console.error('Error al registrar el usuario:', error.response)
+      // setErrors({ error: 'Error al registrar el usuario' })
       setTimeout(() => {
-        setErrors({})
+        setSuccessMessageCorrect('')
       }, 3000)
     }
   }
 
   return (
     <div className='bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen flex flex-col lg:flex-row lg:justify-around min-w-[300px]'>
+      {successMessageCorrect?.succes &&
+        <section className='absolute top-5 mx-auto w-[300px] h-auto grid place-content-center rounded-md bg-slate-600'>
+          <h2 className='text-md text-parrafo bg-green-400 font-semibold'>{successMessageCorrect?.succes}</h2>
+        </section>}
+      {successMessageCorrect?.error &&
+        <section className='absolute top-5 mx-auto w-[300px] h-auto grid place-content-center rounded-md bg-slate-600'>
+          <h2 className='text-md text-parrafo bg-red-500 font-semibold'>{successMessageCorrect?.error}</h2>
+        </section>}
       <div className='lg:flex-col lg:self-center'>
         <div className='pt-9 text-black text-5xl'>
           <h1>Logo</h1>

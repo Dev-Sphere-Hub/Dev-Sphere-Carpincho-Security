@@ -60,7 +60,7 @@ Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al pr
 | <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50> |
 |:---:|
 | **Roger Parra**|
-
+| <a href="https://www.linkedin.com/in/roger-parra?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
 ## Plan de pruebas
 Les dejamos el plan de pruebas que hicimos: [Diseño de Plan de pruebas](https://drive.google.com/file/d/1UrA9jw21BFY8ErlVpJmX54ApW6bMe2ej/view?usp=drive_link)

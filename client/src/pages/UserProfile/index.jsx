@@ -38,6 +38,7 @@ const UserProfile = () => {
 
   console.log('capturando imagen ->', imagen)
   console.log('va la imagen --> ', editImagen)
+
   const validateForm = () => {
     const validateErrors = {}
 

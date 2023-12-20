@@ -8,7 +8,7 @@ const LandinPage = () => {
 
       <section className='banner absolute top-0 left-0 w-full h-full overflow-hidden'>
         <video className='w-full h-full object-cover' muted loop autoPlay>
-          <source src='https://res.cloudinary.com/dpiwmbsog/video/upload/v1702864149/carpincho/Gen-2_1093657189_a_capybara_standing_A_cute_police_baby_c_M_7_dg9cau.mp4' type='video/mp4' />
+          <source src='https://res.cloudinary.com/dpiwmbsog/video/upload/v1703023771/carpincho/WhatsApp_Video_2023-12-19_at_18.53.55_jx2ttz.mp4' type='video/mp4' />
         </video>
       </section>
 

@@ -15,9 +15,9 @@ const History = () => {
 
   // la ruta de esto es /historial
   return (
-    <div className='variabeleContain w-[100%] lg:w-[100%] xl:w-full xl:max-w-[1880px] min-h-screen h-full flex flex-col justify-start items-start gap-1 lg:flex-row lg:flex:nowrap lg:justify-start bg-white mx-auto overflow-hidden'>
+    <div className='variabeleContain w-full lg:w-full xl:w-full xl:max-w-[1880px] min-h-screen h-full flex flex-col justify-start items-start gap-1 lg:flex-row lg:flex:nowrap lg:justify-start bg-white mx-auto overflow-hidden'>
       <VerticalMenu activeNavVerticas={activeNavVerticas} setActiveNavVerticas={setActiveNavVerticas} />
-      <section className={`relative w-screen ${activeNavVerticas ? 'lg:transform lg:w-full' : 'lg:transform lg:w-4/5'} transition-transform ease-linear duration-300 h-full min-h-screen lg:min-h-[900px] py-5 flex flex-col justify-start items-center min-w-[300px] pt-5 lg:pt-[80px]  overflow-hidden fondo`}>
+      <section className={`relative w-screen ${activeNavVerticas ? 'lg:transform lg:w-full' : 'lg:transform lg:w-4/5'} transition-transform ease-linear duration-300 h-full min-h-screen lg:min-h-screen flex flex-col justify-start items-center min-w-[300px] pt-5 lg:pt-[80px]  overflow-hidden fondo`}>
         <Routes>
           <Route
             path='/historial/'

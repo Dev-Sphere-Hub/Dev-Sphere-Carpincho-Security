@@ -13,7 +13,7 @@ import LandinPage from '../pages/LandinPAge/LandinPage'
 // import RegisterAll from '../pages/RegisterAll'
 
 const AppRoutes = () => {
-  const logged = true // luego lo traemos desde un estado
+  const logged = false // luego lo traemos desde un estado
   return (
     <Routes>
       {/* <Route path='/' element={<Home />} /> */}

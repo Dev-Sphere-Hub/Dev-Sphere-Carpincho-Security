@@ -25,6 +25,8 @@ const PORT = process.env.PORT || 5000;
             },
             abortOnLimit: true
         }));
+
+    app.use(express.static('public'));
     app.get('/', (req, res) => {
         res.send("¡Hola, mundo!");
     });

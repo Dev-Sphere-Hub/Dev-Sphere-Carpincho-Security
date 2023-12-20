@@ -107,11 +107,20 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
           </li>
           <li>
             <button
-              className={`${customButton} ${activeIndex === 'ingresoRapido' && activeIndex !== null ? `${customButtonActive}` : `${customButtonInactive}`}`}
+              className={`${customButton} ${activeIndex === 'ingresoReportes' && activeIndex !== null ? `${customButtonActive}` : `${customButtonInactive}`}`}
+              onClick={() => navigate('/historial/reportes')}
+            >
+              <BiSolidReport className={`${customIcon}`} />
+              <span className={`${spanCustom}`}>Inicio</span>
+            </button>
+          </li>
+          <li>
+            <button
+              className={`${customButton}  ${activeIndex === 'ingresoRapido' && activeIndex !== null ? `${customButtonActive}` : `${customButtonInactive}`}`}
               onClick={() => navigate('/historial/ingresoRapido')}
             >
               <BiSolidTruck className={`${customIcon}`} />
-              <span className={`${spanCustom}`}>Ingreso Egreso</span>
+              <span className={`${spanCustom}`}>Ingreso/Egreso</span>
             </button>
           </li>
           <li>
@@ -120,18 +129,10 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
               onClick={() => navigate('/historial/historia')}
             >
               <BiSolidTimeFive className={`${customIcon}`} />
-              <span className={`${spanCustom}`}>Vsitas</span>
+              <span className={`${spanCustom}`}>Visitas</span>
             </button>
           </li>
-          <li>
-            <button
-              className={`${customButton}  ${activeIndex === 'reportes' && activeIndex !== null ? `${customButtonActive}` : `${customButtonInactive}`}`}
-              onClick={() => navigate('/historial/reportes')}
-            >
-              <BiSolidReport className={`${customIcon}`} />
-              <span className={`${spanCustom}`}>Reportes</span>
-            </button>
-          </li>
+       
           <li>
             <button
               className={`${customButton} ${activeIndex === 'paquetes' && activeIndex !== null ? `${customButtonActive}` : `${customButtonInactive}`}`}

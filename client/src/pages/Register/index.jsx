@@ -1,49 +1,105 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import { endpoints } from '../../constants/api'
-import InputForm from '../../components/InputForm'
-import Button from '../../components/Button'
 
 const Register = () => {
   const navigate = useNavigate()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues
-  } = useForm()
-  const [isLoading, setIsLoading] = React.useState(false)
 
-  const onSubmit = async (data) => {
+  const [name, setName] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [documentId, setDocumentId] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [errors, setErrors] = useState({})
+  const [successMessage, setSuccessMessage] = useState('')
+
+  const validateForm = () => {
+    const validateErrors = {}
+
+    if (!name.trim()) {
+      validateErrors.name = 'El nombre es obligatorio'
+    } else if (!/^[a-zA-Z\s]+$/.test(name)) {
+      validateErrors.name = 'El nombre solo puede contener letras'
+    }
+
+    if (!lastname.trim()) {
+      validateErrors.lastname = 'El apellido es obligatorio'
+    } else if (!/^[a-zA-Z\s]+$/.test(lastname)) {
+      validateErrors.lastname = 'El apellido solo puede contener letras'
+    }
+
+    if (!email.trim()) {
+      validateErrors.email = 'El email es obligatorio'
+    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+      validateErrors.email = 'El email no es valido'
+    }
+
+    if (!phone.trim()) {
+      validateErrors.phone = 'El teléfono es obligatorio'
+    } else if (!/^\d+$/.test(phone)) {
+      validateErrors.phone = 'El teléfono solo puede contener números'
+    } else if (phone.length > 9) {
+      validateErrors.phone = 'El teléfono debe tener mas de 8 dígitos'
+    }
+
+    if (!documentId.trim()) {
+      validateErrors.documentId = 'El DNI es obligatorio'
+    } else if (!/^\d+$/.test(documentId)) {
+      validateErrors.documentId = 'El DNI solo puede contener números'
+    } else if (documentId.length < 8) {
+      validateErrors.documentId = 'El DNI no puede tener menos de 8 dígitos'
+    }
+
+    if (!password.trim()) {
+      validateErrors.password = 'La contraseña es obligatoria'
+    } else if (password.length < 6) {
+      validateErrors.password = 'La contraseña debe tener al menos 6 caracteres'
+    } else if (password.length > 20) {
+      validateErrors.password = 'La contraseña debe tener menos de 20 caracteres'
+    }
+
+    return validateErrors
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    const validationErrors = validateForm()
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      setSuccessMessage('')
+      return
+    }
+
+    const formData = new FormData(event.target)
+
+    const data = Object.fromEntries(formData)
+    console.log('Data a enviar al servidor:', data)
+
+    setErrors({})
+    setSuccessMessage('Usuario registrado correctamente')
+    setTimeout(() => {
+      setSuccessMessage('')
+    }, 300)
+
     try {
-      setIsLoading(true)
-      const payload = {
-        name: data.name,
-        lastname: data.lastname,
-        email: data.email,
-        password: data.password,
-        confirmPassword: data.confirmPassword,
-        phone: data.phone,
-        documentId: data.documentId
-      }
-      const response = await axios.post(endpoints.register, payload, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const responseData = response.data
-      console.log(responseData)
-      const token = responseData.data.token
-      console.log(token)
+      const response = await axios.post(endpoints.register, data)
+      console.log('response --> ', response)
       navigate('/login')
     } catch (error) {
-      console.error('Error al registrarse:', error.message)
-    } finally {
-      setIsLoading(false)
+      console.error('Error al registrar el usuario:', error)
+      setSuccessMessage('')
+      setErrors({ general: 'Error al registrar el usuario' })
+      setTimeout(() => {
+        setErrors({})
+      }, 3000)
     }
   }
+
   return (
     <div className='bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen flex flex-col lg:flex-row lg:justify-around min-w-[300px]'>
       <div className='lg:flex-col lg:self-center'>
@@ -55,106 +111,75 @@ const Register = () => {
         </div>
       </div>
       <div className=''>
-        <form className='w-full px-[10%]' onSubmit={handleSubmit(onSubmit)}>
-          <InputForm
-            label='Nombre'
-            placeholder='Escribe tu nombre'
-            type='text'
-            register={register('name', {
-              required: 'Por favor, ingresa tu nombre'
-            })}
-            errorType={errors.name}
-            errorMessage={errors.name?.message}
-          />
-          <InputForm
-            label='Apellido'
-            placeholder='Escribe tu apellido'
-            type='text'
-            register={register('lastname', {
-              required: 'Por favor, ingresa tu apellido'
-            })}
-            errorType={errors.lastname}
-            errorMessage={errors.lastname?.message}
-          />
-          <InputForm
-            label='Dni'
-            placeholder='Escribe tu DNI'
-            type='text'
-            register={register('documentId', {
-              required: 'Por favor, ingresa tu DNI',
-              minLength: {
-                value: 8,
-                message: 'El DNI debe tener 8 caracteres'
-              }
-            })}
-            errorType={errors.documentId}
-            errorMessage={errors.documentId?.message}
-          />
-          <InputForm
-            label='Email'
-            placeholder='Escribe tu correo electrónico'
-            type='email'
-            register={register('email', {
-              required: 'Por favor, ingresa tu correo electrónico',
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: 'Correo electrónico inválido'
-              }
-            })}
-            errorType={errors.email}
-            errorMessage={errors.email?.message}
-          />
-          <InputForm
-            label='Phone'
-            placeholder='Escribe tu número de teléfono'
-            type='tel'
-            register={register('phone', {
-              required: 'Por favor, ingresa tu número de teléfono',
-              minLength: {
-                value: 10,
-                message: 'El numero debe tener 10 caracteres'
-              }
-            })}
-            errorType={errors.phone}
-            errorMessage={errors.phone?.message}
-          />
+        <form className='w-full px-[10%] flex flex-col justify-center items-center gap-5' onSubmit={handleSubmit}>
+          <label htmlFor='name'>
+            nombre
+            <input
+              name='name'
+              placeholder='Escribe tu nombre'
+              type='text'
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+          </label>
+          <label htmlFor='lastname'>
+            apellido
+            <input
+              name='lastname'
+              placeholder='Escribe tu apellido'
+              type='text'
+              onChange={(e) => setLastname(e.target.value)}
+              value={lastname}
+            />
+          </label>
+          <label htmlFor='documentId'>
+            DNI
+            <input
+              name='documentId'
+              placeholder='Escribe tu DNI'
+              type='text'
+              onChange={(e) => setDocumentId(e.target.value)}
+              value={documentId}
+            />
+          </label>
+          <label htmlFor='phone'>
+            teléfono
+            <input
+              name='phone'
+              placeholder='Escribe tu teléfono'
+              type='text'
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+            />
+          </label>
+          <label htmlFor='email'>
+            email
+            <input
+              name='email'
+              placeholder='Escribe tu email'
+              type='email'
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </label>
+          <label htmlFor='password'>
+            contraseña
+            <input
+              name='password'
+              placeholder='Escribe tu contraseña'
+              type='password'
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+            {successMessage && <p className='text-green-500 text-xs font-semibold mt-1'>{successMessage}</p>}
+            {Object.keys(errors).length > 0 && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.general}</p>}
+            {Object.keys(errors).map((errorKey) => (
+              <p key={errorKey} className='text-red-500 text-xs font-semibold mt-1'>{errors[errorKey]}</p>
+            ))}
+            <p className='text-white text-xs font-semibold mt-1'>La contraseña debe tener al menos 6 caracteres y menos de 20 caracteres</p>
+          </label>
 
-          <InputForm
-            label='Contraseña'
-            placeholder='Ingresa tu contraseña'
-            type='password'
-            register={register('password', {
-              required: 'Por favor, ingresa tu contraseña',
-              minLength: {
-                value: 6,
-                message: 'La contraseña debe tener al menos 6 caracteres'
-              }
-            })}
-            errorType={errors.password}
-            errorMessage={errors.password?.message}
-          />
-          <InputForm
-            label='Confirmar Contraseña'
-            placeholder='Confirma tu contraseña'
-            type='password'
-            register={register('confirmPassword', {
-              required: 'Confirma tu contraseña',
-              minLength: {
-                value: 6,
-                message: 'La contraseña debe tener al menos 6 caracteres'
-              },
-              validate: (value) =>
-                value === getValues('password') ||
-                  'Las contraseñas no coinciden'
-            })}
-            errorType={errors.confirmPassword}
-            errorMessage={errors.confirmPassword?.message}
-          />
-          <Button
-            type='submit'
-            text={isLoading ? 'Cargando...' : 'Registrar'}
-            onClick={handleSubmit(onSubmit)}
-          />
+          <button type='submit' className='bg-green-300 text-white px-5 py-2'>enviar</button>
         </form>
       </div>
     </div>

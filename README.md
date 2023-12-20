@@ -9,10 +9,10 @@ Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al pr
 
 #### 🎨 UX/UI:
 
-| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|  <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
-|:---:| :---:|
-| **Jennifer Durrling** | **Rocio Livingston** |
-| <a href="https://www.linkedin.com/in/karemcarranza/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>| | <a href="https://www.linkedin.com/in/karemcarranza/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
+| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
+|:---:|
+| **Jennifer Durrling** |
+| <a href="https://www.linkedin.com/in/jennifer-durrling/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>|
 
 #### 🧑💻 Developers:
 
@@ -21,7 +21,7 @@ Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al pr
 | <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>| <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>|
 |:---:|:---:|:---:|:---:|
 | **Eduardo Arevalo**| **Guillermo Agustín Neculqueo**| **Lucero Gonzalez**| **Victor Fernandez**|
-| <a href="https://www.linkedin.com/in/eduardo-arevalo-/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/dario-elguero/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/exequiel-schiavo"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/victor-h-fernandez-p/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+| <a href="https://www.linkedin.com/in/eduardo-arevalo-/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/guillermo-agustín-neculqueo-57932b196/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/gonzalezlucerocamila?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/victor-h-fernandez-p/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
  #### 🛠️ Tech Stack:
  
@@ -32,7 +32,7 @@ Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al pr
 |<img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50> | <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50> |
 |:---:|:---:|
 | **Sonny Pimentel**| **Jesus Clemente**|
-| <a href="https://www.linkedin.com/in/hectordariosol/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/miguel-guerrero-403939194/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/masielvenegas/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+| <a href="https://www.linkedin.com/in/sonny-pimentel/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>  | <a href="https://www.linkedin.com/in/jesus-maria-clemente-garcia/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
   #### 🛠️ Tech Stack:
  ![Nodo JS](https://img.shields.io/badge/Nodejs-6c5187?style=for-the-badge&logo=nodejs&logoColor=white) 
@@ -60,7 +60,7 @@ Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al pr
 | <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50> |
 |:---:|
 | **Roger Parra**|
-
+| <a href="https://www.linkedin.com/in/roger-parra?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
 ## Plan de pruebas
 Les dejamos el plan de pruebas que hicimos: [Diseño de Plan de pruebas](https://drive.google.com/file/d/1UrA9jw21BFY8ErlVpJmX54ApW6bMe2ej/view?usp=drive_link)

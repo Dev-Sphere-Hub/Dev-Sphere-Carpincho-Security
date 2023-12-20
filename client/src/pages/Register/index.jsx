@@ -28,11 +28,13 @@ const Register = () => {
         phone: data.phone,
         documentId: data.documentId
       }
+
       const response = await axios.post(endpoints.register, payload, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
+
       const responseData = response.data
       console.log(responseData)
       const token = responseData.data.token
@@ -55,7 +57,7 @@ const Register = () => {
         </div>
       </div>
       <div className=''>
-        <form className='w-full px-[10%]' onSubmit={handleSubmit(onSubmit)}>
+        <form className='w-full px-[10%] lg:w-[350px]' onSubmit={handleSubmit(onSubmit)}>
           <InputForm
             label='Nombre'
             placeholder='Escribe tu nombre'
@@ -107,7 +109,7 @@ const Register = () => {
           <InputForm
             label='Phone'
             placeholder='Escribe tu número de teléfono'
-            type='tel'
+            type='number'
             register={register('phone', {
               required: 'Por favor, ingresa tu número de teléfono',
               minLength: {
@@ -153,7 +155,7 @@ const Register = () => {
           <Button
             type='submit'
             text={isLoading ? 'Cargando...' : 'Registrar'}
-            onClick={handleSubmit(onSubmit)}
+
           />
         </form>
       </div>

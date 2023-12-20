@@ -114,7 +114,9 @@ const UserProfile = () => {
     navigate('/historial/reportes')
   }
 
-  console.log('imagen capturada en el storage', captureImage)
+  const buttonStyles = 'absolute right-1 bottom-2 rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white  text-sm grid place-content-center '
+  const buttonStyles2 = 'w-[30px] h-[30px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white absolute right-1 top-auto text-xl grid place-content-center'
+  // console.log('imagen capturada en el storage', captureImage)
   return (
     <div className='w-[100%] h-[100%] z-10  grid place-content-center py-6'>
       <section className='w-[100%] h-auto flex flex-col justify-start items-center gap-5'>
@@ -139,7 +141,7 @@ const UserProfile = () => {
                       className='w-[90px] h-[90px] rounded-full object-cover '
                       src={user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'} alt='carpincho image '
                     />
-                    <button className='absolute right-1 bottom-2 w-[20px] h-[20px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white  text-sm grid place-content-center ' onClick={(e) => setEditPhoto(true)}>
+                    <button className={`${buttonStyles} w-[20px] h-[20px]`} onClick={(e) => setEditPhoto(true)}>
                       <FaRegEdit />
                     </button>
                   </div>
@@ -163,7 +165,7 @@ const UserProfile = () => {
                 )
               : (
                 <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.fullName}
-                  <button className='w-[30px] h-[30px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditFullName(true)}>
+                  <button className={`${buttonStyles2}`} onClick={(e) => setEditFullName(true)}>
                     <FaRegEdit />
                   </button>
                 </div>
@@ -186,7 +188,7 @@ const UserProfile = () => {
                 />)
               : (
                 <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.email}
-                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditEmail(true)}>
+                  <button className={`${buttonStyles2}`} onClick={(e) => setEditEmail(true)}>
                     <FaRegEdit />
                   </button>
                 </div>
@@ -210,7 +212,7 @@ const UserProfile = () => {
                 )
               : (
                 <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.phone}
-                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditPhone(true)}>
+                  <button className={`${buttonStyles2}`} onClick={(e) => setEditPhone(true)}>
                     <FaRegEdit />
                   </button>
                 </div>
@@ -232,7 +234,7 @@ const UserProfile = () => {
                  />)
               : (
                 <div className='w-[100%] h-[40px] border-2 rounded-md outline-none px-3 text-xs  bg-white flex font-titulo text-gray-400 font-semibold justify-start items-center capitalize relative'>{user?.documentId}
-                  <button className='w-[30px] h-[30px] rounded-md bg-green-400 text-white absolute right-1 top-auto text-xl grid place-content-center ' onClick={(e) => setEditDni(true)}>
+                  <button className={`${buttonStyles2}`} onClick={(e) => setEditDni(true)}>
                     <FaRegEdit />
                   </button>
                 </div>

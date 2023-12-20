@@ -20,7 +20,7 @@ const AppRoutes = () => {
       <Route path='/' element={<LandinPage />} />
       {
         logged === true &&
-          <Route path='/historial' element='' />
+          <Route path='/profile' element='' />
       }
       <Route path='/novedades' element={<GuardianJournal />} />
 

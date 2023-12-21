@@ -10,9 +10,28 @@ const PhotoCapture = () => {
   const [isActive, setIsActive] = useState(true)
   const { capturedImage, setCapturedImage } = useImageStore()
 
-  const capturar = async () => {
-    const imagenSrc = webcamRef.current.getScreenshot()
-    setCapturedImage(imagenSrc)
+  const handelCapturar = async (e) => {
+    e.preventDefault()
+    const imagenBase64 = webcamRef.current.getScreenshot()
+
+    if (/^data:image\/\w+;base64,/.test(imagenBase64)) {
+      // Decodificar la cadena base64
+      const arrayBuffer = Uint8Array.from(atob(imagenBase64.split(',')[1]), (c) =>
+        c.charCodeAt(0)
+      ).buffer
+
+      // Crear un Blob y un objeto File
+      const blob = new Blob([arrayBuffer], { type: 'image/png' })
+      const fileName = 'perfilUser.png'
+      const file = new File([blob], fileName, { type: 'image/png' })
+
+      console.log('Imagen convertida a objeto File ->', file)
+
+      // Hacer lo que necesites con el objeto File
+      setCapturedImage(file)
+    } else {
+      console.error('La cadena no es una cadena base64 válida.')
+    }
   }
 
   const { setActiveIndex } = useNavStore()
@@ -25,7 +44,7 @@ const PhotoCapture = () => {
   return (
     <div className='flex flex-col items-center justify-center '>
 
-      <div className='mb-4 border border-gray-300 h-64 w-64 relative rounded-md
+      <div className='mb-4 border-gray-300 h-64 w-64 relative rounded-md
     border-2 bg-white'
       >
         {capturedImage
@@ -57,7 +76,7 @@ const PhotoCapture = () => {
       </div>
 
       <button
-        onClick={capturar}
+        onClick={handelCapturar}
         className='bg-blue-500 text-white px-4 py-2 rounded mt-5'
       >
         Tomar foto y registrar

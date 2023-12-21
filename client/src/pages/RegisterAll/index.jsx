@@ -17,7 +17,7 @@ const RegisterAll = () => {
 
   return (
     <>
-      <div className='flex flex-col items-center justify-center w-full'>
+      <div className='flex flex-col items-center justify-center w-full min-h-screen py-5'>
         <div className='flex flex-col items-center justify-center my-5'><PhotoCapture /></div>
 
         <div className='flex justify-between items-center w-[300px] h-[35px] lg:w-[500px] lg:h-[40px] text-white rounded-[20px] cursor-pointer bg-[#ccdebc] gap-0 text-xs lg_text-lg'>
@@ -41,7 +41,7 @@ const RegisterAll = () => {
           </button>
         </div>
 
-        <section className='mx-auto w-[90%] p-3'>
+        <section className='mx-auto w-full'>
           {formularioVisible === 'ingreso' && (
             <>
               <div className='text-xl font-bold mb-4'>Ingreso de persona</div>
@@ -57,7 +57,7 @@ const RegisterAll = () => {
           {formularioVisible === 'vehiculo' && (
             <>
               <div className='text-xl font-bold mb-4'>Ingreso de vehiculos</div>
-              <FormVehicle token={token} imagen={capturedImage} />
+              <FormVehicle />
             </>
           )}
         </section>

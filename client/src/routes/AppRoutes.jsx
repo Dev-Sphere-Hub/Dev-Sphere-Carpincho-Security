@@ -10,10 +10,11 @@ import SuccessfulRegistration from '../components/SuccessfulRegistration'
 
 import History from '../pages/History'
 import LandinPage from '../pages/LandinPAge/LandinPage'
+import NotFound from '../pages/NotFound/NotFound'
 // import RegisterAll from '../pages/RegisterAll'
 
 const AppRoutes = () => {
-  const logged = true // luego lo traemos desde un estado
+  const logged = false // luego lo traemos desde un estado
   return (
     <Routes>
       {/* <Route path='/' element={<Home />} /> */}
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path='/register' element={<Register />} />
       <Route path='/photoCapture/registerExito' element={<SuccessfulRegistration />} />
       {/* <Route path='/registro' element={<RegisterAll />} /> */}
+      <Route path='*' element={<NotFound />} />
       <Route
         path='/historial/*'
         element={<History />}

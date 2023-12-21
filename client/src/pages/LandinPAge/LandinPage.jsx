@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../../assets/images/CarpinchoSecurityLogo.png'
+import TypewriterAnimation from '../../components/TypewriterAnimation'
 
 const LandinPage = () => {
   const navigate = useNavigate()
@@ -8,15 +10,18 @@ const LandinPage = () => {
 
       <section className='banner absolute top-0 left-0 w-full h-full overflow-hidden'>
         <video className='w-full h-full object-cover' muted loop autoPlay>
-          <source src='https://res.cloudinary.com/dpiwmbsog/video/upload/v1702864149/carpincho/Gen-2_1093657189_a_capybara_standing_A_cute_police_baby_c_M_7_dg9cau.mp4' type='video/mp4' />
+          <source src='https://res.cloudinary.com/dpiwmbsog/video/upload/v1703023771/carpincho/WhatsApp_Video_2023-12-19_at_18.53.55_jx2ttz.mp4' type='video/mp4' />
         </video>
       </section>
 
       <section
-        className='contenudoTextios w-[100%] h-1/2 rounded-sm  md:w-1/2 md:h-full absolute top-0 md:top-0 md:left-0 flex flex-col justify-center items-center md:flex md:flex-col md:justify-center md:items-center gap-5 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 shadow-[0_0_0_10px_rgba(35,17,44,0.200)] backdrop-blur-[6px] opacity-80'
+        className='contenudoTextios w-[100%] h-1/2 rounded-sm  md:w-1/2 md:h-full absolute top-0 md:top-0 md:left-0 flex flex-col justify-center items-center md:flex md:flex-col md:justify-center md:items-center gap-1 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 shadow-[0_0_0_10px_rgba(35,17,44,0.200)] backdrop-blur-[6px] opacity-80'
       >
-        <h1 className='font-bold text-slate-800 fonrt-titulo  text-2xl px-1 lg:text-5xl'>Bienvenido a Carpincho Security !!!</h1>
-        <p className='font-normal font-parrafo text-sm lg:text-md text-left text-slate-200 px-4'><b>Carpincho Security</b> redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al proporcionar un <b>sistema</b> integral de <strong>control de acceso</strong>. Diseñada para brindar tranquilidad, nuestra aplicación permite a los profesionales <b>de seguridad</b> tener un control total sobre las <strong>entradas, salidas, paquetería y entregas</strong>. <b>Con Carpincho Security</b>, cada interacción queda registrada, brindando una gestión eficiente y segura. ¡<strong>Tu paz de mente</strong> es nuestra prioridad! 🛡️🔒</p>
+        <h1 className='font-bold text-slate-800 fonrt-titulo  text-2xl px-1 lg:text-5xl'>Carpincho Security</h1>
+        <div className='container-rotate hidden lg:block'>
+          <img className='rotating-image' src={Logo} alt='' />
+        </div>
+        <p className='font-normal font-parrafo text-sm lg:text-md text-left text-slate-200 px-4'><b>Carpincho Security</b>proporciona un <b>sistema</b> integral de <strong>control de acceso</strong>. Diseñada para brindar tranquilidad, nuestra aplicación permite a los profesionales <b>de seguridad</b> tener un control total sobre las <strong>entradas, salidas, paquetería y entregas</strong>. <b>Con Carpincho Security</b>, cada interacción queda registrada, brindando una gestión eficiente y segura. ¡<strong>Tu paz de mente</strong> es nuestra prioridad! 🛡️🔒</p>
       </section>
 
       {/* botones */}
@@ -36,6 +41,8 @@ const LandinPage = () => {
           onClick={(e) => navigate('/login')}
         >login
         </button>
+        <div className='hidden lg:block'><TypewriterAnimation /></div>
+
       </section>
     </section>
   )

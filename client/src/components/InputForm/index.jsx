@@ -4,15 +4,13 @@ const InputForm = ({
   label,
   placeholder,
   type,
-  register,
+  name,
+  value,
+  onChange,
   errorType,
   errorMessage
 }) => {
-  const [errorVisible, setErrorVisible] = useState(true)
-
-  const hideError = () => {
-    setErrorVisible(false)
-  }
+  // const [errorVisible, setErrorVisible] = useState(true)
 
   return (
     <div className='flex flex-col m-auto max-w-sm'>
@@ -20,7 +18,7 @@ const InputForm = ({
         className={`relative ${errorMessage && errorVisible ? 'pb-0' : 'pb-2 sm:pb-4'}`}
       >
         <label
-          htmlFor={register.name}
+          htmlFor={name}
           className='pb-[1%] font-medium flex text-gray-700'
         >
           {label}
@@ -28,9 +26,11 @@ const InputForm = ({
         <input
           className={`w-full ${errorType ? 'border-red-500' : ''} text-base font-medium border h-10 focus:outline-none rounded-lg pl-2 bg-slate-40 focus:bg-[#4ebeff21]`}
           type={type}
-          id={register.name}
+          id={name}
+          name={name}
           placeholder={placeholder}
-          {...register}
+          value={value}
+          onChange={onChange}
         />
         {errorMessage && errorVisible && (
           <div className='flex items-center'>

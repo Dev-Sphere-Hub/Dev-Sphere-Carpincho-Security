@@ -8,6 +8,7 @@ export const useAuthStore = create(persist((set) => ({
   user: null,
   tokenDesifred: null,
   loading: false,
+  update: false,
 
   setToken: (newToken) => {
     if (typeof window !== 'undefined') {
@@ -18,6 +19,7 @@ export const useAuthStore = create(persist((set) => ({
   setTokenDesifred: (newToken) => set({ tokenDesifred: newToken }),
 
   updateUser: async (updatedFields, token, user) => {
+    console.log('update valores enviados -> ', updatedFields)
     try {
       const userId = user._id
 
@@ -25,15 +27,25 @@ export const useAuthStore = create(persist((set) => ({
         throw new Error('El ID del usuario no está definido')
       }
 
+      const formData = new FormData()
+
+      // Agrega los campos actualizados al FormData
+      for (const key in updatedFields) {
+        formData.append(key, updatedFields[key])
+      }
+
       const response = await axios.patch(`${endpoints.patchUser}/${userId}`, updatedFields, {
         headers: {
-
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }
       })
-
+      console.log('respuesta store -->', response)
       set({ user: { ...user, ...response.data.data } })
+      set({ update: true })
+      setTimeout(() => {
+        set({ update: false })
+      }, 300)
     } catch (error) {
       console.error('Error al actualizar el usuario:', error)
     }

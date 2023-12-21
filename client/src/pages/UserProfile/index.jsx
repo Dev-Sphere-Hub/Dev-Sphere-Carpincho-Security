@@ -129,6 +129,11 @@ const UserProfile = () => {
     navigate('/historial/reportes')
   }
 
+  const handleClickCustom = (e) => {
+    setEditPhoto(false)
+    setEditImagen(true)
+  }
+
   const buttonStyles = 'absolute right-1 bottom-2 rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white  text-sm grid place-content-center '
   const buttonStyles2 = 'w-[30px] h-[30px] rounded-md bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white absolute right-1 top-auto text-xl grid place-content-center'
   // console.log('imagen capturada en el storage', captureImage)
@@ -171,7 +176,7 @@ const UserProfile = () => {
                       name='image'
                       id='image'
                       accept='image/png, image/jpeg'
-                      onClick={(e) => setEditImagen(true)}
+                      onClick={handleClickCustom}
                       onChange={(e) => setImage(e.target.files[0])}
                       value={captureImage}
                       className='absolute w-full h-full top-0 left-0 rounded-full z-20 opacity-0'
@@ -294,16 +299,3 @@ const UserProfile = () => {
 }
 
 export default UserProfile
-
-/**
-        "data": {
-        "_id": "657501f3e8811871c73d5bf9",
-        "type": "safety_guard",
-        "fullName": "guille nec",
-        "email": "guillermoneculqueo123@gmail.com",
-        "phone": "2944396888",
-        "documentId": "33654987",
-        "is_authorized": true,
-        "__v": 0
-    }
-*/

@@ -41,7 +41,8 @@ const LandinPage = () => {
           onClick={(e) => navigate('/login')}
         >login
         </button>
-        <TypewriterAnimation />
+        <div className='hidden lg:block'><TypewriterAnimation /></div>
+
       </section>
     </section>
   )

@@ -145,7 +145,7 @@ const UserProfile = () => {
 
         <form
           onSubmit={handleSubmit}
-          className='min-w-[300px] md:w-[400px] lg:w-[500px] h-auto  p-5 flex flex-col justify-start items-center gap-3 cardGlass' action=''
+          className='min-w-[300px] md:w-[400px] lg:w-[500px] h-auto  p-5 flex flex-col justify-start items-center gap-3 backdrop-blur-md backdrop-saturate-180 bg-[#5b7dad50] bg-opacity-80 border-2 rounded-md border-white border-opacity-20 overflow-hidden' action=''
         >
           <div className='w-full h-auto  flex justify-center items-center transition-all ease-linear duration-500'>
             {

@@ -12,6 +12,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
   const menuRef = useRef(null)
   const [buttonActivado, setButtonActivado] = useState(false)
   const [animationActive, setAnimationActive] = useState(false)
+  const [perfilImage, setPerfilImage] = useState(null)
 
   const { user } = useAuthStore()
   console.log('user menuVertical -->', user)
@@ -40,7 +41,11 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
     navigate('/historial/reportes')
   }
 
-  const imageUser = user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
+  useEffect(() => {
+    setPerfilImage(user?.photoUrl)
+  }, [user])
+  const imageUser = 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
+
   const spanCustom = 'lg:block font-semibold text-base text-center'
   const customButton = 'customButton p-3 lg_p-0 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white hover:text-slate-800 hover:bg-gradient-to-r hover:from-slate-50 hover:via-slate-300 hover:to-slate-500 w-[123px] h-[123px] lg:h-[40px] rounded-md flex flex-col-reverse justify-around items-center text-3xl lg:text-lg lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5 transition-all ease-linear duration-300 shadow-custom '
   const customIcon = 'ml-auto lg:ml-0'
@@ -89,7 +94,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
               <img
                 className='w-full h-full lg:w-[120px] lg:h-[120px] bg-white object-cover rounded-md lg:rounded-full shadow-custom'
                 title='imagen perfil del usuario'
-                src={imageUser}
+                src={perfilImage || imageUser}
                 alt='imagen de perfil del usuario'
               />
               <span className='hidden lg:block font-semibold text-lg text-center'>Usuario</span>

@@ -6,14 +6,12 @@ import mainBg from '../../assets/images/carpinchosVarios.jpeg'
 
 const Register = () => {
   const navigate = useNavigate()
-
   const [name, setName] = useState('')
   const [lastname, setLastname] = useState('')
   const [documentId, setDocumentId] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
   const [errors, setErrors] = useState({})
   const [successMessage, setSuccessMessage] = useState('')
   const [successMessageCorrect, setSuccessMessageCorrect] = useState({})

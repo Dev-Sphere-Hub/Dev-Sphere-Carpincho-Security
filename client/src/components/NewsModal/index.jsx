@@ -1,48 +1,86 @@
-// components/NewsModal.js
-import React from 'react';
+import React from 'react'
+import { RiCloseLine } from 'react-icons/ri'
 
 const NewsModal = ({ isOpen, onClose, onSubmit, formData, setFormData, categories }) => {
-  if (!isOpen) return null;
-
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  if (!isOpen) return null
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center'>
-      <div className='bg-white p-5 rounded-lg shadow-lg'>
-        <h2 className='font-bold text-lg mb-4'>Agregar Novedad</h2>
-        <form onSubmit={onSubmit}>
-          <div>
-            <label>Categoría</label>
-            <select 
+    <div className='fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center z-50'>
+      <div className='bg-white p-5 rounded-lg shadow-lg w-5/6 md:w-1/2 lg:w-1/3'>
+        <div className='flex justify-between items-center'>
+          <h2 className='text-2xl font-bold text-gray-700'>Reportar Novedad</h2>
+          <RiCloseLine
+            onClick={onClose}
+            className='text-gray-500 cursor-pointer hover:text-gray-700'
+            size={25}
+          />
+        </div>
+        <form onSubmit={onSubmit} className='mt-4'>
+          <div className='mb-4'>
+            <label htmlFor='category' className='block text-gray-700 text-sm font-bold mb-2'>
+              Categoría
+            </label>
+            <select
               name='category'
               value={formData.category}
               onChange={handleInputChange}
-              className='border-2 w-full p-2 rounded'
+              className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              required
             >
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+              <option value=''>Seleccione una categoría</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
           </div>
-          <div className='mt-4'>
-            <label>Detalle</label>
-            <textarea 
+          <div className='mb-4'>
+            <label htmlFor='detail' className='block text-gray-700 text-sm font-bold mb-2'>
+              Detalle
+            </label>
+            <textarea
               name='detail'
               value={formData.detail}
               onChange={handleInputChange}
-              className='border-2 w-full p-2 rounded'
+              className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              rows='4'
+              required
             />
           </div>
-          <div className='flex justify-end mt-4'>
-            <button type='button' onClick={onClose} className='bg-gray-500 text-white p-2 rounded mr-2'>Cerrar</button>
-            <button type='submit' className='bg-blue-500 text-white p-2 rounded'>Guardar</button>
+          <div className='mb-6'>
+            <label htmlFor='date' className='block text-gray-700 text-sm font-bold mb-2'>
+              Fecha (formato AAAA-MM-DD)
+            </label>
+            <input
+              type='text'
+              name='date'
+              value={formData.date}
+              onChange={handleInputChange}
+              className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              placeholder='2023-12-31'
+              required
+            />
+          </div>
+          <div className='flex items-center justify-between'>
+            <button
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              type='submit'
+            >
+              Reportar
+            </button>
           </div>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewsModal;
+export default NewsModal

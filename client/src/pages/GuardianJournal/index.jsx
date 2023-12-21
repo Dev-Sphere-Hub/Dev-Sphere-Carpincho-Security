@@ -13,12 +13,18 @@ const GuardianJournal = () => {
   const { setActiveIndex } = useNavStore()
   const [formData, setFormData] = useState({
     category: '',
-    detail: ''
+    detail: '',
+    date: ''
   })
-  const [categories, setCategories] = useState([])
   const [novedades, setNovedades] = useState([])
   const [selectedNews, setSelectedNews] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [categoryTranslations] = useState({
+    Emergencia: 'emergencies',
+    'Evento Destacado': 'featured_events',
+    'Persona No Autorizada': 'unauthorized_person',
+    'Vehículo No Autorizado': 'unauthorized_vehicle'
+  })
 
   useEffect(() => {
     axios.get(endpoints.nuevos)
@@ -42,13 +48,18 @@ const GuardianJournal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(endpoints.nuevos, formData)
+    const postFormData = {
+      ...formData,
+      category: categoryTranslations[formData.category],
+      date: new Date().toISOString()
+    }
+
+    axios.post(endpoints.nuevos, postFormData)
       .then(res => {
-        console.log('Novedad registrada con éxito.')
         setNovedades([...novedades, res.data.data])
       })
       .catch(err => console.log(err))
-    setFormData({ category: '', detail: '' })
+    setFormData({ category: '', detail: '', date: '' })
     setShowModal(false)
   }
 
@@ -59,8 +70,6 @@ const GuardianJournal = () => {
   const handleOpenModal = () => {
     setShowModal(true)
   }
-
-  const categoriess = ['emergencies', 'featured_events', 'unauthorized_person', 'unauthorized_vehicle']
 
   const categoryImageMap = {
     emergencies: 'https://source.unsplash.com/featured/?emergency',
@@ -78,10 +87,10 @@ const GuardianJournal = () => {
   return (
     <div className='flex justify-evenly text-center w-full'>
       <div className='flex-col max-w-[500px] justify-center'>
-        <h2 className='mx-auto text-3xl font-bold text-white  shadow-lg shadow-black'>Novedades</h2>
+        <h2 className='mx-auto text-3xl font-bold text-white shadow-lg shadow-black'>Novedades</h2>
         <IoMdAddCircleOutline
           onClick={handleOpenModal}
-          className=' hover:text-gray-300 text-gray-400 cursor-pointer ml-auto'
+          className='hover:text-gray-300 text-gray-400 cursor-pointer ml-auto'
           size={50}
         />
         <div className='overflow-y-scroll custom-scroll h-[30rem]'>
@@ -102,7 +111,7 @@ const GuardianJournal = () => {
               <div className='mx-auto'>
                 <img
                   src={getImageUrlForCategory(selectedNews.category)}
-                  alt={selectedNews.new}
+                  alt={selectedNews.news}
                   className='w-full max-w-[20rem] h-[11rem] object-cover mb-5 rounded-xl mx-auto'
                 />
                 <div className='px-2 w-full h-20 flex-col text-left'>
@@ -118,13 +127,13 @@ const GuardianJournal = () => {
                 <div className='flex flex-col justify-start items-center'>
                   <h3 className='text-2xl font-semibold mb-2 text-gray-700'>Bienvenido {user?.name || 'a Carpincho Security'}</h3>
                   <br />
-                </div>
-                <div className='h-[20rem]' style={{ backgroundImage: `url(${Welcome})` }} />
-                <br />
-                <p className='text-center text-md text-gray-600 px-4'>Explora las últimas alertas y novedades de seguridad.</p>
-                <p className=''>Selecciona una novedad para obtener más detalles.</p>
-                <div className='my-2'>
-                  <TbHandClick size={30} className='m-auto' />
+                  <div className='h-[20rem]' style={{ backgroundImage: `url(${Welcome})` }} />
+                  <br />
+                  <p className='text-center text-md text-gray-600 px-4'>Explora las últimas alertas y novedades de seguridad.</p>
+                  <p>Selecciona una novedad para obtener más detalles.</p>
+                  <div className='my-2'>
+                    <TbHandClick size={30} className='m-auto' />
+                  </div>
                 </div>
               </div>
               )}
@@ -136,7 +145,7 @@ const GuardianJournal = () => {
         onSubmit={handleSubmit}
         formData={formData}
         setFormData={setFormData}
-        categories={categories}
+        categories={Object.keys(categoryTranslations)}
       />
     </div>
   )

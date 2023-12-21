@@ -30,19 +30,19 @@ const Search = ({ allVisitas, nameColumn, handleSearch }) => {
       {
         buscando
           ? (
-            <div className='bg-gradient-to-r from-green-500 via-green-700 to-blue-400 rounded-[50px] p-1 font-titulo'>
-              <div className=' h-[50px] w-[268px] rounded-[50px] bg-white outline-none font-parrafo font-medium text-lg px-8 flex items-center justify-center'>
+            <div className='bg-gradient-to-r rounded-[50px] p-1 font-titulo'>
+              <div className=' h-[50px] w-[268px] rounded-[50px] backdrop-blur-md backdrop-saturate-180 bg-[#5b7dad50] bg-opacity-80 border-2  border-opacity-20 outline-none font-parrafo font-medium text-lg px-8 flex items-center justify-center'>
                 <p className='redirect '> Buscando...</p>
               </div>
             </div>
             )
           : (
             <form onSubmit={handleSubmit} className='relative'>
-              <div className='bg-gradient-to-r from-green-500 via-green-700 to-blue-400 rounded-[50px] p-1 font-titulo text-lg '>
+              <div className='b rounded-[50px] p-1 font-titulo text-lg '>
                 <input
                   type='text'
                   name='text'
-                  className='input h-[50px] w-[268px] rounded-[50px] bg-white outline-none font-parrafo font-medium text-sm px-8'
+                  className='input h-[50px] w-[268px] rounded-[50px] backdrop-blur-md backdrop-saturate-180 bg-[#5b7dad50] bg-opacity-80 border-2  border-opacity-30 border-red-  outline-none font-parrafo font-medium text-sm px-8'
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
                   placeholder='Buscador'

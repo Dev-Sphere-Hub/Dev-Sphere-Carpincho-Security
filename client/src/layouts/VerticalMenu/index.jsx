@@ -12,6 +12,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
   const menuRef = useRef(null)
   const [buttonActivado, setButtonActivado] = useState(false)
   const [animationActive, setAnimationActive] = useState(false)
+  const [perfilImage, setPerfilImage] = useState(null)
 
   const { user } = useAuthStore()
   console.log('user menuVertical -->', user)
@@ -40,7 +41,11 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
     navigate('/historial/reportes')
   }
 
-  const imageUser = user?.photoUrl || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
+  useEffect(() => {
+    setPerfilImage(user?.photoUrl)
+  }, [user])
+  const imageUser = 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1701381196/carpincho/portrait_of_a_cartoon_capybara_with_sunglasses_and_ujhmyj.jpg'
+
   const spanCustom = 'lg:block font-semibold text-base text-center'
   const customButton = 'customButton p-3 lg_p-0 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white hover:text-slate-800 hover:bg-gradient-to-r hover:from-slate-50 hover:via-slate-300 hover:to-slate-500 w-[123px] h-[123px] lg:h-[40px] rounded-md flex flex-col-reverse justify-around items-center text-3xl lg:text-lg lg:w-[98%] lg:flex-row lg:flex-nowrap lg:justify-start lg:items-center lg:gap-2 lg:pl-5 transition-all ease-linear duration-300 shadow-custom '
   const customIcon = 'ml-auto lg:ml-0'
@@ -62,8 +67,16 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
     }
   }
 
+  const localStorage = window.localStorage
+
+  const handleLogout = () => {
+    navigate('/')
+    localStorage.removeItem('token')
+    localStorage.removeItem('authStore')
+  }
+
   return (
-    <div ref={menuRef} className={`alfa z-30 w-[100%] min-h-[80px] ${activeNavVerticas ? 'lg:transform lg:w-0' : 'lg:transform lg:w-1/5'}  lg:relative lg:h-screen lg:min-h-[900px] flex justify-center items-center content-center lg:justify-center lg:items-start shadow-custom bg-gray-300 `}>
+    <div ref={menuRef} className={`alfa z-30 w-[100%] min-h-[80px] ${activeNavVerticas ? 'lg:transform lg:w-0' : 'lg:transform lg:w-1/5'}  lg:relative lg:h-screen lg:min-h-screen flex justify-center items-center content-center lg:justify-center lg:items-start shadow-custom bg-gray-300 `}>
       <section className='navSuperior activeNavVerical absolute top-auto  w-[100%] h-[70px] lg:top-0 lg:left-0 lg:w-[100vw] bg-gray-300 rounded-r-[3px] text-md z-30 flex flex-row justify-between items-center px-2 lg:px-5 overflow-hidden'>
         <ToggleNav activeNavVerticas={activeNavVerticas} handleClickNavVerticas={handleClickNavVerticas} />
         <img className='w-[60px] h-[60px] rounded-full object-cover overflow-hidden' src={`${logoImage}`} onClick={handleNavigate} alt='logotipo' />
@@ -72,16 +85,16 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
         {/* hamburguer */}
 
         {/* submenu */}
-        <ul className='navMenuVert w-[258px] mt-[80px] h-auto grid gap-2 grid-cols-2 grid-rows-2 place-content-center lg:pl-1 z-50 lg:flex lg:w-[100%] lg:h-auto lg:flex-col lg:flex-nowrap lg:gap-3 '>
+        <ul className='navMenuVert w-[258px] mt-[80px] lg:mt-0 h-auto grid gap-2 grid-cols-2 grid-rows-2 place-content-center lg:pl-1 z-50 lg:flex lg:w-[100%] lg:h-auto lg:flex-col lg:flex-nowrap lg:gap-3 '>
           <li>
             <button
               className='relative customButton mx-auto z-30 w-[123px] h-[123px]  rounded-md lg:rounded-full flex justify-center items-center text-xl lg:w-[190px] lg:h-[190px] lg:flex-col lg:flex-nowrap lg:justify-center lg:items-center lg:gap-2 '
               onClick={(e) => handleClickButton(e)}
             >
               <img
-                className='w-full h-full lg:w-[120px] lg:h-[120px] object-cover rounded-md lg:rounded-full shadow-custom'
+                className='w-full h-full lg:w-[120px] lg:h-[120px] bg-white object-cover rounded-md lg:rounded-full shadow-custom'
                 title='imagen perfil del usuario'
-                src={imageUser}
+                src={perfilImage || imageUser}
                 alt='imagen de perfil del usuario'
               />
               <span className='hidden lg:block font-semibold text-lg text-center'>Usuario</span>
@@ -99,7 +112,10 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
                 Editar Perfil
               </button>
               <span className='w-full h-[2px] rounded-xl bg-slate-300' />
-              <button className='w-full h-auto py-2 flex justify-start items-center gap-2 text-sm lg:text-lg text-[#607d8b]'>
+              <button
+                className='w-full h-auto py-2 flex justify-start items-center gap-2 text-sm lg:text-lg text-[#607d8b]'
+                onClick={handleLogout}
+              >
                 <BiArrowFromLeft />
                 Salir
               </button>
@@ -132,7 +148,7 @@ const VerticalMenu = ({ activeNavVerticas, setActiveNavVerticas }) => {
               <span className={`${spanCustom}`}>Visitas</span>
             </button>
           </li>
-       
+
           <li>
             <button
               className={`${customButton} ${activeIndex === 'paquetes' && activeIndex !== null ? `${customButtonActive}` : `${customButtonInactive}`}`}

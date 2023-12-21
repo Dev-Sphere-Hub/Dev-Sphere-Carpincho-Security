@@ -61,7 +61,7 @@ const Historial = () => {
     >
       <Search allVisitas={visitas} nameColumn='visitorFullName' handleSearch={handleSearch} />
       {/* aca puedo componetizar mas */}
-      <div className='mt-3 w-[900px] 2xl:w-[1200px] grid grid-cols-5  rounded-lg  overflow-hidden text-colorCustom4 font-titulo font-medium text-xs lg:text-sm gap-1'>
+      <div className='mx-auto mt-3 w-[900px] 2xl:w-[1200px] grid grid-cols-5  rounded-lg  overflow-hidden text-colorCustom4 font-titulo font-medium text-xs lg:text-sm gap-1'>
         <div className=' py-2 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 '>
           <h2 className='w-full text-center'>Empleado</h2>
         </div>

@@ -239,10 +239,8 @@ export const registerVehicleSchemaValidation = Joi.object({
             "string.length": "Debe de contener 11 caracteres."
         }),
     details: Joi.string()
-        .regex(/^[ 0-9a-fA-F]+$/)
         .required()
         .messages({
-            "string.pattern.base": "Sólo se permiten espacios, letras y números.",
             "any.required": `"details" es requerido.`
         }),
     image: Joi.any().optional()

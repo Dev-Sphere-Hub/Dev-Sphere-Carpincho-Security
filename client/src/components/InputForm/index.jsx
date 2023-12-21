@@ -4,17 +4,13 @@ const InputForm = ({
   label,
   placeholder,
   type,
-  name, // Use name directly
+  name,
   value,
   onChange,
   errorType,
   errorMessage
 }) => {
-  const [errorVisible, setErrorVisible] = useState(true);
-
-  const hideError = () => {
-    setErrorVisible(false);
-  };
+  // const [errorVisible, setErrorVisible] = useState(true)
 
   return (
     <div className='flex flex-col m-auto max-w-sm'>
@@ -46,7 +42,7 @@ const InputForm = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InputForm;
+export default InputForm

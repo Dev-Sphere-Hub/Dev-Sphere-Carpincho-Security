@@ -21,7 +21,8 @@ export default {
         colorCustom3: '#b2e43f',
         colorCustom4: '#302c25',
         colorCustom5: '#f8f9fa',
-        colorCustom6: '#A5CC82'
+        colorCustom6: '#A5CC82',
+        colorCustom7: 'bg-gradient-to-r from-green-500 via-green-700 to-blue-400 shadow-[0_0_0_10px_rgba(35,17,44,0.200)] backdrop-blur-[6px] opacity-80'
       }
     }
   },

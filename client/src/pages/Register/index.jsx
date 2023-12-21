@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { endpoints } from '../../constants/api'
+import mainBg from '../../assets/images/carpinchosVarios.jpeg'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -114,94 +115,117 @@ const Register = () => {
   }
 
   return (
-    <div className='bg-colorCustom1 w-[100%] px-6 lg:bg-slate-400 h-screen flex flex-col lg:flex-row lg:justify-around min-w-[300px]'>
-      {successMessageCorrect?.succes &&
-        <section className='absolute top-5 mx-auto w-[300px] h-auto grid place-content-center rounded-md bg-slate-600'>
-          <h2 className='text-md text-parrafo bg-green-400 font-semibold'>{successMessageCorrect?.succes}</h2>
-        </section>}
-      {successMessageCorrect?.error &&
-        <section className='absolute top-5 mx-auto w-[300px] h-auto grid place-content-center rounded-md bg-slate-600'>
-          <h2 className='text-md text-parrafo bg-red-500 font-semibold'>{successMessageCorrect?.error}</h2>
-        </section>}
-      <div className='lg:flex-col lg:self-center'>
-        <div className='pt-9 text-black text-5xl'>
-          <h1>Logo</h1>
-        </div>
-        <div className='pt-6 lg:flex'>
-          <p>Nombre de la app</p>
-        </div>
-      </div>
-      <div className=''>
-        <form className='w-full px-[10%] flex flex-col justify-center items-center gap-5' onSubmit={handleSubmit}>
-          <label htmlFor='name'>
-            nombre
-            <input
-              name='name'
-              placeholder='Escribe tu nombre'
-              type='text'
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </label>
-          <label htmlFor='lastname'>
-            apellido
-            <input
-              name='lastname'
-              placeholder='Escribe tu apellido'
-              type='text'
-              onChange={(e) => setLastname(e.target.value)}
-              value={lastname}
-            />
-          </label>
-          <label htmlFor='documentId'>
-            DNI
-            <input
-              name='documentId'
-              placeholder='Escribe tu DNI'
-              type='text'
-              onChange={(e) => setDocumentId(e.target.value)}
-              value={documentId}
-            />
-          </label>
-          <label htmlFor='phone'>
-            teléfono
-            <input
-              name='phone'
-              placeholder='Escribe tu teléfono'
-              type='text'
-              onChange={(e) => setPhone(e.target.value)}
-              value={phone}
-            />
-          </label>
-          <label htmlFor='email'>
-            email
-            <input
-              name='email'
-              placeholder='Escribe tu email'
-              type='email'
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </label>
-          <label htmlFor='password'>
-            contraseña
-            <input
-              name='password'
-              placeholder='Escribe tu contraseña'
-              type='password'
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-            {successMessage && <p className='text-green-500 text-xs font-semibold mt-1'>{successMessage}</p>}
-            {Object.keys(errors).length > 0 && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.general}</p>}
-            {Object.keys(errors).map((errorKey) => (
-              <p key={errorKey} className='text-red-500 text-xs font-semibold mt-1'>{errors[errorKey]}</p>
-            ))}
-            <p className='text-white text-xs font-semibold mt-1'>La contraseña debe tener al menos 6 caracteres y menos de 20 caracteres</p>
-          </label>
+    <div
+      className='grid min-h-screen h-screen w-full bg-cover'
+      style={{
+        backgroundImage: `url(${mainBg})`
+      }}
+    >
+      <div
+        className='grid justify-items-center items-center h-full p-4'
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}
+      >
+        <div className='grid bg-[#EDEDED] justify-items-center w-full max-w-md px-[3%] py-[2%] rounded-lg shadow-lg border border-gray-200'>
+          <h1 className='text-2xl font-bold mb-4'>Registro</h1>
 
-          <button type='submit' className='bg-green-300 text-white px-5 py-2'>enviar</button>
-        </form>
+          {successMessageCorrect?.succes && (
+            <section className='absolute top-5 mx-auto w-[300px] h-auto grid place-content-center rounded-md bg-slate-600'>
+              <h2 className='text-md text-parrafo bg-green-400 font-semibold'>{successMessageCorrect?.succes}</h2>
+            </section>
+          )}
+
+          {successMessageCorrect?.error && (
+            <section className='absolute top-5 mx-auto w-[300px] h-auto grid place-content-center rounded-md bg-slate-600'>
+              <h2 className='text-md text-parrafo bg-red-500 font-semibold'>{successMessageCorrect?.error}</h2>
+            </section>
+          )}
+
+          <div className='' />
+          <form className='w-full px-[10%] flex flex-col justify-center gap-1 text-start' onSubmit={handleSubmit}>
+            <label htmlFor='name' className='text-gray-700'>
+              Nombre
+              <input
+                className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent'
+                name='name'
+                placeholder='Escribe tu nombre'
+                type='text'
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+            </label>
+
+            <label htmlFor='lastname' className='text-gray-700'>
+              Apellido
+              <input
+                className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent'
+                name='lastname'
+                placeholder='Escribe tu apellido'
+                type='text'
+                onChange={(e) => setLastname(e.target.value)}
+                value={lastname}
+              />
+            </label>
+
+            <label htmlFor='documentId' className='text-gray-700'>
+              DNI
+              <input
+                className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent'
+                name='documentId'
+                placeholder='Escribe tu DNI'
+                type='text'
+                onChange={(e) => setDocumentId(e.target.value)}
+                value={documentId}
+              />
+            </label>
+
+            <label htmlFor='phone' className='text-gray-700'>
+              Teléfono
+              <input
+                className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent'
+                name='phone'
+                placeholder='Escribe tu teléfono'
+                type='text'
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
+              />
+            </label>
+
+            <label htmlFor='email' className='text-gray-700'>
+              Email
+              <input
+                className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent'
+                name='email'
+                placeholder='Escribe tu email'
+                type='email'
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </label>
+
+            <label htmlFor='password' className='text-gray-700'>
+              Contraseña
+              <input
+                className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-transparent'
+                name='password'
+                placeholder='Escribe tu contraseña'
+                type='password'
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+              {successMessage && <p className='text-green-500 text-xs font-semibold mt-1'>{successMessage}</p>}
+              {Object.keys(errors).length > 0 && <p className='text-red-500 text-xs font-semibold mt-1'>{errors.general}</p>}
+              {Object.keys(errors).map((errorKey) => (
+                <p key={errorKey} className='text-red-500 text-xs font-semibold mt-1'>{errors[errorKey]}</p>
+              ))}
+              <p className='text-gray-600 text-xs font-semibold mt-1'>La contraseña debe tener al menos 6 caracteres y menos de 20 caracteres</p>
+            </label>
+
+            <button type='submit' className='bg-gradient-to-r from-green-500 via-green-700 to-blue-400  backdrop-blur-[6px] opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+              Enviar
+            </button>
+          </form>
+
+        </div>
       </div>
     </div>
   )

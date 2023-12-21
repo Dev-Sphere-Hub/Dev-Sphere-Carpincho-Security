@@ -113,7 +113,7 @@ const LoginForm = () => {
           <div className='mb-6'>
             <button
               type='submit'
-              className='w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none'
+              className='w-full bg-gradient-to-r from-green-500 via-green-700 to-blue-400  backdrop-blur-[6px] opacity-80 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none'
             >
               <b> Iniciar Sesión </b>
             </button>

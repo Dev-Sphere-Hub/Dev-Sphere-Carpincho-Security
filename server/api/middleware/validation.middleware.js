@@ -268,7 +268,7 @@ export const registerCourierServiceSchemaValidation = Joi.object({
             "any.required": `"deliverer" es requerido.`,
         }),
     description: Joi.string()
-        .regex(/^[ 0-9a-fA-F]+$/)
+        .regex(/^[ 0-9a-zA-Z]+$/)
         .required()
         .messages({
             "string.pattern.base": "Sólo se permiten espacios, letras y números.",

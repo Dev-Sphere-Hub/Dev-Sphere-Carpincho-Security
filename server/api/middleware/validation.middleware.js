@@ -83,7 +83,6 @@ export const updateUserSchemaValidation = Joi.object({
 export const registerUserSchemaValidation = Joi.object({
     type: Joi.string()
         .valid('admin', 'safety_guard', 'home_owner', 'visitor')
-        .default('safety_guard')
         .optional(),
     name: Joi.string()
         .max(50)

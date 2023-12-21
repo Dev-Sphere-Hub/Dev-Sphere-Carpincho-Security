@@ -32,7 +32,7 @@ const HistorialVehiculos = () => {
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   // const currentItems = visitas?.slice(indexOfFirstItem, indexOfLastItem)
-  const currentItems = filterVehicles?.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filterVehicles.reverse()?.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (action) => {
     if (action === 'next') {

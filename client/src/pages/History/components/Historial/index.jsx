@@ -39,7 +39,7 @@ const Historial = () => {
   const itemsPerPage = 5
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = filterVisitas?.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filterVisitas.reverse()?.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (action) => {
     if (action === 'next') {

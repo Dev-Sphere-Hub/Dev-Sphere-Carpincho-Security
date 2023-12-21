@@ -10,9 +10,12 @@ const TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || '24h';
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 export const createUser = tryCatch(async(req, res) => {
-    const { name, lastname, documentId, phone, email, password } = req.body;
-    const existingUser = await User.findOne({ email });
-    const existingUserDocumentId = await User.findOne({ documentId });
+    //const { name, lastname, documentId, phone, email, password } = req.body;
+    const {...userFields } = req.body;
+    const ema = req.body.email;
+    const docuId = req.body.documentId;
+    const existingUser = await User.findOne({ ema });
+    const existingUserDocumentId = await User.findOne({ docuId });
     if (existingUser) {
         throw sendResponse(res, 409, 'El correo ya está registrado.');
     }
@@ -21,15 +24,13 @@ export const createUser = tryCatch(async(req, res) => {
     }
     const saltRounds = 10;
 
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const fullName = name.concat(' ', lastname);
-    const newUser = new User({
-        fullName,
-        documentId,
-        phone,
-        email: email.toLowerCase(),
-        password: hashedPassword,
-    });
+    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const fullName = userFields.name.concat(' ', userFields.lastname);
+    userFields.fullName = fullName;
+    userFields.email = userFields.email.toLowerCase();
+    userFields.password = hashedPassword;
+
+    const newUser = new User(userFields);
 
     await newUser.save();
 

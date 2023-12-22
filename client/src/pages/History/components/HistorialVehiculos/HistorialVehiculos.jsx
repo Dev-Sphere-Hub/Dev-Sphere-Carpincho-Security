@@ -32,7 +32,7 @@ const HistorialVehiculos = () => {
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   // const currentItems = visitas?.slice(indexOfFirstItem, indexOfLastItem)
-  const currentItems = filterVehicles?.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filterVehicles.reverse()?.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (action) => {
     if (action === 'next') {
@@ -54,7 +54,7 @@ const HistorialVehiculos = () => {
     >
       <Search allVisitas={vehicles} nameColumn='plateCode' handleSearch={handleSearch} />
       {/* aca puedo componetizar mas */}
-      <div className='mt-3 w-[900px] 2xl:w-[1200px] grid grid-cols-4  rounded-lg  overflow-hidden text-colorCustom4 font-titulo font-medium text-xs lg:text-sm gap-1'>
+      <div className='mx-auto mt-3 w-[900px] 2xl:w-[1200px] grid grid-cols-4  rounded-lg  overflow-hidden text-colorCustom4 font-titulo font-medium text-xs lg:text-sm gap-1'>
         <div className='  py-2 bg-gradient-to-r from-green-500 via-green-700 to-blue-400'>
           <h2 className='w-full text-center'>Empleado</h2>
         </div>

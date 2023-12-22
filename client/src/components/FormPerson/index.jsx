@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import useImageStore from '../../store/imagenStore/Imagen'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import useVisitStore from '../../store/VisitStore/VisitStore'
 
 const FormPerson = () => {
-  const { token, user } = useAuthStore()
-  console.log(token)
-  console.log(user)
-  const navigate = useNavigate()
+  const { token } = useAuthStore()
   const { capturedImage } = useImageStore()
 
-  const { registerVisit } = useVisitStore()
-  const [form, setForm] = useState({
-    address: '',
-    visitType: 'walking',
-    visitorIdentityNumber: '',
-    visitorFullName: '',
-    state: '',
-    photo: capturedImage
-
-  })
+  const { subirVicita } = useVisitStore()
+  const [form, setForm] = useState()
 
   useEffect(() => {
     if (capturedImage !== null) {
@@ -33,39 +21,29 @@ const FormPerson = () => {
   }, [capturedImage])
 
   const handleChange = (e) => {
-    setForm({
+    e.preventDefault()
+    let updatedForm = {
       ...form,
+      visitType: 'walking',
       [e.target.name]: e.target.value
-    })
+    }
+
+    if (capturedImage) {
+      updatedForm = {
+        ...updatedForm,
+        image: capturedImage
+      }
+    }
+    console.log('data Form ->', updatedForm)
+    setForm(updatedForm)
   }
-
-  // const dataURItoBlob = (dataURI) => {
-  //   const byteString = atob(dataURI.split(',')[1])
-  //   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-  //   const ab = new ArrayBuffer(byteString.length)
-  //   const ia = new Uint8Array(ab)
-
-  //   for (let i = 0; i < byteString.length; i++) {
-  //     ia[i] = byteString.charCodeAt(i)
-  //   }
-
-  //   return new Blob([ab], { type: mimeString })
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!form.visitorFullName || !form.visitorIdentityNumber || !form.state || !form.address) {
-      console.error('Faltan datos obligatorios')
-      return
-    }
-
     try {
-      await registerVisit(form, token)
-      console.log(form)
-      console.log(token)
-      navigate('/historial/historia', { state: { form, token } })
+      const response = await subirVicita(form, token)
+      console.log('Respuetsasasas ->', response)
     } catch (error) {
       console.error('Error al realizar la solicitud:', error)
     }

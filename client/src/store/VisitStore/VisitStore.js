@@ -10,7 +10,7 @@ const useVisitStore = create((set) => ({
   setUpdate: (update) => set({ update }),
   setVisitas: (nuevaVisita) => set({ visitas: nuevaVisita }),
   setNewVisite: (newVisite) => set({ newVisite }),
-  subirVicita: async (token, updateVisita) => {
+  subirVicita: async (updateVisita, token) => {
     try {
       const response = await axios.post(`${endpoints.visitas}/`, updateVisita, {
         headers: {
@@ -18,6 +18,7 @@ const useVisitStore = create((set) => ({
           Authorization: `Bearer ${token}`
         }
       })
+      console.log('response subir visita -->', response.data)
       set({ update: true })
       set({ newVisite: response.data })
     } catch (error) {

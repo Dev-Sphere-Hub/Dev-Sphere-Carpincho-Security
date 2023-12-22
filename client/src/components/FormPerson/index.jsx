@@ -42,7 +42,6 @@ const FormPerson = () => {
     e.preventDefault()
 
     try {
-      console.log(token)
       const response = await subirVicita(form, token)
       console.log('Respuetsasasas ->', response)
     } catch (error) {

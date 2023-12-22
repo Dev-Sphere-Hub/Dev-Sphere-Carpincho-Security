@@ -12,8 +12,11 @@ const useVisitStore = create((set) => ({
   setNewVisite: (newVisite) => set({ newVisite }),
   subirVicita: async (token, updateVisita) => {
     try {
-      const response = await axios.post(endpoints.visitas, updateVisita, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.post(`${endpoints.visitas}/`, updateVisita, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`
+        }
       })
       set({ update: true })
       set({ newVisite: response.data })

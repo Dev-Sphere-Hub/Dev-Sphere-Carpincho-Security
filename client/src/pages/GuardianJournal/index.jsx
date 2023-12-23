@@ -123,11 +123,12 @@ const GuardianJournal = () => {
               </div>
               )
             : (
-              <div className='h-full'>
+              <div className=''>
                 <div className='flex flex-col justify-start items-center'>
                   <h3 className='text-2xl font-semibold mb-2 text-gray-700'>Bienvenido {user?.name || 'a Carpincho Security'}</h3>
                   <br />
-                  <div className='h-[20rem]' style={{ backgroundImage: `url(${Welcome})` }} />
+                  <div className='h-full' />
+                  <img src={Welcome} alt='Welcome' className='w-full max-w-[20rem] h-[20rem] object-cover mb-5 rounded-xl mx-auto' />
                   <br />
                   <p className='text-center text-md text-gray-600 px-4'>Explora las últimas alertas y novedades de seguridad.</p>
                   <p>Selecciona una novedad para obtener más detalles.</p>

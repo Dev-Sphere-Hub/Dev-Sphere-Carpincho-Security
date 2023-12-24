@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useImageStore from '../../store/imagenStore/Imagen'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 import useVehicleStore from '../../store/VehicleStore/VehicleStore'
+import usePhotoCaptureStore from '../../store/PhotoCaptureStore/photoCaptureStore'
+
 const FormVehicle = () => {
   const navigate = useNavigate()
-  const { capturedImage } = useImageStore()
+  const { captureImage } = usePhotoCaptureStore()
   const { token } = useAuthStore()
   const { updateVehicles, message, badmessage } = useVehicleStore()
 
@@ -56,10 +57,10 @@ const FormVehicle = () => {
     }
 
     const formData = new FormData(e.target)
-    console.log('imagen capturada', capturedImage)
+    console.log('imagen capturada', captureImage)
 
-    if (capturedImage) {
-      formData.append('image', capturedImage)
+    if (captureImage) {
+      formData.append('image', captureImage)
     }
 
     const data = Object.fromEntries(formData)

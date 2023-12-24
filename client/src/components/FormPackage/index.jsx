@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useImageStore from '../../store/imagenStore/Imagen'
+import StylesForm from '../../constants/StylesForm'
+import usePhotoCaptureStore from '../../store/PhotoCaptureStore/photoCaptureStore'
 
 const FormPackage = () => {
+  const { styleForm, styleInput, styleButton } = StylesForm()
   const navigate = useNavigate()
-  const { capturedImage } = useImageStore()
+  const { captureImage } = usePhotoCaptureStore()
   const [form, setForm] = useState({
-    empresa: '',
-    documento: '',
-    procedencia: '',
-    propietario: '',
-    descripcion: '',
-    photoUrl: capturedImage
-
   })
 
   useEffect(() => {
-    setForm((prevForm) => ({ ...prevForm, photoUrl: capturedImage }))
-  }, [capturedImage])
+    setForm((prevForm) => ({ ...prevForm, photoUrl: captureImage }))
+  }, [captureImage])
 
   const handleChange = (e) => {
     setForm({
@@ -28,17 +23,47 @@ const FormPackage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/historial/paquetes', { state: { form } })
+
+    navigate('/historial/paquetes')
     console.log(form)
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit} className='flex flex-col '>
-        <input type='text' name='empresa' placeholder='Tipo' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <input type='text' name='procedencia' placeholder='Procedencia' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <input type='text' name='propietario' placeholder='Propietario receptor' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <textarea type='text' name='descripcion' placeholder='Descripcion' onChange={handleChange} className='w-full p-2 mb-4 border rounded' />
-        <button type='submit' className='self-end w-full p-2 bg-gradient-to-r from-green-500 via-green-700 to-blue-400 text-white rounded shadow-custom'>Guardar</button>
+    <div className='flex flex-col justify-center items-start'>
+      <form onSubmit={handleSubmit} className={`${styleForm} text-sm text-slate-800 font-parrafo`}>
+        <input
+          type='text'
+          name='empresa'
+          placeholder='Tipo'
+          onChange={handleChange}
+          className={`${styleInput}`}
+        />
+        <input
+          type='text'
+          name='procedencia'
+          placeholder='Procedencia'
+          onChange={handleChange}
+          className={`${styleInput}`}
+        />
+        <input
+          type='text'
+          name='propietario'
+          placeholder='Propietario receptor'
+          onChange={handleChange}
+          className={`${styleInput}`}
+        />
+        <textarea
+          type='text'
+          name='descripcion'
+          placeholder='Descripcion'
+          onChange={handleChange}
+          className={`${styleInput} resize-none`}
+        />
+
+        <button
+          type='submit'
+          className={`${styleButton} py-2`}
+        >Guardar
+        </button>
       </form>
     </div>
   )

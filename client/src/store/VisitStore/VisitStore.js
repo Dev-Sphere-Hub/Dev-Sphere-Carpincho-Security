@@ -24,6 +24,19 @@ const useVisitStore = create((set) => ({
     } catch (error) {
       console.error('Error al subir la visita:', error)
     }
+  },
+  getVisitas: async (token) => {
+    try {
+      const response = await axios.get(endpoints.visitas, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log('response getVisitas -->', response.data)
+      set({ visitas: response.data })
+    } catch (error) {
+      console.error('Error al obtener las visitas:', error)
+    }
   }
 
 }))

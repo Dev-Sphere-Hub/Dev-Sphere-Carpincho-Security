@@ -5,7 +5,8 @@ export const endpoints = {
   register: `${api}/auth/register`,
   getUser: `${api}/users/profile`,
   patchUser: `${api}/users`,
-  paquetes: `${api}/packages`,
+  getPaquetes: `${api}/courierServices`,
+  crearPaquetes: `${api}/courierServices`,
   vehiculos: `${api}/vehicles`,
   visitas: `${api}/visits`,
   nuevos: `${api}/news`

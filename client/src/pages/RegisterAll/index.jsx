@@ -28,19 +28,19 @@ const RegisterAll = () => {
           <div className={`relative flex justify-between items-center w-[98%] max-w-[400px] h-[40px] lg:max-w-[500px] lg:h-[40px] text-white cursor-pointer bg-[#ccdebc] gap-0 text-xs lg:text-sm rounded-full overflow-hidden ${styleButton}`}>
             <div className={`z-20 absolute h-full w-1/3  border-2 rounded-full border-white border-opacity-20 bg-[#5b7dada9] ${formularioVisible === 'ingreso' ? 'translate-x-0' : formularioVisible === 'paqueteria' ? 'translate-x-[100%]' : 'translate-x-[200%]'} transition-transform ease-linear duration-300  `} />
             <button
-              className='h-full w-1/3 z-30 rounded-full'
+              className='h-full w-1/3 z-20 rounded-full'
               onClick={() => toggleFormulario('ingreso')}
             >
               Ingreso de persona
             </button>
             <button
-              className='h-full w-1/3 z-30 rounded-full'
+              className='h-full w-1/3 z-20 rounded-full'
               onClick={() => toggleFormulario('paqueteria')}
             >
               Paqueteria
             </button>
             <button
-              className='h-full w-1/3 z-30 rounded-full'
+              className='h-full w-1/3 z-20 rounded-full'
               onClick={() => toggleFormulario('vehiculo')}
             >
               Vehiculo / Moto

@@ -178,7 +178,7 @@ const UserProfile = () => {
                       accept='image/png, image/jpeg'
                       onClick={handleClickCustom}
                       onChange={(e) => setImage(e.target.files[0])}
-                      value={captureImage}
+                      value={captureImage || null}
                       className='absolute w-full h-full top-0 left-0 rounded-full z-20 opacity-0'
                     />
                   </div>
@@ -196,7 +196,7 @@ const UserProfile = () => {
                   type='text'
                   name='fullName' id='fullName'
                   placeholder='Ingresa Nombre y Apellido'
-                  value={fullName}
+                  value={fullName || null}
                   onChange={(e) => setFullName(e.target.value)}
                 />
                 )

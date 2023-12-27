@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import PhotoCapture from '../../components/PhotoCapture'
 import FormVehicle from '../../components/FormVehicle'
 import FormPackage from '../../components/FormPackage'
 import FormPerson from '../../components/FormPerson'
 import useImageStore from '../../store/imagenStore/Imagen'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
+import StylesForm from '../../constants/StylesForm'
+import PhotoCapture from '../UserProfile/components/PhotoCapture'
 
 const RegisterAll = () => {
-  const [formularioVisible, setFormularioVisible] = useState(null)
+  const { styleButton } = StylesForm()
+  const [formularioVisible, setFormularioVisible] = useState('ingreso')
   const toggleFormulario = (formulario) => {
     setFormularioVisible(formulario)
   }
@@ -17,46 +19,49 @@ const RegisterAll = () => {
 
   return (
     <>
-      <div className='flex flex-col items-center justify-center w-full min-h-screen py-5'>
-        <div className='flex flex-col items-center justify-center my-5'><PhotoCapture /></div>
+      <div className='flex flex-col lg:flex-eow items-center justify-center w-full min-h-screen pb-5 gap-5'>
 
-        <div className='flex justify-between items-center w-[300px] h-[35px] lg:w-[500px] lg:h-[40px] text-white rounded-[20px] cursor-pointer bg-[#ccdebc] gap-0 text-xs lg_text-lg'>
-          <button
-            className={`flex-1 rounded-[20px] h-full grid place-content-center ${formularioVisible === 'ingreso' ? 'bg-lime-600' : 'bg-transparent text-black'} transition ease-in delay-200`}
-            onClick={() => toggleFormulario('ingreso')}
-          >
-            Ingreso de persona
-          </button>
-          <button
-            className={`flex-1 rounded-[20px] h-full grid place-content-center ${formularioVisible === 'paqueteria' ? 'bg-lime-600' : 'bg-transparent text-black'} transition ease-in delay-200`}
-            onClick={() => toggleFormulario('paqueteria')}
-          >
-            Paqueteria
-          </button>
-          <button
-            className={`flex-1 rounded-[20px] h-full grid place-content-center ${formularioVisible === 'vehiculo' ? 'bg-lime-600' : 'bg-transparent text-black'} transition ease-in delay-200`}
-            onClick={() => toggleFormulario('vehiculo')}
-          >
-            Vehiculo / Moto
-          </button>
-        </div>
+        {/* <PhotoCapture /> */}
+        <PhotoCapture />
 
-        <section className='mx-auto w-full'>
+        <section className='mx-auto w-full h-full flex flex-col justify-center items-center gap-5'>
+          <div className={`relative flex justify-between items-center w-[98%] max-w-[400px] h-[40px] lg:max-w-[500px] lg:h-[40px] text-white cursor-pointer bg-[#ccdebc] gap-0 text-xs lg:text-sm rounded-full overflow-hidden ${styleButton}`}>
+            <div className={`z-20 absolute h-full w-1/3  border-2 rounded-full border-white border-opacity-20 bg-[#5b7dada9] ${formularioVisible === 'ingreso' ? 'translate-x-0' : formularioVisible === 'paqueteria' ? 'translate-x-[100%]' : 'translate-x-[200%]'} transition-transform ease-linear duration-300  `} />
+            <button
+              className='h-full w-1/3 z-20 rounded-full'
+              onClick={() => toggleFormulario('ingreso')}
+            >
+              Ingreso de persona
+            </button>
+            <button
+              className='h-full w-1/3 z-20 rounded-full'
+              onClick={() => toggleFormulario('paqueteria')}
+            >
+              Paqueteria
+            </button>
+            <button
+              className='h-full w-1/3 z-20 rounded-full'
+              onClick={() => toggleFormulario('vehiculo')}
+            >
+              Vehiculo / Moto
+            </button>
+          </div>
+
           {formularioVisible === 'ingreso' && (
             <>
-              <div className='text-xl font-bold mb-4'>Ingreso de persona</div>
+              <h2 className='text-xl font-bold text-slate-800'>Ingreso de persona</h2>
               <FormPerson token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'paqueteria' && (
             <>
-              <div className='text-xl font-bold mb-4'>Ingreso de paqueteria</div>
+              <h2 className='text-xl font-bold text-slate-800'>Ingreso de paqueteria</h2>
               <FormPackage token={token} user={user} imagen={capturedImage} />
             </>
           )}
           {formularioVisible === 'vehiculo' && (
             <>
-              <div className='text-xl font-bold mb-4'>Ingreso de vehiculos</div>
+              <h2 className='text-xl font-bold text-slate-800'>Ingreso de vehiculos</h2>
               <FormVehicle />
             </>
           )}

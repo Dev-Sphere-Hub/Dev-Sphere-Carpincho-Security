@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BiPlus, BiArea } from 'react-icons/bi'
+import { BiPlus, BiArea, BiX } from 'react-icons/bi'
 import usePackageStore from '../../../../store/PackageStore/PackageStore'
 import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
 import StylesForm from '../../../../constants/StylesForm'
@@ -27,9 +27,15 @@ const ListaDePaquetes = () => {
     })
   }
 
-  if (detailPaquete === null) {
-    setDetailPaquete(paquetes[0])
+  const handleCloseModal = (e) => {
+    e.preventDefault()
+    document.startViewTransition(() => {
+      setDetailPaquete(null)
+    })
   }
+  // if (detailPaquete === null) {
+  //   setDetailPaquete(paquetes[0])
+  // }
 
   return (
     <div className='w-full h-full  py-6 '>
@@ -81,17 +87,23 @@ const ListaDePaquetes = () => {
         </section>
       </section>
       {detailPaquete && (
-        <section className='lg:hidden detailsCards w-full min-h-screen flex justify-center items-center bg-slate-300 absolute top-0 left-0 opacity-90'>
+        <section className='modalDetail lg:hidden detailsCards w-full min-h-screen flex justify-center items-center bg-slate-300 absolute top-0 left-0 opacity-90'>
 
-          <section className='detailPaquete w-[300px] md:w-[400px] h-[430px] bg-green-200 rounded-md overflow-hidden flex flex-col justify-center items-center shadow-custom'>
+          <section className='relative detailPaquete w-[300px] md:w-[400px] h-[430px] bg-green-200 rounded-md overflow-hidden flex flex-col justify-center items-center shadow-custom'>
             <img className='w-[350px] lg:w-full h-[240px] object-cover' src={` ${detailPaquete?.photoURL || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1703751913/carpincho/pakage_oih8iw.jpg'}`} alt={detailPaquete?.description} />
             <h2>repartidor: <span>{detailPaquete?.recipient}</span></h2>
             <p><span>{detailPaquete?.deliverer}</span></p>
             <p><span>{detailPaquete?.description}</span></p>
             <p><span>{detailPaquete?.status}</span></p>
             <p><span>{detailPaquete?.type}</span></p>
-          </section>
 
+            <button
+              className='closeModal absolute top-2 right-2 w-5 h-5 text-red-500 text-xl rounded-full border-2 grid place-content-center'
+              onClick={handleCloseModal}
+            >
+              <BiX />
+            </button>
+          </section>
         </section>
       )}
     </div>

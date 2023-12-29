@@ -37,31 +37,33 @@ const ListaDePaquetes = () => {
   //   setDetailPaquete(paquetes[0])
   // }
 
+  const genericTitulo = 'font-titulo text-sm text-slate-600 font-bold flex justify-start items-center gap-2'
+  const genericSpan = 'font-parrafo text-sm text-slate-600 font-medium'
   return (
     <div className='w-full h-full  py-6 '>
-      <section className='flex flex-row w-full justify-center items-center gap-2 bg-red-400'>
-        <h2 className=' text-3xl font-bold text-white shadow-black'>Novedades</h2>
-        <button className='text-slate-500 cursor-pointer rounded-full w-[30px] h-[30px] grid place-content-center border-2 border-slate-600 text-xl hover:text-slate-300 hover:border-slate-300 transition-all ease-linear duration-300'>
+      <section className='flex flex-row w-full justify-center items-center gap-2 '>
+        <h2 className='w-auto  text-3xl font-bold text-white shadow-black '>Novedades</h2>
+        {/* <button className='text-slate-500 cursor-pointer rounded-full w-[30px] h-[30px] grid place-content-center border-2 border-slate-600 text-xl hover:text-slate-300 hover:border-slate-300 transition-all ease-linear duration-300'>
           <BiPlus />
-        </button>
+        </button> */}
       </section>
 
-      <section className='ContainGeneral w-full h-auto  py-5 flex flex-col lg:flex-row gap-1 flex-nowrap'>
+      <section className='ContainGeneral mx-auto w-[98%] h-auto  py-5 flex flex-col lg:flex-row gap-1 flex-nowrap bg-white rounded-md'>
         <section className='sectionCard w-full flex flex-row flex-wrap justify-center items-center gap-2 lg:w-1/2  h-auto'>
           {currentItems.map((paquete, index) => (
             <section
               key={index}
-              className={`relative w-[260px] lg:w-[340px] h-[150px] lg:h-[160px] border-2 text-left p-2 lg:p-3 rounded-md font-parrafo text-sm font-normal ${genericCard2} `}
+              className={`relative w-[260px] lg:w-[340px] h-[150px] lg:h-[140px] border-2 text-left p-2 lg:p-3 rounded-md font-parrafo text-sm font-normal ${genericCard2}`}
             >
-              <h3 className='estadoPakage text-slate-600 font-bold flex justify-start items-center gap-2'>Estado: <span className={`text-xs font-light text-slate-600 rounded-full py-1 px-2 ${calcStatus(paquete.status) ? 'bg-green-300' : 'bg-red-400'} `}>{paquete?.status || 'pendiente'}</span> </h3>
+              <p className={`estadoPakage ${genericTitulo} `}>Estado: <span className={`rounded-full py-1 px-2 ${genericSpan} ${calcStatus(paquete.status) ? 'bg-green-300' : 'bg-red-400'} `}>{paquete?.status || 'pendiente'}</span> </p>
 
-              <p className='estadoPakage text-slate-600 font-bold flex justify-start items-center gap-2'>Repartidor:
-                <span className='text-base font-light text-slate-600 rounded-full py-1 px-2 '>{paquete?.deliverer || 'pepito'}
+              <p className={`estadoPakage ${genericTitulo} `}>Repartidor:
+                <span className={`${genericSpan}`}>{paquete?.deliverer || 'pepito'}
                 </span>
               </p>
 
-              <p className='estadoPakage text-slate-600 font-bold flex justify-start items-center gap-2'>Destino:
-                <span className='text-base font-light text-slate-600 rounded-full py-1 px-2 '>{paquete?.recipient || 'cali'}
+              <p className={`estadoPakage ${genericTitulo} `}>Destino:
+                <span className={`${genericSpan}`}>{paquete?.recipient || 'cali'}
                 </span>
               </p>
 
@@ -75,35 +77,76 @@ const ListaDePaquetes = () => {
           ))}
           <Paginacion paginate={funcPaginate} />
         </section>
+        {/* seccion Detalle lg */}
         <section className='hidden detailsCards w-full lg:w-1/2 lg:flex justify-center items-center min-h-[300px]'>
-          <section className='detailPaquete w-[90%] bg-purple-400 h-[420px] rounded-md flex flex-col justify-center items-center shadow-custom'>
-            <h2>repartidor: <span>{detailPaquete?.recipient}</span></h2>
-            <img className='w-[350px] lg:w-full h-[250px] object-cover' src={` ${detailPaquete?.photoURL || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1703751913/carpincho/pakage_oih8iw.jpg'}`} alt={detailPaquete?.description} />
-            <p><span>{detailPaquete?.deliverer}</span></p>
-            <p><span>{detailPaquete?.description}</span></p>
-            <p><span>{detailPaquete?.status}</span></p>
-            <p><span>{detailPaquete?.type}</span></p>
-          </section>
+          {detailPaquete === null
+            ? <h2>seleccione un paquete</h2>
+            : (
+              // esto lo puedo componetizar y reusar, pero me da diaca, lo copio y lo pego y fue xD
+              <article className='relative detailPaquete w-[90%] xl:w-[500px] h-[430px] bg-white p-1 rounded-md overflow-hidden flex flex-col justify-center items-center shadow-custom text-left gap-2'>
+
+                {/* image detalle */}
+                <img className='w-full lg:w-full h-[240px] object-cover rounded-sm' src={` ${detailPaquete?.photoURL || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1703751913/carpincho/pakage_oih8iw.jpg'}`} alt={detailPaquete?.description} />
+
+                {/* textos detalle */}
+                <section className='DetailText w-full h-auto'>
+                  <p className={`estadoPakage ${genericTitulo} `}>Destino:
+                    <span className={`${genericSpan}`}>{detailPaquete?.recipient}</span>
+                  </p>
+                  <p className={`estadoPakage ${genericTitulo} `}>Repartidor:
+                    <span className={`${genericSpan}`}>{detailPaquete?.deliverer}</span>
+                  </p>
+                  <p className={`estadoPakage ${genericTitulo} `}>Detalle:
+                    <span className={`${genericSpan}`}>{detailPaquete?.description}</span>
+                  </p>
+                  <p className={`estadoPakage ${genericTitulo} `}>Tipo:
+                    <span className={`${genericSpan}`}>{detailPaquete?.type}</span>
+                  </p>
+                </section>
+                <button className={`absolute top-1 left-1 px-2 py-1 rounded-3xl ${genericSpan} ${calcStatus(detailPaquete.status) ? 'bg-green-300' : 'bg-red-400'} `}>{detailPaquete?.status}</button>
+
+                <button
+                  className='closeModal absolute top-1 right-1 w-7 h-7 bg-red-500 text-slate-700 text-2xl hover:bg-slate-600 hover:text-red-400 transition-all ease-linear duration-300 rounded-md  grid place-content-center'
+                  onClick={handleCloseModal}
+                >
+                  <BiX />
+                </button>
+              </article>
+              )}
         </section>
       </section>
+      {/* seccion detalle movile hasta lg */}
       {detailPaquete && (
-        <section className='modalDetail lg:hidden detailsCards w-full min-h-screen flex justify-center items-center bg-slate-300 absolute top-0 left-0 opacity-90'>
+        <section className='modalDetail lg:hidden detailsCards mx-auto w-[100%]  h-full flex justify-center items-center bg-white absolute top-0 left-0'>
+          <article className='relative detailPaquete w-[300px] md:w-[400px] h-[430px] bg-white p-1 rounded-md overflow-hidden flex flex-col justify-center items-center shadow-custom text-left gap-2'>
 
-          <section className='relative detailPaquete w-[300px] md:w-[400px] h-[430px] bg-green-200 rounded-md overflow-hidden flex flex-col justify-center items-center shadow-custom'>
-            <img className='w-[350px] lg:w-full h-[240px] object-cover' src={` ${detailPaquete?.photoURL || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1703751913/carpincho/pakage_oih8iw.jpg'}`} alt={detailPaquete?.description} />
-            <h2>repartidor: <span>{detailPaquete?.recipient}</span></h2>
-            <p><span>{detailPaquete?.deliverer}</span></p>
-            <p><span>{detailPaquete?.description}</span></p>
-            <p><span>{detailPaquete?.status}</span></p>
-            <p><span>{detailPaquete?.type}</span></p>
+            {/* image detalle */}
+            <img className='w-full lg:w-full h-[240px] object-cover rounded-sm' src={` ${detailPaquete?.photoURL || 'https://res.cloudinary.com/dpiwmbsog/image/upload/v1703751913/carpincho/pakage_oih8iw.jpg'}`} alt={detailPaquete?.description} />
+
+            {/* textos detalle */}
+            <section className='DetailText w-full h-auto'>
+              <p className={`estadoPakage ${genericTitulo} `}>Destino:
+                <span className={`${genericSpan}`}>{detailPaquete?.recipient}</span>
+              </p>
+              <p className={`estadoPakage ${genericTitulo} `}>Repartidor:
+                <span className={`${genericSpan}`}>{detailPaquete?.deliverer}</span>
+              </p>
+              <p className={`estadoPakage ${genericTitulo} `}>Detalle:
+                <span className={`${genericSpan}`}>{detailPaquete?.description}</span>
+              </p>
+              <p className={`estadoPakage ${genericTitulo} `}>Tipo:
+                <span className={`${genericSpan}`}>{detailPaquete?.type}</span>
+              </p>
+            </section>
+            <button className={`absolute top-1 left-1 px-2 py-1 rounded-3xl  ${calcStatus(detailPaquete.status) ? 'bg-green-300' : 'bg-red-400'} `}>{detailPaquete?.status}</button>
 
             <button
-              className='closeModal absolute top-2 right-2 w-5 h-5 text-red-500 text-xl rounded-full border-2 grid place-content-center'
+              className='closeModal absolute top-1 right-1 w-7 h-7 bg-red-500 text-slate-700 text-2xl hover:bg-slate-600 hover:text-red-400 transition-all ease-linear duration-300 rounded-md  grid place-content-center'
               onClick={handleCloseModal}
             >
               <BiX />
             </button>
-          </section>
+          </article>
         </section>
       )}
     </div>

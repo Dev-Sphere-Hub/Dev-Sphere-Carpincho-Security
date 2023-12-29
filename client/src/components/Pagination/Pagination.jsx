@@ -1,9 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const usePagination = (listaDeItems) => {
   const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(4)
 
-  const itemsPerPage = 4
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerPage(getItemsPerPage())
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
+
+  // const itemsPerPage = 4
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = listaDeItems.reverse()?.slice(indexOfFirstItem, indexOfLastItem)
@@ -20,6 +32,16 @@ const usePagination = (listaDeItems) => {
       })
     } else if (action === 'prev' && currentPage > 1) {
       setCurrentPage((prev) => prev - 1)
+    }
+  }
+
+  const getItemsPerPage = () => {
+    const windowWidth = window.innerWidth
+
+    if (windowWidth >= 1728) {
+      return 8
+    } else {
+      return 4
     }
   }
 

@@ -7,12 +7,15 @@ const StylesForm = () => {
 
   const genericCard2 = 'bg-[#a5cc82] border-2 flex flex-col justify-center items-start gap-1 backdrop-blur-md  backdrop-saturate-180  bg-opacity-80 rounded-md border-white border-opacity-30 overflow-hidden  text-slate-600'
 
+  const gradienteCustom = 'bg-gradient-to-r from-green-500 via-green-700 to-blue-400 '
+
   return {
     styleForm,
     styleInput,
     styleButton,
     genericCard,
-    genericCard2
+    genericCard2,
+    gradienteCustom
   }
 }
 

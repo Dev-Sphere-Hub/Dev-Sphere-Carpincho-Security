@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BiPlus, BiArea, BiX } from 'react-icons/bi'
+import { BiArea, BiX } from 'react-icons/bi'
 import usePackageStore from '../../../../store/PackageStore/PackageStore'
 import { useAuthStore } from '../../../../store/AuthStore/AuthStore'
 import StylesForm from '../../../../constants/StylesForm'

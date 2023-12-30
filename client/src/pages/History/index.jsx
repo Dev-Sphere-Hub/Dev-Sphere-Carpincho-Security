@@ -4,11 +4,11 @@ import { Route, Routes, Outlet } from 'react-router-dom'
 import UserProfile from '../UserProfile/index'
 import Historial from './components/Historial'
 import GuardianJournal from '../GuardianJournal'
-import Paquetes from './components/Paquetes/Paquetes'
 import RegisterAll from '../RegisterAll'
 import HistorialVehiculos from './components/HistorialVehiculos/HistorialVehiculos'
 
 import './History.css'
+import ListaDePaquetes from './components/ListaDePaquetes/ListaDePaquetes'
 
 const History = () => {
   const [activeNavVerticas, setActiveNavVerticas] = useState(false)
@@ -44,7 +44,7 @@ const History = () => {
           />
           <Route
             path='/paquetes'
-            element={<Paquetes />}
+            element={<ListaDePaquetes />}
           />
           <Route
             path='/vehiculos'

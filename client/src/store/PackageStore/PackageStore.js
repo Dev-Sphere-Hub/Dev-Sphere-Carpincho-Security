@@ -21,7 +21,7 @@ const usePackageStore = create((set) => ({
         }
       })
       console.log('response getPAquetes -->', response.data)
-      set({ paquetes: response.data, loading: false })
+      set({ paquetes: response?.data?.data, loading: false })
     } catch (error) {
       console.log(error)
       set({ errorPaquete: error, loading: false })

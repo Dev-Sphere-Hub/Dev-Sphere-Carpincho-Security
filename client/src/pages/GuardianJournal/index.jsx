@@ -25,6 +25,9 @@ const GuardianJournal = () => {
     'Persona No Autorizada': 'unauthorized_person',
     'Vehículo No Autorizado': 'unauthorized_vehicle'
   })
+  const addNewNews = (newNews) => {
+    setNovedades([...novedades, newNews])
+  }
 
   useEffect(() => {
     axios.get(endpoints.nuevos)
@@ -64,6 +67,7 @@ const GuardianJournal = () => {
   }
 
   const { user } = useAuthStore()
+
   return (
     <div className='flex justify-evenly text-center w-full'>
       <div className='flex-col max-w-[500px] justify-center'>
@@ -128,6 +132,7 @@ const GuardianJournal = () => {
         setFormData={setFormData}
         categories={Object.keys(categoryTranslations)}
         categoryTranslations={categoryTranslations}
+        onAddNews={addNewNews}
       />
     </div>
   )

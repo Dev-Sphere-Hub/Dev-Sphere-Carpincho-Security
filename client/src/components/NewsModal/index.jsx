@@ -4,7 +4,7 @@ import axios from 'axios'
 import { endpoints } from '../../constants/api'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 
-const NewsModal = ({ isOpen, onClose, categories, categoryTranslations }) => {
+const NewsModal = ({ isOpen, onClose, categories, categoryTranslations, onAddNews }) => {
   const { token } = useAuthStore()
   const [formData, setFormData] = useState({
     category: '',
@@ -38,6 +38,9 @@ const NewsModal = ({ isOpen, onClose, categories, categoryTranslations }) => {
       })
 
       if (response.data) {
+        // actualizar la lista de novedades
+        onAddNews(response.data)
+
         setFormData({ category: '', detail: '', date: '' })
       }
     } catch (error) {

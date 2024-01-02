@@ -20,7 +20,7 @@ const GuardianJournal = () => {
   const [selectedNews, setSelectedNews] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [categoryTranslations] = useState({
-    Emergencia: 'emergencies',
+    'Emergencia': 'emergencies',
     'Evento Destacado': 'featured_events',
     'Persona No Autorizada': 'unauthorized_person',
     'Vehículo No Autorizado': 'unauthorized_vehicle'

@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { RiCloseLine } from 'react-icons/ri'
 import axios from 'axios'
 import { endpoints } from '../../constants/api'
+import { useAuthStore } from '../../store/AuthStore/AuthStore'
 
 const NewsModal = ({ isOpen, onClose, categories }) => {
+  const { token } = useAuthStore()
   const [formData, setFormData] = useState({
     category: '',
     detail: '',
@@ -27,7 +29,12 @@ const NewsModal = ({ isOpen, onClose, categories }) => {
         ...formData
       }
 
-      const response = await axios.post(endpoints.nuevos, transformedFormData)
+      const response = await axios.post(endpoints.nuevos, transformedFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
       if (response.data) {
         setFormData({ category: '', detail: '', date: '' })
       }

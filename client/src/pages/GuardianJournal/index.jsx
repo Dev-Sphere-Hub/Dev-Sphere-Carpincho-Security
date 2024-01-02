@@ -127,6 +127,7 @@ const GuardianJournal = () => {
         formData={formData}
         setFormData={setFormData}
         categories={Object.keys(categoryTranslations)}
+        categoryTranslations={categoryTranslations}
       />
     </div>
   )

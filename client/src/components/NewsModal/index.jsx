@@ -4,7 +4,7 @@ import axios from 'axios'
 import { endpoints } from '../../constants/api'
 import { useAuthStore } from '../../store/AuthStore/AuthStore'
 
-const NewsModal = ({ isOpen, onClose, categories }) => {
+const NewsModal = ({ isOpen, onClose, categories, categoryTranslations }) => {
   const { token } = useAuthStore()
   const [formData, setFormData] = useState({
     category: '',
@@ -25,8 +25,10 @@ const NewsModal = ({ isOpen, onClose, categories }) => {
     setLoading(true)
 
     try {
+      const transformedCategory = categoryTranslations[formData.category] || formData.category
       const transformedFormData = {
-        ...formData
+        ...formData,
+        category: transformedCategory
       }
 
       const response = await axios.post(endpoints.nuevos, transformedFormData, {

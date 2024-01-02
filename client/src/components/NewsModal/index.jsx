@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RiCloseLine } from 'react-icons/ri'
+import axios from 'axios'
+import { endpoints } from '../../constants/api'
 
-const NewsModal = ({ isOpen, onClose, onSubmit, formData, setFormData, categories }) => {
+const NewsModal = ({ isOpen, onClose, categories }) => {
+  const [formData, setFormData] = useState({
+    category: '',
+    detail: '',
+    date: ''
+  })
+  const [loading, setLoading] = useState(false)
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+
+    try {
+      const transformedFormData = {
+        ...formData
+      }
+
+      const response = await axios.post(endpoints.nuevos, transformedFormData)
+      if (response.data) {
+        setFormData({ category: '', detail: '', date: '' })
+      }
+    } catch (error) {
+      console.error('Error al enviar la novedad:', error)
+    } finally {
+      setLoading(false)
+      onClose()
+    }
   }
 
   if (!isOpen) return null
@@ -22,7 +52,7 @@ const NewsModal = ({ isOpen, onClose, onSubmit, formData, setFormData, categorie
             size={25}
           />
         </div>
-        <form onSubmit={onSubmit} className='mt-4'>
+        <form onSubmit={handleSubmit} className='mt-4'>
           <div className='mb-4'>
             <label htmlFor='category' className='block text-gray-700 text-sm font-bold mb-2'>
               Categoría
@@ -60,12 +90,11 @@ const NewsModal = ({ isOpen, onClose, onSubmit, formData, setFormData, categorie
               Fecha (formato AAAA-MM-DD)
             </label>
             <input
-              type='text'
+              type='date'
               name='date'
               value={formData.date}
               onChange={handleInputChange}
               className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              placeholder='2023-12-31'
               required
             />
           </div>
@@ -73,8 +102,9 @@ const NewsModal = ({ isOpen, onClose, onSubmit, formData, setFormData, categorie
             <button
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
               type='submit'
+              disabled={loading}
             >
-              Reportar
+              {loading ? 'Enviando...' : 'Reportar'}
             </button>
           </div>
         </form>

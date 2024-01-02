@@ -39,28 +39,8 @@ const GuardianJournal = () => {
     return () => setActiveIndex(null)
   }, [])
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const postFormData = {
-      ...formData,
-      category: categoryTranslations[formData.category],
-      date: new Date().toISOString()
-    }
-
-    axios.post(endpoints.nuevos, postFormData)
-      .then(res => {
-        setNovedades([...novedades, res.data.data])
-      })
-      .catch(err => console.log(err))
-    setFormData({ category: '', detail: '', date: '' })
-    setShowModal(false)
+  const handleAddNews = (newNews) => {
+    setNovedades([...novedades, newNews])
   }
 
   const handleCardClick = (news) => {
@@ -143,7 +123,7 @@ const GuardianJournal = () => {
       <NewsModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onSubmit={handleSubmit}
+        onSubmitSuccess={handleAddNews}
         formData={formData}
         setFormData={setFormData}
         categories={Object.keys(categoryTranslations)}

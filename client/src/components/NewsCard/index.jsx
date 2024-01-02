@@ -24,7 +24,7 @@ const NewsCard = ({ news, onClick, getImageUrlForCategory }) => {
         className='mx-2 self-center rounded-lg h-[2.7rem] w-[2rem]'
       />
       <div className='flex-col text-left'>
-        <p className='text-gray-600 text-sm'>{news.author.fullName}</p>
+        <p className='text-gray-600 text-sm'>{news?.author?.fullName}</p>
         <h2 className='text-title font-title font-bold'>
           {translateCategory(news.category)}
         </h2>

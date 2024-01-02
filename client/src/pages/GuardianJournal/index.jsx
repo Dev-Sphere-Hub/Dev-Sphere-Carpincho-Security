@@ -20,11 +20,14 @@ const GuardianJournal = () => {
   const [selectedNews, setSelectedNews] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [categoryTranslations] = useState({
-    Emergencia: 'emergencies',
+    'Emergencia': 'emergencies',
     'Evento Destacado': 'featured_events',
     'Persona No Autorizada': 'unauthorized_person',
     'Vehículo No Autorizado': 'unauthorized_vehicle'
   })
+  const addNewNews = (newNews) => {
+    setNovedades([...novedades, newNews])
+  }
 
   useEffect(() => {
     axios.get(endpoints.nuevos)
@@ -39,28 +42,8 @@ const GuardianJournal = () => {
     return () => setActiveIndex(null)
   }, [])
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const postFormData = {
-      ...formData,
-      category: categoryTranslations[formData.category],
-      date: new Date().toISOString()
-    }
-
-    axios.post(endpoints.nuevos, postFormData)
-      .then(res => {
-        setNovedades([...novedades, res.data.data])
-      })
-      .catch(err => console.log(err))
-    setFormData({ category: '', detail: '', date: '' })
-    setShowModal(false)
+  const handleAddNews = (newNews) => {
+    setNovedades([...novedades, newNews])
   }
 
   const handleCardClick = (news) => {
@@ -84,6 +67,7 @@ const GuardianJournal = () => {
   }
 
   const { user } = useAuthStore()
+
   return (
     <div className='flex justify-evenly text-center w-full'>
       <div className='flex-col max-w-[500px] justify-center'>
@@ -143,10 +127,12 @@ const GuardianJournal = () => {
       <NewsModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onSubmit={handleSubmit}
+        onSubmitSuccess={handleAddNews}
         formData={formData}
         setFormData={setFormData}
         categories={Object.keys(categoryTranslations)}
+        categoryTranslations={categoryTranslations}
+        onAddNews={addNewNews}
       />
     </div>
   )

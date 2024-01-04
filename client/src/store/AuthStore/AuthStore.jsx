@@ -9,7 +9,7 @@ export const useAuthStore = create(persist((set) => ({
   tokenDesifred: null,
   loading: false,
   update: false,
-
+  setUser: (newUser) => set({ user: newUser }),
   setToken: (newToken) => {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('token', newToken)

@@ -8,7 +8,7 @@ import { useAuthStore } from '../../store/AuthStore/AuthStore'
 
 const LoginForm = () => {
   const localStorage = window.localStorage
-  const { setTokenDesifred, setToken } = useAuthStore()
+  const { setTokenDesifred, setToken, fetchUserData } = useAuthStore()
 
   const navigate = useNavigate()
 
@@ -35,15 +35,6 @@ const LoginForm = () => {
     return validateErrors
   }
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target
-  //   if (name === 'email') {
-  //     setEmail(value)
-  //   } else if (name === 'password') {
-  //     setPassword(value)
-  //   }
-  // }
-
   const handleLogin = async (event) => {
     event.preventDefault()
 
@@ -66,7 +57,8 @@ const LoginForm = () => {
     try {
       const response = await axios.post(endpoints.login, formData)
       const responseData = response.data
-      console.log('responseData -> ', responseData)
+      // console.log('responseData Login-> ', responseData.data.token)
+      fetchUserData(responseData?.data?.token)
       if (response.status === 200) {
         const decodedToken = jwtDecode(responseData?.data?.token)
         localStorage.setItem('token', responseData?.data?.token)

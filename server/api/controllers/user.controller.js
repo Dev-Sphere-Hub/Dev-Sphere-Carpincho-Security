@@ -62,3 +62,10 @@ export const profile = tryCatch(async(req, res) => {
     }).select('-password');
     sendResponse(res, 200, 'Perfil del usuario obtenido con éxito.', userData);
 });
+
+export const getHomeOwners = tryCatch(async(req, res) => {
+    const homeOwners = await User.find({
+        type: 'home_owner'
+    }, { _id: 1, fullName: 1, address: 1 });
+    sendResponse(res, 200, 'Propietarios encontrados.', homeOwners);
+})

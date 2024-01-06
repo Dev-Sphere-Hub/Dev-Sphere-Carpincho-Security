@@ -18,6 +18,10 @@ export const updateUser = tryCatch(async(req, res) => {
             return sendResponse(res, 200, 'El cambio de $vars[prop] no está permitido, comunícate con el administrador.');
         }
     }
+    const userRegistered = await User.find({ email: email });
+    if (userRegistered) {
+        return sendResponse(res, 401, 'Ya existe un usuario registrado con el email ingresado.');
+    }
     if (req.files) {
         const { image } = req.files;
         const fileTypes = ['image/jpeg', 'image/png', 'image/jpg'];

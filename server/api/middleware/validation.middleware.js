@@ -123,7 +123,7 @@ export const registerUserSchemaValidation = Joi.object({
             "any.invalid": `"name" no puede ser vacío.`
         }),
     phone: Joi.string()
-        .regex(/(^[0-9]{8,15}$)/) //"958945124 or 9845125474, 9 or 11 digits"
+        .regex(/(^[0-9]{8,15}$)/) //"958945124 or 9845125474, 9 to 15 digits"
         .optional()
         .messages({
             "string.pattern.base": "El número de teléfono debe contener entre 8 y 15 dígitos.",

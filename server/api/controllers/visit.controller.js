@@ -13,6 +13,10 @@ export const registerVisit = tryCatch(async(req, res) => {
     if (!checkAllKeys) {
         return sendResponse(res, 400, 'Faltan datos obligatorios');
     }
+    const noCheckoutVisit = await Visit.find({ visitorIdentityNumber: visitFields.visitorIdentityNumber });
+    if (!noCheckoutVisit.checkOut) {
+        return sendResponse(res, 400, 'El visitante tiene un ingreso sin salida registrada');
+    }
     if (req.files) {
         const { image } = req.files;
         const fileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -58,7 +62,7 @@ export const getAllVisits = tryCatch(async(req, res) => {
 
 // Controlador para obtener una visita por ID
 export const getVisitById = tryCatch(async(req, res) => {
-    const visit = await Visit.findById(req.params.id);
+    const visit = await Visit.findById(req.params.id).populate({ path: 'checkInBy', select: 'fullName' }).populate({ path: 'checkOutBy', select: 'fullName' });
     if (!visit) {
         return sendResponse(res, 404, 'Visita no encontrada');
     }

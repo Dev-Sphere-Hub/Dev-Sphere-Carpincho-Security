@@ -18,6 +18,10 @@ export const updateUser = tryCatch(async(req, res) => {
             return sendResponse(res, 200, 'El cambio de $vars[prop] no está permitido, comunícate con el administrador.');
         }
     }
+    const userRegistered = await User.find({ email: email });
+    if (userRegistered) {
+        return sendResponse(res, 401, 'Ya existe un usuario registrado con el email ingresado.');
+    }
     if (req.files) {
         const { image } = req.files;
         const fileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -62,3 +66,10 @@ export const profile = tryCatch(async(req, res) => {
     }).select('-password');
     sendResponse(res, 200, 'Perfil del usuario obtenido con éxito.', userData);
 });
+
+export const getHomeOwners = tryCatch(async(req, res) => {
+    const homeOwners = await User.find({
+        type: 'home_owner'
+    }, { _id: 1, fullName: 1, address: 1 });
+    sendResponse(res, 200, 'Propietarios encontrados.', homeOwners);
+})

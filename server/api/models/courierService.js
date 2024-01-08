@@ -28,9 +28,10 @@ const courierServiceSchema = new mongoose.Schema({
     },
     status: {
         type: String,
+        default: 'received',
         enum: ['received', 'delivered']
     }
-});
+}, { timestamps: true });
 
 const CourierService = mongoose.model('CourierService', courierServiceSchema);
 

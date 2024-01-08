@@ -13,14 +13,15 @@ export const createUser = tryCatch(async(req, res) => {
     //const { name, lastname, documentId, phone, email, password } = req.body;
     const {...userFields } = req.body;
     const ema = req.body.email;
+    console.log(ema);
     const docuId = req.body.documentId;
-    const existingUser = await User.findOne({ ema });
+    const existingUser = await User.findOne({ email: ema });
     const existingUserDocumentId = await User.findOne({ docuId });
     if (existingUser) {
-        throw sendResponse(res, 409, 'El correo ya está registrado.');
+        throw sendResponse(res, 400, 'El correo ya está registrado.');
     }
     if (existingUserDocumentId) {
-        throw sendResponse(res, 409, 'Ya existe un usuario registrado con el número de documento ingresado.');
+        throw sendResponse(res, 400, 'Ya existe un usuario registrado con el número de documento ingresado.');
     }
     const saltRounds = 10;
 

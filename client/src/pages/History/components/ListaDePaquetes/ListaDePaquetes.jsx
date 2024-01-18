@@ -36,23 +36,24 @@ const ListaDePaquetes = () => {
   // if (detailPaquete === null) {
   //   setDetailPaquete(paquetes[0])
   // }
+  console.log('detailPaquete --> ', detailPaquete)
 
   const genericTitulo = 'font-titulo text-sm text-slate-600 font-bold flex justify-start items-center gap-2'
   const genericSpan = 'font-parrafo text-sm text-slate-600 font-medium'
   return (
     <div className='w-full h-full  py-6 '>
-      <section className='flex flex-row w-full justify-center items-center gap-2 '>
-        <h2 className='w-auto  text-3xl font-bold text-white shadow-black '>Novedades</h2>
+      <section className='flex flex-row w-full justify-center items-center bg-white gap-2 py-5'>
+        <h2 className='w-auto text-3xl font-bold text-slate-600 shadow-black '>Novedades</h2>
         {/* <button className='text-slate-500 cursor-pointer rounded-full w-[30px] h-[30px] grid place-content-center border-2 border-slate-600 text-xl hover:text-slate-300 hover:border-slate-300 transition-all ease-linear duration-300'>
           <BiPlus />
         </button> */}
       </section>
 
-      <section className='ContainGeneral mx-auto w-[98%] h-auto  py-5 flex flex-col lg:flex-row gap-1 flex-nowrap bg-white rounded-md'>
+      <section className='ContainGeneral mx-auto w-[98%] h-auto  py-2 flex flex-col lg:flex-row gap-1 flex-nowrap bg-white rounded-md'>
         <section className='sectionCard w-full flex flex-row flex-wrap justify-center items-center gap-2 lg:w-1/2  h-auto'>
-          {currentItems.map((paquete, index) => (
+          {currentItems.map((paquete) => (
             <section
-              key={index}
+              key={paquete._id}
               className={`relative w-[260px] lg:w-[340px] h-[150px] lg:h-[140px] border-2 text-left p-2 lg:p-3 rounded-md font-parrafo text-sm font-normal ${genericCard2}`}
             >
               <p className={`estadoPakage ${genericTitulo} `}>Estado: <span className={`rounded-full py-1 px-2 ${genericSpan} ${calcStatus(paquete.status) ? 'bg-green-300' : 'bg-red-400'} `}>{paquete?.status || 'pendiente'}</span> </p>
@@ -63,7 +64,7 @@ const ListaDePaquetes = () => {
               </p>
 
               <p className={`estadoPakage ${genericTitulo} `}>Destino:
-                <span className={`${genericSpan}`}>{paquete?.recipient || 'cali'}
+                <span className={`${genericSpan}`}>{paquete?.recipient?.fullName || 'cali'}
                 </span>
               </p>
 
@@ -91,7 +92,7 @@ const ListaDePaquetes = () => {
                 {/* textos detalle */}
                 <section className='DetailText w-full h-auto'>
                   <p className={`estadoPakage ${genericTitulo} `}>Destino:
-                    <span className={`${genericSpan}`}>{detailPaquete?.recipient}</span>
+                    <span className={`${genericSpan}`}>{detailPaquete?.recipient?.fullName}</span>
                   </p>
                   <p className={`estadoPakage ${genericTitulo} `}>Repartidor:
                     <span className={`${genericSpan}`}>{detailPaquete?.deliverer}</span>
@@ -126,7 +127,7 @@ const ListaDePaquetes = () => {
             {/* textos detalle */}
             <section className='DetailText w-full h-auto'>
               <p className={`estadoPakage ${genericTitulo} `}>Destino:
-                <span className={`${genericSpan}`}>{detailPaquete?.recipient}</span>
+                <span className={`${genericSpan}`}>{detailPaquete?.recipient.fullName}</span>
               </p>
               <p className={`estadoPakage ${genericTitulo} `}>Repartidor:
                 <span className={`${genericSpan}`}>{detailPaquete?.deliverer}</span>

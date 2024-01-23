@@ -1,4 +1,4 @@
-# s12-05-n-node-react
+#node + react
 
 #### **Carpincho Security**
 Redefine la seguridad en 🏢 edificios, 🏡 countries y establecimientos al proporcionar un sistema integral de control de acceso. Diseñada para brindar tranquilidad, nuestra aplicación permite a los profesionales de seguridad tener un control total sobre las entradas, salidas, paquetería y entregas. Con Carpincho Security, cada interacción queda registrada, brindando una gestión eficiente y segura. ¡Tu paz de mente es nuestra prioridad!
